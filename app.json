@@ -1,5 +1,6 @@
 {
   "expo": {
+    "jsEngine": "jsc",
     "name": "InorteApp",
     "slug": "InorteApp",
     "version": "1.0.0",
