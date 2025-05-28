@@ -14,7 +14,11 @@ export default function AppRoute(){
             drawerActiveBackgroundColor: colors.secondary,
             drawerActiveTintColor: colors.white,
             drawerInactiveBackgroundColor:colors.primary,
-            drawerInactiveTintColor: colors.white
+            drawerInactiveTintColor: colors.white,
+            drawerItemStyle:{
+                marginBottom: 10,
+                borderRadius: 8
+            }
             }}
         >
             <AppDrawer.Screen name='Home' component={Home}/>

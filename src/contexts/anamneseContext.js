@@ -4,7 +4,10 @@ export const AnamneseContext = createContext()
 
 export default function AnamneseProvider({ children }){
     const [paciente, setPaciente] = useState({
-        data: ''
+        data: '',
+        nome: '',
+        sus: '',
+        
     })
 
     return (
