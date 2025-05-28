@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { View, Text, KeyboardAvoidingView, TextInput, Button } from 'react-native'
+import { View, Text, KeyboardAvoidingView, TextInput, ScrollView } from 'react-native'
 import { styles, colors } from '../../../styles/Styles'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
@@ -58,93 +58,104 @@ export default function AnmenseAdolescentes(){
     }
 
     return (
-        <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
-            <Header setor={'Anamnese de adolescentes'}/>
-            
-            <View style={styles.contentArea}>
+        <KeyboardAvoidingView style={styles.container} behavior={'height'}>
+            <ScrollView>
+                <Header setor={'Anamnese de adolescentes'}/>
+                
+                <View style={styles.contentArea}>
 
-                <View style={styles.inputArea}>
-                    <Text style={styles.normal}>Data:</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        onChangeText={texto=>formatarData(texto, setPaciente, 'data')}
-                        placeholder='DD/MM/AAAA'
-                        value={paciente.data}
-                        keyboardType='numeric'
-                    />
-                </View>
-
-                <Text style={styles.titulo}>1. Dados de Identificação</Text>
-
-                <View style={styles.inputArea}>
-                    <Text style={styles.normal}>Nome completo:</Text>
-                    <TextInput
-                        placeholder={paciente.nome}
-                        style={styles.input}
-                        onChangeText={newText => setPaciente({...paciente, nome: newText})}
-                        value={paciente.nome}
-                    />
-                    <Text style={styles.normal}>Nº SUS:</Text>
-                    <TextInput
-                        value={paciente.sus}
-                        style={[styles.input, {width: 120}]}
-                        placeholder='___ ___ ___ ___'
-                        onChangeText={formatarSus}
-                        maxLength={19}
-                        keyboardType="numeric"
-                    />
-                </View>
-
-
-                <View style={styles.inputArea}>
-                    <Text style={styles.normal}>Data de nascimento:</Text>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <TextInput
-                            style={[styles.input, {width: '70%'}]}
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Data:</Text>
+                        <TextInput 
+                            style={styles.input} 
+                            onChangeText={texto=>formatarData(texto, setPaciente, 'data')}
                             placeholder='DD/MM/AAAA'
-                            onChangeText={texto=>formatarData(texto, setPaciente, 'nascimento')}
-                            value={paciente.nascimento}
+                            value={paciente.data}
                             keyboardType='numeric'
                         />
-                        <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 30}}>
-                            <Text style={styles.normal}>Idade:</Text>
-                            <Text style={{ borderRadius: 3, padding: 5, backgroundColor: colors.primary, color: colors.white}}>
-                                {paciente.idade ? paciente.idade : '0'}
-                            </Text>
+                    </View>
+
+                    <Text style={styles.titulo}>1. Dados de Identificação</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Nome completo:</Text>
+                        <TextInput
+                            placeholder={paciente.nome}
+                            style={styles.input}
+                            onChangeText={newText => setPaciente({...paciente, nome: newText})}
+                            value={paciente.nome}
+                        />
+                        <Text style={styles.normal}>Nº SUS:</Text>
+                        <TextInput
+                            value={paciente.sus}
+                            style={[styles.input, {width: 120}]}
+                            placeholder='___ ___ ___ ___'
+                            onChangeText={formatarSus}
+                            maxLength={19}
+                            keyboardType="numeric"
+                        />
+                    </View>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Data de nascimento:</Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <TextInput
+                                style={[styles.input, {width: '70%'}]}
+                                placeholder='DD/MM/AAAA'
+                                onChangeText={texto=>formatarData(texto, setPaciente, 'nascimento')}
+                                value={paciente.nascimento}
+                                keyboardType='numeric'
+                            />
+                            <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 30}}>
+                                <Text style={styles.normal}>Idade:</Text>
+                                <Text style={{ borderRadius: 3, padding: 5, backgroundColor: colors.primary, color: colors.white, height: 40, fontSize: 18}}>
+                                    {paciente.idade ? paciente.idade : '0'}
+                                </Text>
+                            </View>
                         </View>
                     </View>
-                </View>
 
-                <View style={[styles.inputArea, {gap: 7}]}>
-                    <Text style={styles.normal}>Endereço:</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(newText) => setPaciente({...paciente, enderecoendereco: newText})}
-                        value={paciente.endereco}
-                        placeholder='Rua e número da casa'
-                    />
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(newText) => setPaciente({...paciente, endereco: newText})}
-                        value={paciente.endereco}
-                        placeholder='Bairro'
-                    />
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(newText) => setPaciente({...paciente, cidadeUf: newText})}
-                        value={paciente.cidadeUf}
-                        placeholder='Cidade, UF'
-                    />
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={formatarCep}
-                        value={paciente.cep}
-                        placeholder='CEP'
-                        keyboardType='numeric'
-                    />
-                </View>
+                    <View style={[styles.inputArea, {gap: 7}]}>
+                        <Text style={styles.normal}>Endereço:</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(newText) => setPaciente({...paciente, enderecoendereco: newText})}
+                            value={paciente.endereco}
+                            placeholder='Rua e número da casa'
+                        />
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(newText) => setPaciente({...paciente, endereco: newText})}
+                            value={paciente.endereco}
+                            placeholder='Bairro'
+                        />
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(newText) => setPaciente({...paciente, cidadeUf: newText})}
+                            value={paciente.cidadeUf}
+                            placeholder='Cidade, UF'
+                        />
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={formatarCep}
+                            value={paciente.cep}
+                            placeholder='CEP'
+                            keyboardType='numeric'
+                        />
+                    </View>
 
-            </View>
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Informante:</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(newText) => setPaciente({...paciente, informante: newText})}
+                            value={paciente.informante}
+                            placeholder='Qual o nome de quem está informando?'
+                        />
+                    </View>
+
+                </View>
+            </ScrollView>
         </KeyboardAvoidingView>
     )
 }
