@@ -27,7 +27,8 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: colors.white
+    backgroundColor: colors.white,
+    paddingBottom: 35
   },
 
   contentArea: {
@@ -83,12 +84,42 @@ export const styles = StyleSheet.create({
     marginBottom: spacing.small,
   },
 
+  pickerContainer: {
+    backgroundColor: colors.primary,
+    borderRadius: 8,
+    overflow: 'hidden',
+    height: 40,
+    justifyContent: 'center'
+  },
+
   input: {
     backgroundColor: colors.primary,
     borderRadius: 8,
     height: 40,
     paddingHorizontal: spacing.small,
     color: colors.white,
+  },
+
+  mobilePicker: {
+    width: '100%', 
+    borderRadius: 8, 
+    borderWidth: 1, 
+    alignItems: 'center', 
+    marginTop: 5, 
+    marginBottom: 5,
+    backgroundColor: colors.primary
+  },
+
+  desktopPicker: {
+    height: 40,
+    width: '100%', 
+    borderRadius: 8, 
+    borderWidth: 1, 
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5, 
+    marginBottom: 10,
+    color: colors.white
   },
 
   // Componentes de navegação
@@ -109,6 +140,17 @@ export const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: spacing.small,
+  },
+
+  teste: {
+    backgroundColor: colors.secondary,
+    borderRadius: 8,
+    width: '100%',
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: spacing.medium,
     marginBottom: spacing.small,
   },
 

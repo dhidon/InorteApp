@@ -1,32 +1,15 @@
 import React, { useContext, useEffect } from 'react'
-import { View, Text, KeyboardAvoidingView, TextInput, ScrollView } from 'react-native'
+import { View, Text, KeyboardAvoidingView, TextInput, ScrollView, TouchableOpacity } from 'react-native'
 import { styles, colors } from '../../../styles/Styles'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
+import { estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao } from '../../../constants/anamneseOptions'
 import Header from '../../../components/Header'
+import Seletor from '../../../components/Seletor'
 
 export default function AnmenseAdolescentes(){
-    const { setPaciente, paciente } = useContext(AnamneseContext)
+    const { setPaciente, paciente, formatarData, formatarSus, formatarCep } = useContext(AnamneseContext)
 
-
-
-    const formatarData = (texto, callback, key) => {
-        let textoFiltrado = texto.replace(/\D/g, '')
-        if (textoFiltrado.length >= 5) {
-            textoFiltrado = textoFiltrado.substring(0, 2) + '/' + textoFiltrado.substring(2, 4) + '/' + textoFiltrado.substring(4,8)
-        } else if (textoFiltrado.length >= 3) {
-            textoFiltrado = textoFiltrado.substring(0, 2) + '/' + textoFiltrado.substring(2, 4)
-        }
-        callback({...paciente, [key]: textoFiltrado})
-    }
-
-    const formatarSus = (texto) => {
-        let textoFiltrado = texto.replace(/\D/g, '')
-        textoFiltrado = textoFiltrado.match(/.{1,4}/g)?.join(' ') || textoFiltrado
-        setPaciente({...paciente, sus: textoFiltrado})
-    }
-
-    
     useEffect(()=>{
         if (!paciente.nascimento) return;
     
@@ -46,16 +29,11 @@ export default function AnmenseAdolescentes(){
         setPaciente({ ...paciente, idade: idade });
     }, [paciente.nascimento])
 
-    const formatarCep = (texto) => {
-        let textoFiltrado = texto.replace(/\D/g,'')
-        if (textoFiltrado.length > 5) {
-            textoFiltrado = `${textoFiltrado.substring(0,2)}.${textoFiltrado.substring(2,5)}-${textoFiltrado.substring(5,8)}`
-        } else if(textoFiltrado.length > 2) {
-            textoFiltrado = `${textoFiltrado.substring(0,2)}.${textoFiltrado.substring(2)}`
+    useEffect(() => {
+        if (!paciente.condicoes) {
+            setPaciente({...paciente, condicoes: condicoes})
         }
-
-        setPaciente({...paciente, cep: textoFiltrado})
-    }
+    }, [])
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
@@ -153,6 +131,187 @@ export default function AnmenseAdolescentes(){
                             placeholder='Qual o nome de quem está informando?'
                         />
                     </View>
+
+                    <View style={[styles.inputArea, {gap: 7}]}>
+                        <Text style={styles.normal}>Dados da mãe:</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={newText => setPaciente({...paciente, nomeMae: newText})}
+                            value={paciente.nomeMae}
+                            placeholder='Nome'
+                        />
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={texto=>formatarData(texto, setPaciente, 'nascimentoMae')}
+                            value={paciente.nascimentoMae}
+                            placeholder='Data de nascimento'
+                        />
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.profissaoMae}
+                            onChangeText={newText => setPaciente({...paciente, profissaoMae: newText})}
+                            placeholder='Profissão'
+                        />
+                    </View>
+
+                    <View style={[styles.inputArea, {gap: 7}]}>
+                        <Text style={styles.normal}>Dados do pai:</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={newText => setPaciente({...paciente, nomePai: newText})}
+                            value={paciente.nomePai}
+                            placeholder='Nome'
+                        />
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={texto=>formatarData(texto, setPaciente, 'nascimentoPai')}
+                            value={paciente.nascimentoPai}
+                            placeholder='Data de nascimento'
+                        />
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.profissaoPai}
+                            onChangeText={newText => setPaciente({...paciente, profissaoPai: newText})}
+                            placeholder='Profissão'
+                        />
+                    </View>
+
+                    <View style={[styles.inputArea, {gap: 7}]}>
+                        <Text style={styles.normal}>Estado civil dos pais</Text>
+                        <Seletor
+                        selecionado={paciente.estadoCivilSelecionado}
+                        aoMudar={value=>setPaciente({...paciente, estadoCivilSelecionado: value})}
+                        lista={estadoCivil}
+                        />
+
+                        {paciente.estadoCivilSelecionado === 'separados' || paciente.estadoCivilSelecionado === 'divorciados'
+                        ? <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
+                            <Text style={styles.normal}>Que idade a criança tinha quando os pais se separaram?</Text>
+                            <TextInput
+                                style={styles.input}
+                                value={paciente.idadeSeparacao}
+                                onChangeText={newText=>setPaciente({...paciente, idadeSeparacao: newText})}
+                                keyboardType='numeric'
+                            />
+                            <Text style={styles.normal}>Quem tem a guarda da criança?</Text>
+                            <Seletor
+                                selecionado={paciente.guardaSelecionada}
+                                aoMudar={value=>setPaciente({...paciente, guardaSelecionada: value})}
+                                lista={guarda}
+                            />
+                            {paciente.guardaSelecionada !== 'outro'
+                            ? <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
+                                <Text style={styles.normal}>Qual o nome do padrasto/madrasta?</Text>
+                                <TextInput
+                                style={styles.input}
+                                value={paciente.padrastroMadrasta}
+                                onChangeText={newText => setPaciente({...paciente, padrastoMadrasta: newText})}
+                                />
+                            </View>
+                            : <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
+                                <Text style={styles.normal}>Qual o motivo?</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    value={paciente.motivo}
+                                    onChangeText={newText=>setPaciente({...paciente, motivo: newText})}
+                                />
+                                <Text style={styles.normal}>Quem possui a guarda legal?</Text>
+                                <Seletor
+                                    selecionado={paciente.guardiaoLegalSelecionado}
+                                    aoMudar={value=>setPaciente({...paciente, guardiaoLegalSelecionado: value})}
+                                    lista={guardiaoLegal}
+                                />
+                                <TextInput
+                                    style={styles.input }
+                                    value={paciente.guardiao}
+                                    onChangeText={newText=>setPaciente({...paciente, guardiao: newText})}
+                                    placeholder='Nome'
+                                />
+                            </View>}
+                        </View> 
+                        : null}
+                    </View>
+
+                    <Text style={styles.titulo}>2 Sintomas</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Qual o principal motivo do paciente estar realizando esta avaliação?</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.motivo}
+                            onChangeText={newText=>setPaciente({...paciente, motivo: newText})}
+                        />
+                        <Text style={styles.normal}>Que profissionais estão fazendo o acompanhamento?</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.profissionais}
+                            onChangeText={newText=>setPaciente({...paciente, profissionais: newText})}
+                        />
+                        <Text style={styles.normal}>Com quem o adolescente passa mais tempo?</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.convive}
+                            onChangeText={newText=>setPaciente({...paciente, convive: newText})}
+                        />
+                    </View>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Pressione as condições ou doenças que algum membro da família (pais, irmãos, tias, tios, primos, avós) já teve. Anote o grau de parentesco com a criança</Text>
+                        {paciente.condicoes?.map((item, index)=>
+                            <TouchableOpacity key={index} onPress={() => {
+                                const newCondicoes = [...paciente.condicoes];
+                                newCondicoes[index] = {
+                                    ...newCondicoes[index],
+                                    value: newCondicoes[index].value === 'não' ? 'sim' : 'não'
+                                };
+                                setPaciente({...paciente, condicoes: newCondicoes});
+                            }}>
+                                <View>
+                                    <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1}}>
+                                        <Text>{item.label}</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
+                                    </View>
+                                    {item.value === 'sim'
+                                    ?<TextInput
+                                        placeholder='Qual o parentesco?'
+                                        style={[styles.input, {marginTop: 7}]}
+                                        value={item.parentesco}
+                                        onChangeText={newText=>{
+                                            const newCondicoes = [...paciente.condicoes];
+                                            newCondicoes[index] = {
+                                                ...newCondicoes[index],
+                                                parentesco: newText
+                                            };
+                                            setPaciente({...paciente, condicoes: newCondicoes});
+                                        }}
+                                    />
+                                    :null
+                                    }
+                                </View>
+                            </TouchableOpacity>
+                        )}
+                    </View>
+
+                    <Text style={styles.titulo}>3. Histórico de saúde</Text>
+                    <Text style={styles.titulo}>Gestação e desenvolvimento</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>A gestação foi planejada?</Text>
+                        <Seletor
+                            selecionado={paciente.gestacaoSelecionada}
+                            aoMudar={value=>setPaciente({...paciente, gestacaoSelecionada: value})}
+                            lista={simOuNao}
+                        />
+                        <Text>Realizou pré-natal?</Text>
+                        <Seletor
+                            selecionado={paciente.preNatalSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, preNatalSelecionado: value})}
+                            lista={simOuNao}
+                        />
+                    </View>
+                        <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.condicoes)}>
+                            <Text style={styles.buttonText}>Teste</Text>
+                        </TouchableOpacity>
 
                 </View>
             </ScrollView>
