@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
-import { View, Image, TextInput, TouchableOpacity, Text, KeyboardAvoidingView } from "react-native";
+import React, { useContext, useState } from "react";
+import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput } from "react-native";
 import { styles } from "../../styles/Styles";
-import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../../contexts/auth";
 
-export default function LogIn() {
-    const { signIn } = useContext(AuthContext)
-    const navigation = useNavigation()
+export default function SignUp() {
+    const { registerUser } = useContext(AuthContext)
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
 
-    function handleLogin() {
-        signIn()
+
+    function handleRegister(){
+        registerUser(email, senha)
     }
 
     return (
@@ -17,15 +18,12 @@ export default function LogIn() {
             behavior={'padding'}
             style={styles.loginContainer}
         >
-            <Image
-                style={styles.logo}
-                source={require('../../assets/logo-card.png')}
-            />
             <View style={styles.inputArea}>
                 <TextInput 
                     style={styles.input}
-                    placeholder='Usuário'
+                    placeholder='email'
                     placeholderTextColor={styles.input.color}
+                    onChangeText={newText=>setEmail(newText)}
                 />
             </View>
 
@@ -34,22 +32,17 @@ export default function LogIn() {
                     style={styles.input}
                     placeholder='Senha'
                     placeholderTextColor={styles.input.color}
+                    onChangeText={newText=>setSenha(newText)}
+                    secureTextEntry
                 />
             </View>
 
             <TouchableOpacity
                 style={styles.buttonArea}
                 activeOpacity={0.6}
-                onPress={() => handleLogin()}
+                onPress={() => handleRegister()}
             >
                 <Text style={styles.buttonText}>Log In</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-                style={styles.linkArea}
-                onPress={() => navigation.navigate('SignIn')}
-            >
-                <Text style={styles.link}>Criar novo usuário</Text>
             </TouchableOpacity>
         </KeyboardAvoidingView>
     )
