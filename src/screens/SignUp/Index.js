@@ -42,7 +42,7 @@ export default function SignUp() {
                 activeOpacity={0.6}
                 onPress={() => handleRegister()}
             >
-                <Text style={styles.buttonText}>Log In</Text>
+                <Text style={styles.buttonText}>Criar usuário</Text>
             </TouchableOpacity>
         </KeyboardAvoidingView>
     )

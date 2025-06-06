@@ -6,15 +6,19 @@ import { AuthContext } from "../../contexts/auth";
 import Header from "../../components/Header";
 
 export default function Home() {
-    const { setSigned } = useContext(AuthContext)
+    const { logOut, authUser } = useContext(AuthContext)
+
+    function handleLogout(){
+        logOut()
+    }
 
     return (
         <KeyboardAvoidingView style={styles.container}>
             <Header setor={'Home'}/>
             <View style={styles.contentArea}>
-                <Text style={styles.normal}>Esta é a sua home, parabéns!</Text>
+                <Text style={styles.normal}>Bem-vindo, {authUser.email}</Text>
 
-                <TouchableOpacity onPress={()=>{setSigned(false)}} style={styles.buttonArea}>
+                <TouchableOpacity onPress={()=>{handleLogout}} style={styles.buttonArea}>
                     <Text style={styles.buttonText}>LogOut</Text>
                 </TouchableOpacity>
             </View>

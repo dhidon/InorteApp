@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, Image, TextInput, TouchableOpacity, Text, KeyboardAvoidingView } from "react-native";
 import { styles } from "../../styles/Styles";
 import { useNavigation } from "@react-navigation/native";
@@ -7,9 +7,11 @@ import { AuthContext } from "../../contexts/auth";
 export default function LogIn() {
     const { signIn } = useContext(AuthContext)
     const navigation = useNavigation()
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
 
     function handleLogin() {
-        signIn()
+        signIn(email, senha)
     }
 
     return (
@@ -24,8 +26,9 @@ export default function LogIn() {
             <View style={styles.inputArea}>
                 <TextInput 
                     style={styles.input}
-                    placeholder='Usuário'
+                    placeholder='Seu email'
                     placeholderTextColor={styles.input.color}
+                    onChangeText={newText=>setEmail(newText)}
                 />
             </View>
 
@@ -34,6 +37,8 @@ export default function LogIn() {
                     style={styles.input}
                     placeholder='Senha'
                     placeholderTextColor={styles.input.color}
+                    onChangeText={newText=>setSenha(newText)}
+                    secureTextEntry
                 />
             </View>
 
@@ -42,7 +47,7 @@ export default function LogIn() {
                 activeOpacity={0.6}
                 onPress={() => handleLogin()}
             >
-                <Text style={styles.buttonText}>Log In</Text>
+                <Text style={styles.buttonText}>Entrar</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
