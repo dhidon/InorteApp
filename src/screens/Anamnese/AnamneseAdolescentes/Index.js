@@ -302,16 +302,19 @@ export default function AnmenseAdolescentes(){
                             aoMudar={value=>setPaciente({...paciente, gestacaoSelecionada: value})}
                             lista={simOuNao}
                         />
-                        <Text>Realizou pré-natal?</Text>
+                        <Text style={styles.normal}>Realizou pré-natal?</Text>
                         <Seletor
                             selecionado={paciente.preNatalSelecionado}
                             aoMudar={value=>setPaciente({...paciente, preNatalSelecionado: value})}
                             lista={simOuNao}
                         />
                     </View>
-                        <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.condicoes)}>
-                            <Text style={styles.buttonText}>Teste</Text>
-                        </TouchableOpacity>
+                    
+                    <Text style={styles.titulo}>Alimentação</Text>
+
+                    <View style={styles.inputArea}>
+                        
+                    </View>
 
                 </View>
             </ScrollView>
