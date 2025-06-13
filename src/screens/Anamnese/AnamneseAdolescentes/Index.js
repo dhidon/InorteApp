@@ -310,6 +310,41 @@ export default function AnmenseAdolescentes(){
                             lista={simOuNao}
                         />
                     </View>
+
+                    <Text style={styles.titulo}>Alimentação</Text>
+                    
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Mamou quando criança?</Text>
+                        <Seletor
+                            selecionado={paciente.mamouSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, mamouSelecionado: value})}
+                            lista={simOuNao}
+                        />
+                        {paciente.mamouSelecionado === 'sim'
+                        ? <View>
+                            <Text>Aleitamento materno exclusivo até quantos meses?</Text>
+                            <TextInput
+                                style={styles.input}
+                                value={paciente.leiteMatExclMeses}
+                                onChangeText={newText=>setPaciente({...paciente, leiteMatExclMeses: newText})}
+                                keyboardType='numeric'
+                            />
+                            <Text>Mamou até quantos meses?</Text>
+                            <TextInput
+                                style={styles.input}
+                                value={paciente.mamouMeses}
+                                onChangeText={newText=>setPaciente({...paciente, mamouMeses: newText})}
+                                keyboardType='numeric'
+                            />
+                            <Text>Usou mamadeira?</Text>
+                        </View>
+                        : null
+                        }
+                    </View>
+
+
+
+
                         <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.condicoes)}>
                             <Text style={styles.buttonText}>Teste</Text>
                         </TouchableOpacity>
