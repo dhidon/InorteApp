@@ -19,7 +19,7 @@ export default function Home() {
                 <Text style={styles.normal}>Bem-vindo, {authUser.email}</Text>
 
                 <TouchableOpacity onPress={()=>handleLogout()} style={styles.buttonArea}>
-                    <Text style={styles.buttonText}>LogOut</Text>
+                    <Text style={styles.buttonText}>Sair</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>

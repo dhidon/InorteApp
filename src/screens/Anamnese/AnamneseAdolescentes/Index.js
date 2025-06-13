@@ -303,7 +303,7 @@ export default function AnmenseAdolescentes(){
                             aoMudar={value=>setPaciente({...paciente, gestacaoSelecionada: value})}
                             lista={simOuNao}
                         />
-                        <Text>Realizou pré-natal?</Text>
+                        <Text style={styles.normal}>Realizou pré-natal?</Text>
                         <Seletor
                             selecionado={paciente.preNatalSelecionado}
                             aoMudar={value=>setPaciente({...paciente, preNatalSelecionado: value})}
