@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { View, Text, KeyboardAvoidingView, TextInput, ScrollView, TouchableOpacity } from 'react-native'
 import { styles, colors } from '../../../styles/Styles'
+import { format } from 'date-fns'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
 import { estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao } from '../../../constants/anamneseOptions'
