@@ -16,7 +16,7 @@ export default function Home() {
         <KeyboardAvoidingView style={styles.container}>
             <Header setor={'Home'}/>
             <View style={styles.contentArea}>
-                <Text style={styles.normal}>Bem-vindo, {authUser.email}</Text>
+                <Text style={styles.normal}>Bem-vindo, {authUser?.email}</Text>
 
                 <TouchableOpacity onPress={()=>handleLogout()} style={styles.buttonArea}>
                     <Text style={styles.buttonText}>Sair</Text>

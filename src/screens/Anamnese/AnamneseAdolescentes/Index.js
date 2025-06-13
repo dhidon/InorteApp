@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import { View, Text, KeyboardAvoidingView, TextInput, ScrollView, TouchableOpacity } from 'react-native'
 import { styles, colors } from '../../../styles/Styles'
-import { format } from 'date-fns'
+import Slider from '@react-native-community/slider'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
-import { estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao } from '../../../constants/anamneseOptions'
+import { estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao, consistencias, problemaAlimentacao } from '../../../constants/anamneseOptions'
 import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 
@@ -294,6 +294,7 @@ export default function AnmenseAdolescentes(){
                     </View>
 
                     <Text style={styles.titulo}>3. Histórico de saúde</Text>
+
                     <Text style={styles.titulo}>Gestação e desenvolvimento</Text>
 
                     <View style={styles.inputArea}>
@@ -321,33 +322,125 @@ export default function AnmenseAdolescentes(){
                             lista={simOuNao}
                         />
                         {paciente.mamouSelecionado === 'sim'
-                        ? <View>
-                            <Text>Aleitamento materno exclusivo até quantos meses?</Text>
+                        ? <View style={[styles.inputArea, {width: '100%', gap: 7}]}>
+                            <Text style={styles.normal}>Aleitamento materno exclusivo até quantos meses?</Text>
                             <TextInput
                                 style={styles.input}
                                 value={paciente.leiteMatExclMeses}
                                 onChangeText={newText=>setPaciente({...paciente, leiteMatExclMeses: newText})}
                                 keyboardType='numeric'
                             />
-                            <Text>Mamou até quantos meses?</Text>
+                            <Text style={styles.normal}>Mamou até quantos meses?</Text>
                             <TextInput
                                 style={styles.input}
                                 value={paciente.mamouMeses}
                                 onChangeText={newText=>setPaciente({...paciente, mamouMeses: newText})}
                                 keyboardType='numeric'
                             />
-                            <Text>Usou mamadeira?</Text>
                         </View>
                         : null
                         }
+                        <Text style={styles.normal}>Usou mamadeira?</Text>
+                        <Seletor
+                            selecionado={paciente.mamadeiraSelecionada}
+                            aoMudar={value=>setPaciente({...paciente, mamadeiraSelecionada: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Usou chupeta?</Text>
+                        <Seletor
+                            selecionado={paciente.chupetaSelecionada}
+                            aoMudar={value=>setPaciente({...paciente, chupetaSelecioada: value})}
+                            lista={simOuNao}
+                        />
+
+                        <Text style={styles.normal}>Com qual idade foi feita a introdução alimentar?</Text>
+                            <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 15}}>
+                                <Slider
+                                    minimumValue={0}
+                                    maximumValue={10}
+                                    value={0}
+                                    onValueChange={newValue=>setPaciente({...paciente, idadeIntroAlimentar: newValue})}
+                                    step={1}
+                                    style={{width: '90%', marginTop: 10}}
+                                />
+                                <Text style={styles.normal}>{paciente.idadeIntroAlimentar}</Text>
+                            </View>
+
+                        <Text style={styles.normal}>Apresentou dificuldade na introdução alimentar?</Text>
+                        <Seletor
+                            selecionado={paciente.difIntroAlimentarSelecionada}
+                            aoMudar={value=>setPaciente({...paciente, difIntroAlimentarSelecionada: value})}
+                            lista={simOuNao}
+                        />
+                        {paciente.difIntroAlimentarSelecionada === 'sim'
+                        ? <View style={styles.inputArea}>
+                            <Text style={styles.normal}>Quais?</Text>
+                            <TextInput
+                                value={paciente.difAlimentar}
+                                style={styles.input}
+                                onChangeText={newText=>setPaciente({...paciente, difAlimentar: newText})}
+                            />
+                        </View>
+                        : null}
+                        <Text style={[styles.normal, {marginBottom: 5}]}>As respostas a seguir devem ser referentes ao estado atual da criança</Text>
+                        <Text style={[styles.normal, {marginBottom: 5}]}>Quais das consistencias alimentares asseguir o adolescente aceita bem?</Text>
+                        {consistencias.map((item, index)=>{
+                            return <TouchableOpacity key={index} onPress={()=>{
+                                const newConsistencias = [...consistencias]
+                                newConsistencias[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, consistencias: newConsistencias})
+                            }}>
+                                <View style={{flexDirection: 'row', borderBottomWidth: 1, justifyContent: 'space-between', marginBottom: 5}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight:'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        })}
+                        <Text style={[styles.normal, {marginBottom: 5}]}>Apresentou algum problema na alimenteação?</Text>
+                        {problemaAlimentacao.map((item, index)=>{
+                            return <TouchableOpacity key={index} onPress={()=>{
+                                const newProbAlimentacao = [...problemaAlimentacao]
+                                newProbAlimentacao[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, problemaAlimentacao: newProbAlimentacao})
+                            }}>
+                                <View style={{flexDirection: 'row', borderBottomWidth: 1, justifyContent: 'space-between', marginBottom: 5}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight:'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        })}
+                        <Text style={styles.normal}>Apresenta alguma seletividade em relação a comida?</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.seletividadeAlimentar}
+                            onChangeText={newText=>setPaciente({...paciente, seletividadeAlimentar: newText})}
+                        />    
+                    </View>
+
+                    <Text style={styles.titulo}>Sono e desenvolvimento</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Como é o sono?</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder='É tranquilo, agitado, acorda durante a noite...?'
+                            value={paciente.formaSono}
+                            onChangeText={newText=>setPaciente({...paciente, formaSono: newText})}
+                        />
+                        <Text style={styles.normal}>Dorme sozinho?</Text>
+                        <Seletor
+                            selecionado={paciente.dormeSozinhoSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, dormeSozinhoSelecionado: value})}
+                            lista={simOuNao}
+                        />
                     </View>
 
 
 
 
-                        <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.condicoes)}>
-                            <Text style={styles.buttonText}>Teste</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.condicoes)}>
+                        <Text style={styles.buttonText}>Teste</Text>
+                    </TouchableOpacity>
 
                 </View>
             </ScrollView>

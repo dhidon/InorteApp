@@ -1,4 +1,5 @@
 export const estadoCivil = [
+    {label: '---', value: null},
     { label: 'Casados', value: 'casados' },
     { label: 'Separados', value: 'separados' },
     { label: 'Divorciados', value: 'divorciados' },
@@ -39,4 +40,16 @@ export const condicoes = [
     {id: 'doencaNeurologica_cg_36', label: 'Doença ou enfermidade neurológica', value: 'não', parentesco: ''}
 ]
 
-export const simOuNao = [{label: 'Sim', value: 'sim'}, {label: 'Não', value: 'nao'}]
+export const simOuNao = [{label: '---', value: null}, {label: 'Sim', value: 'sim'}, {label: 'Não', value: 'nao'}]
+
+export const consistencias = [
+    {id: 'solido', label: 'Sólido', value: 'não'},
+    {id: 'liquido', label: 'Líquido', value: 'não'},
+    {id: 'pastoso', label: 'Pastoso', value: 'não'}
+]
+
+export const problemaAlimentacao = [
+    {id: 'alteracaoMastigacao', label: 'Alteração na mastigaçao', value: 'não'},
+    {id: 'poucoApetite', label: 'Pouco apetite', value: 'não'},
+    {id: 'voracidade', label: 'Voracidade', value: 'não'}
+]

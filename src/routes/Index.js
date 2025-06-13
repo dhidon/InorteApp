@@ -7,10 +7,11 @@ import { AuthContext } from "../contexts/auth";
 
 export default function Routes(){
     const { signed } = useContext(AuthContext)
+    const building = true
 
     return(
         <View style={{flex: 1}}>
-            {signed ? <AppRoute/> : <AuthRoute/>}
+            {building ? <AppRoute/> : <AuthRoute/>}
         </View>
     )
 }
