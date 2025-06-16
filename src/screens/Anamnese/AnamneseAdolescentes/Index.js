@@ -433,6 +433,24 @@ export default function AnmenseAdolescentes(){
                             aoMudar={value=>setPaciente({...paciente, dormeSozinhoSelecionado: value})}
                             lista={simOuNao}
                         />
+                        <Text style={styles.normal}>Compartilha a cama com:</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.quemCompartilhaCama}
+                            onChangeText={newText=>setPaciente({...paciente, quemCompartilhaCama: newText})}
+                        />
+                        <Text style={styles.normal}>Dorme que horas?</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.horarioDormir}
+                            onChangeText={newText=> setPaciente({...paciente, horarioDormir: newText})}
+                        />
+                        <Text style={styles.normal}>Acorda que horas?</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.horarioAcordar}
+                            onChangeText={newText=> setPaciente({...paciente, horarioAcordar: newText})}
+                        />
                     </View>
 
 

@@ -1,18 +1,16 @@
 import React from "react";
-import { View, Dimensions, Platform, KeyboardAvoidingView, Text } from "react-native";
+import { View, KeyboardAvoidingView, Text } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
 import { styles } from "../styles/Styles";
 
 export default function Seletor({selecionado, aoMudar, lista}) {
-    const larguraTela = Dimensions.get('window').width
-    const ehDesktop = larguraTela > 1024 && Platform.OS === 'web'
     
     return (
-        <KeyboardAvoidingView style={styles.container}>
+        <KeyboardAvoidingView style={[styles.container, {marginBottom: 5}]}>
             <View style={styles.pickerContainer}>
                 <Picker
-                    style={ehDesktop?styles.desktopPicker:styles.mobilePicker}
+                    style={{height: 60}}
                     selectedValue={selecionado}
                     onValueChange={aoMudar}
                     mode='dialog'
