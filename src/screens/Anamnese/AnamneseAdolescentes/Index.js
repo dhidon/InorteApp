@@ -4,7 +4,7 @@ import { styles, colors } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
-import { estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos } from '../../../constants/anamneseOptions'
+import { fatoresDif, estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
 import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 
@@ -33,6 +33,12 @@ export default function AnmenseAdolescentes(){
     useEffect(() => {
         if (!paciente.condicoes) {
             setPaciente({...paciente, condicoes: condicoes})
+        }
+    }, [])
+
+    useEffect(() => {
+        if (!paciente.comportamentos) {
+            setPaciente({...paciente, comportamentos: comportamentos})
         }
     }, [])
 
@@ -392,7 +398,7 @@ export default function AnmenseAdolescentes(){
                             />
                         </View>
                         : null}
-                        <Text style={[styles.normal, {marginBottom: 5}]}>As respostas a seguir devem ser referentes ao estado atual da criança</Text>
+                        <Text style={[styles.normal, {marginBottom: 5}]}>As respostas a seguir devem ser referentes ao estado atual do paciente</Text>
                         <Text style={[styles.normal, {marginBottom: 5}]}>Quais das consistencias alimentares asseguir o adolescente aceita bem?</Text>
                         {consistencias.map((item, index)=>{
                             return <TouchableOpacity key={index} onPress={()=>{
@@ -482,7 +488,7 @@ export default function AnmenseAdolescentes(){
                         ))}
                         <Text style={styles.normal}>Indique a idade aproximada em que seu filho apresentou pela primeira vez os comportamentos a seguir:</Text>
                         <Text style={{fontSize: 13, marginTop: 5, marginBottom: 10}}>Obs.: Assinale 'nunca' se ele nunca demonstrou o comportamento listado. Se não se lembra a idade exata, assinale como cedo, na média ou tarde em relação a outras crianças.</Text>
-                        {comportamentos.map((item, index) => (
+                        {paciente.comportamentos?.map((item, index) => (
                             <View key={index}>
                                 <Text>{item.label}</Text>
                                 <TextInput
@@ -492,11 +498,67 @@ export default function AnmenseAdolescentes(){
                                 />
                             </View>
                         ))}
-
                     </View>
 
+                    <Text style={styles.titulo}>Saúde geral</Text>
 
-
+                    <View style={styles.inputArea}>7
+                        <Text style={styles.normal}>Pressione as condições e doenças que seu filho já teve</Text>
+                        {condicoesFilho.map((item, index) => {
+                            return <TouchableOpacity key={index} onPress={()=> {
+                                const newCondicoes = [...condicoesFilho]
+                                newCondicoes[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, condicoesFilho: newCondicoes})
+                            }}>
+                                <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        })}
+                        <Text style={styles.normal}>As respostas a seguir devem ser referentes ao estado atual do paciente</Text>
+                        <Text style={styles.normal}>Quais fatores você acha que podem contribuir para as dificuldades do seu filho?</Text>
+                        {fatoresDif.map((item, index) => {
+                            return <TouchableOpacity key={index} onPress={()=>{
+                                const newFatores = [...fatoresDif]
+                                newFatores[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, fatoresDif: newFatores})
+                            }}>
+                                <View style={{flexDirection: 'row', borderBottomWidth: 1, justifyContent: 'space-between'}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        })}
+                        <Text style={styles.normal}>Faz uso de alguma medicação?</Text>
+                        <Seletor
+                            lista={simOuNao}
+                            selecionado={paciente.usoMedicacaoSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, usoMedicacaoSelecionado: value})}
+                        />
+                        {paciente.usoMedicacaoSelecionado === 'sim'
+                        ? <View style={[styles.inputArea, {width: '100%', gap: 7}]}>
+                            <TextInput
+                                style={styles.input}
+                                value={paciente.qualMedicacao}
+                                onChangeText={newText=>setPaciente({...paciente, qualMedicacao: newText})}
+                                placeholder='Qual o nome da medicação que o paciente está tomando?'
+                            />
+                            <TextInput
+                                style={styles.input}
+                                value={paciente.motivoMedicacao}
+                                onChangeText={newText=>setPaciente({...paciente, motivoMedicacao: newText})}
+                                placeholder='Qual o motivo do uso desta medicação?'
+                            />
+                            <TextInput
+                                style={styles.input}
+                                value={paciente.quemReceitou}
+                                onChangeText={newText=>setPaciente({...paciente, quemReceitou: newText})}
+                                placeholder='Quem receitou esta medicação para o paciente?'
+                            />
+                        </View>
+                        : null}
+                    </View>
 
                     <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.comportamentos)}>
                         <Text style={styles.buttonText}>Teste</Text>
