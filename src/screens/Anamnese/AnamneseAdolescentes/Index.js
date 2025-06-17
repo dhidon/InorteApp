@@ -37,7 +37,7 @@ export default function AnmenseAdolescentes(){
     }, [])
 
     function atualizarComportamento(id, novoValor) {
-        const newComportamentos = paciente.comportamentos.map(opcao =>{
+        const newComportamentos = paciente.comportamentos.map(opcao => {
             if (opcao.value === id) {
                 return {...opcao, idade: novoValor}
             }
@@ -482,7 +482,7 @@ export default function AnmenseAdolescentes(){
                         ))}
                         <Text style={styles.normal}>Indique a idade aproximada em que seu filho apresentou pela primeira vez os comportamentos a seguir:</Text>
                         <Text style={{fontSize: 13, marginTop: 5, marginBottom: 10}}>Obs.: Assinale 'nunca' se ele nunca demonstrou o comportamento listado. Se não se lembra a idade exata, assinale como cedo, na média ou tarde em relação a outras crianças.</Text>
-                        {comportamentos.map((item, index) => {
+                        {comportamentos.map((item, index) => (
                             <View key={index}>
                                 <Text>{item.label}</Text>
                                 <TextInput
@@ -491,7 +491,7 @@ export default function AnmenseAdolescentes(){
                                     onChangeText={newText => atualizarComportamento(item.value, newText)}
                                 />
                             </View>
-                        })}
+                        ))}
 
                     </View>
 
