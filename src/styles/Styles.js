@@ -49,6 +49,7 @@ export const styles = StyleSheet.create({
   normal: {
     fontSize: typography.medium,
     color: colors.black,
+    marginTop: 5
   },
 
   titulo: {

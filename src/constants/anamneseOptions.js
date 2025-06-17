@@ -53,3 +53,40 @@ export const problemaAlimentacao = [
     {id: 'poucoApetite', label: 'Pouco apetite', value: 'não'},
     {id: 'voracidade', label: 'Voracidade', value: 'não'}
 ]
+
+export const itensSignificantes = [
+            {id: 'extrQuietoInativo', label: 'Extremamente quieto ou inativo', value: 'não'},
+            {id: 'raramenteQuietoInativo', label: 'Raramente quieto ou inativo', value: 'não'},
+            {id: 'excessInquieto', label: 'Excessivamente inquieto', value: 'não'},
+            {id: 'naoColoAfago', label: 'Não gostava de colo ou afago', value: 'não'},
+            {id: 'poucoAlerta', label: 'Pouco alerta', value: 'não'},
+            {id: 'difAcalmar', label: 'Dificuldade para se acalmar', value: 'não'},
+            {id: 'colicas', label: 'Cólicas', value: 'não'},
+            {id: 'sonoExcess', label: 'Sono excessivo', value: 'não'},
+            {id: 'poucoSono', label: 'Pouco Sono', value: 'não'},
+            {id: 'batidasCabeca', label: 'Batidas na cabeça', value: 'não'},
+            {id: 'incomodoSom', label: 'Incômodo com som', value: 'não'},
+            {id: 'semNocaoPerigo', label: 'Sem noção do perigo', value: 'não'},
+            {id: 'eploraTudoSempre', label: 'Explorava tudo o tempo todo', value: 'não'},
+            {id: 'numeroAcidentesAcimaMedia', label: 'Excessivo número de acidentes em comparação com outras crianças', value: 'não'}
+]
+
+export const comportamentos = [
+            {value: 'sorrir', label: 'Sorrir', idade:''},
+            {value: 'rolar', label: 'Rolar', idade: ''},
+            {value: 'sentarSemApoio', label: 'Sentar sem apoio', idade:''},
+            {value: 'engatinhar', label: 'Engatinhar', idade:''},
+            {value: 'andarSemApoio', label: 'Andar sem apoio', idade:''},
+            {value: 'correr', label: 'Correr', idade:''},
+            {value: 'balbuciar', label: 'Balbuciar', idade:''},
+            {value: 'silabas', label: 'Sílabas', idade:''},
+            {value: 'palavras', label: 'Palavras', idade:''},
+            {value: 'frasesDuasPalavras', label: 'Frases com 2 palavras', idade:''},
+            {value: 'amarrarCadarcos', label: 'Amarrar os cadarços', idade:''},
+            {value: 'vestirSozinho', label: 'Vestir-se sozinho', idade:''},
+            {value: 'comerSozinho', label: 'Comer sozinho', idade:''},
+            {value: 'controleDiurnoUrina', label: 'Controle diurno da urina', idade:''},
+            {value: 'controleNoturnoUrina', label: 'Controle noturno da urina', idade:''},
+            {value: 'controleFezes', label: 'Controle de fezes', idade:''},
+            {value: 'andarBicicleta', label: 'Andar de bicicleta', idade:''},
+]

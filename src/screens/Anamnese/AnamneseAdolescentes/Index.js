@@ -4,7 +4,7 @@ import { styles, colors } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
-import { estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao, consistencias, problemaAlimentacao } from '../../../constants/anamneseOptions'
+import { estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos } from '../../../constants/anamneseOptions'
 import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 
@@ -35,6 +35,16 @@ export default function AnmenseAdolescentes(){
             setPaciente({...paciente, condicoes: condicoes})
         }
     }, [])
+
+    function atualizarComportamento(id, novoValor) {
+        const newComportamentos = paciente.comportamentos.map(opcao =>{
+            if (opcao.value === id) {
+                return {...opcao, idade: novoValor}
+            }
+            return opcao
+        })
+        setPaciente({...paciente, comportamentos: newComportamentos})
+    }
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
@@ -451,12 +461,44 @@ export default function AnmenseAdolescentes(){
                             value={paciente.horarioAcordar}
                             onChangeText={newText=> setPaciente({...paciente, horarioAcordar: newText})}
                         />
+                        <Text style={styles.normal}>Teve algum problema de crescimento ou desenvolvimento durante os primeiros anos de vida?</Text>
+                        <Seletor
+                            selecionado={paciente.problemaCrescimentoSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, problemaCrescimentoSelecionado: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Dentre os itens a seguir, pressione aqueles que estiveram presentes (com grau de significância) durante a infância nos primeiros anos de vida:</Text>
+                        {itensSignificantes.map((item, index)=> (
+                            <TouchableOpacity key={index} onPress={()=>{
+                                const newItensSignificantes = [...itensSignificantes]
+                                newItensSignificantes[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, itensSignificantes: newItensSignificantes})
+                            }}>
+                                <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        ))}
+                        <Text style={styles.normal}>Indique a idade aproximada em que seu filho apresentou pela primeira vez os comportamentos a seguir:</Text>
+                        <Text style={{fontSize: 13, marginTop: 5, marginBottom: 10}}>Obs.: Assinale 'nunca' se ele nunca demonstrou o comportamento listado. Se não se lembra a idade exata, assinale como cedo, na média ou tarde em relação a outras crianças.</Text>
+                        {comportamentos.map((item, index) => {
+                            <View key={index}>
+                                <Text>{item.label}</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    value={paciente.comportamentos[index].idade}
+                                    onChangeText={newText => atualizarComportamento(item.value, newText)}
+                                />
+                            </View>
+                        })}
+
                     </View>
 
 
 
 
-                    <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.condicoes)}>
+                    <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.comportamentos)}>
                         <Text style={styles.buttonText}>Teste</Text>
                     </TouchableOpacity>
 
