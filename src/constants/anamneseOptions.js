@@ -173,4 +173,22 @@ export const outrasDificuldades = [
             {id: 'pensamentoLentificado', label: 'Pensamento lentificado', value: 'não'},
             {id: 'difDinheiroMatematica', label: 'Dificuldade com dinheiro/matemática', value: 'não'},
             {id: 'poucaNocaoTemporal', label: 'Pouca noção temporal', value: 'não'}
-        ]
+]
+
+export const caracteristicasSociais= [
+            {id: 'prefereSozinho', label: 'Prefere ficar sozinho', value: 'não'},
+            {id: 'excQuietoTimido', label: 'Excessivamente quieto ou tímido', value: 'não'},
+            {id: 'interesseObjetos', label: 'Mais interessado em objetos que em pessoas', value: 'não'},
+            {id: 'difFazerAmigos', label: 'Dificuldade em fazer amigos', value: 'não'},
+            {id: 'provocadoPorCriancas', label: 'Provocado por outras crianças', value: 'não'},
+            {id: 'provocaCriancas', label: 'Provoca, ameaça, intimida outras crianças', value: 'não'},
+            {id: 'prefTrabSozinho', label: 'Prefere fazer trabalho escolar sozinho', value: 'não'},
+            {id: 'baixaTolFrustracao_Sociais', label: 'Baixa tolerância a frustração', value: 'não'},
+            {id: 'redeContVirtual', label: 'Possui rede de contatos virtuais', value: 'não'},
+            {id: 'mantemContatoForaEscola', label: 'Mantem contato com os colegas de sala de aula fora da escola', value: 'não'},
+            {id: 'nProcuradoPorPares', label: 'Não procurado para estabelecer vínculos de amizade por seus pares', value: 'não'},
+            {id: 'difPontoVistaOutro', label: 'Dificuldade em ver o ponto de vista de outra pessoa', value: 'não'},
+            {id: 'semEmpatia', label: 'Não tem empatia com os outros', value: 'não'},
+            {id: 'confiaDemais', label: 'Confia demais nos outros', value: 'não'},
+            {id: 'naoApreciaHumor', label: 'Não aprecia o humor', value: 'não'},
+]

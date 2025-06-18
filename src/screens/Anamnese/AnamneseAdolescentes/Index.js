@@ -659,6 +659,14 @@ export default function AnmenseAdolescentes(){
                         />
                     </View>
 
+                    <Text style={styles.titulo}>Desenvolvimento social</Text>
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Marque quais destas características sociais o paciente apresenta</Text>
+                        {
+                            
+                        }
+                    </View>
+
                     <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.comportamentos)}>
                         <Text style={styles.buttonText}>Teste</Text>
                     </TouchableOpacity>
