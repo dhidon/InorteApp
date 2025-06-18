@@ -4,7 +4,7 @@ import { styles, colors } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
-import { fatoresDif, estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
+import { outrasDificuldades, nivelHabilidades, fatoresDif, estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
 import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 
@@ -558,6 +558,105 @@ export default function AnmenseAdolescentes(){
                             />
                         </View>
                         : null}
+                    </View>
+
+                    <Text style={styles.titulo}>Habilidades cognitivas</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Classifique as habilidades do seu filho em relação a outros adolescentes da mesma idade</Text>
+                        <Text style={styles.normal}>Compreensão da fala</Text>
+                        <Seletor
+                            selecionado={paciente.compreensaoFala}
+                            aoMudar={value=>setPaciente({...paciente, compreensaoFala: value})}
+                            lista={nivelHabilidades}
+                        />
+                        <Text style={styles.normal}>Resolução de problemas</Text>
+                        <Seletor
+                            selecionado={paciente.resolProblemas}
+                            aoMudar={value=>setPaciente({...paciente, resolProblemas: value})}
+                            lista={nivelHabilidades}
+                        />
+                        <Text style={styles.normal}>Mantém a atenção</Text>
+                        <Seletor
+                            selecionado={paciente.mantemAtencao}
+                            aoMudar={value=>setPaciente({...paciente, mantemAtencao: value})}
+                            lista={nivelHabilidades}
+                        />
+                        <Text style={styles.normal}>Habilidades de organização</Text>
+                        <Seletor
+                            selecionado={paciente.habOrganizacao}
+                            aoMudar={value=>setPaciente({...paciente, habOrganizacao: value})}
+                            lista={nivelHabilidades}
+                        />
+                        <Text style={styles.normal}>Recordação de eventos</Text>
+                        <Seletor
+                            selecionado={paciente.recEventos}
+                            aoMudar={value=>setPaciente({...paciente, recEventos: value})}
+                            lista={nivelHabilidades}
+                        />
+                        <Text style={styles.normal}>Recordação de fatos</Text>
+                        <Seletor
+                            selecionado={paciente.recFatos}
+                            aoMudar={value=>setPaciente({...paciente, recFatos: value})}
+                            lista={nivelHabilidades}
+                        />
+                        <Text style={styles.normal}>Aprendizagem a partir de experiências</Text>
+                        <Seletor
+                            selecionado={paciente.aprendExp}
+                            aoMudar={value=>setPaciente({...paciente, aprendExp: value})}
+                            lista={nivelHabilidades}
+                        />
+                        <Text style={styles.normal}>Entendimento de conceitos</Text>
+                        <Seletor
+                            selecionado={paciente.entendConceitos}
+                            aoMudar={value=>setPaciente({...paciente, entendConceitos: value})}
+                            lista={nivelHabilidades}
+                        />
+                        <Text style={styles.normal}>Marque outras possíveis dificuldades</Text>
+                        {outrasDificuldades.map((item, index) => {
+                            return (
+                                <TouchableOpacity key={index} onPress={()=>{
+                                    const newDificuldades = [...outrasDificuldades]
+                                    newDificuldades[index].value = item.value === 'sim' ? 'não' : 'sim'
+                                    setPaciente({...paciente, outrasDificuldades: newDificuldades})
+                                }}>
+                                    <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1}}>
+                                        <Text>{item.label}</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            )
+                        })}
+                        <Text style={styles.normal}>Descreva brevemente alguma outra habilidade cognitiva que seu filho apresente</Text>
+                        <TextInput
+                            value={paciente.outraDifCogn}
+                            onChangeText={newText=>setPaciente({...paciente, outraDifCogn: newText})}
+                            style={styles.input}
+                        />
+                        <Text style={styles.normal}>Descreva brevemente alguma habilidade especial que seu filho possua</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={paciente.habilidadeEspecial}
+                            onChangeText={newText=>setPaciente({...paciente, habilidadeEspecial: newText})}
+                        />
+                        <Text style={styles.normal}>Apresenta dificuldade na compreensão de linguagem?</Text>
+                        <Seletor
+                            selecionado={paciente.difCompreensaoLing}
+                            aoMudar={value=>setPaciente({...paciente, difCompreensaoLing: value})}
+                            lista={simOuNao}
+                        />
+                        <Text>Dificuldade na comunicação expressiva?</Text>
+                        <Seletor
+                            selecionado={paciente.difComunicExpressiva}
+                            aoMudar={value=>setPaciente({...paciente, difComunicExpressiva: value})}
+                            lista={simOuNao}
+                        />
+                        <Text>Realiza estereotipias ou movimentos corporais?</Text>
+                        <Seletor
+                            selecionado={paciente.estereotipiasMovCorporais}
+                            aoMudar={value=>setPaciente({...paciente, estereotipiasMovCorporais: value})}
+                            lista={simOuNao}
+                        />
                     </View>
 
                     <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.comportamentos)}>

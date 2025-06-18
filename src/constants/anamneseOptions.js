@@ -147,3 +147,30 @@ export const fatoresDif = [
     { id: 'bullying', label: 'Bullying', value: 'não' },
     { id: 'outroFatorEscola', label: 'Outro fator na escola', value: 'não' },
 ]
+
+export const nivelHabilidades = [
+        {label: 'Acima da média', value: 'acimaMedia'},
+        {label: 'Na média', value: 'naMedia'},
+        {label: 'Abaixo da média', value: 'abaixoMedia'},
+        {label: 'Dificuldades severas', value: 'difSeveras'}
+]
+
+export const outrasDificuldades = [
+            {id: 'difArticulacao', label: 'Dificuldades de articulação', value: 'não'},
+            {id: 'difRitmoEntonacaoFala', label: 'Dificuldade no rítmo de entonação da fala', value: 'não'},
+            {id: 'repeteUltPalavra', label: 'Repete a última palavra ou frase ouvida', value: 'não'}, 
+            {id: 'difExpressDesejo', label: 'Dificuldade para expressar desejos', value: 'não'},
+            {id: 'falaDesorganizada', label: 'Fala desorganizada', value: 'não'},
+            {id: 'falaAgramatical', label: 'Fala agramatical', value: 'não'},
+            {id: 'falaInfantilizada', label: 'Fala infantilizada', value: 'não'},
+            {id: 'aprendizagemLenta', label: 'Aprendizagem lenta', value: 'não'},
+            {id: 'esqueceFazerCoisas', label: 'Esquece-se de fazer as coisas', value: 'não'},
+            {id: 'distraiFacilmente', label: 'Distrai-se facilmente', value: 'não'},
+            {id: 'esqueceInstrucoes', label: 'Esquece frequentemente instruções', value: 'não'},
+            {id: 'perdeFreqPertences', label: 'Perde frequentemente pertences', value: 'não'},
+            {id: 'difPlanTarefas', label: 'Dificuldade em planejar tarefas', value: 'não'},
+            {id: 'semConsequenciasAcoes', label: 'Não prevê consequências das ações', value: 'não'},
+            {id: 'pensamentoLentificado', label: 'Pensamento lentificado', value: 'não'},
+            {id: 'difDinheiroMatematica', label: 'Dificuldade com dinheiro/matemática', value: 'não'},
+            {id: 'poucaNocaoTemporal', label: 'Pouca noção temporal', value: 'não'}
+        ]
