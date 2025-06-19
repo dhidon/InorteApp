@@ -8,6 +8,7 @@ export const estadoCivil = [
 ]
 
 export const guarda = [
+    {label: '---', value: null},
     { label: 'Mãe', value: 'mãe' },
     { label: 'Pai', value: 'pai' },
     { label: 'Guarda Compartilhada', value: 'guarda compartilhada' },
@@ -15,6 +16,7 @@ export const guarda = [
 ]
 
 export const guardiaoLegal = [
+    {label: '---', value: null},
     { label: 'Pais adotivos', value: 'pais adotivos' },
     { label: 'Pais de criação', value: 'pais de criação' },
     { label: 'Outros membros da família', value: 'outros membros da família' },
@@ -149,6 +151,7 @@ export const fatoresDif = [
 ]
 
 export const nivelHabilidades = [
+        {label: '---', value: null},
         {label: 'Acima da média', value: 'acimaMedia'},
         {label: 'Na média', value: 'naMedia'},
         {label: 'Abaixo da média', value: 'abaixoMedia'},
@@ -175,7 +178,7 @@ export const outrasDificuldades = [
             {id: 'poucaNocaoTemporal', label: 'Pouca noção temporal', value: 'não'}
 ]
 
-export const caracteristicasSociais= [
+export const caracteristicasSociais = [
             {id: 'prefereSozinho', label: 'Prefere ficar sozinho', value: 'não'},
             {id: 'excQuietoTimido', label: 'Excessivamente quieto ou tímido', value: 'não'},
             {id: 'interesseObjetos', label: 'Mais interessado em objetos que em pessoas', value: 'não'},

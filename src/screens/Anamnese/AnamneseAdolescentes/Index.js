@@ -4,10 +4,11 @@ import { styles, colors } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
-import { outrasDificuldades, nivelHabilidades, fatoresDif, estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
+import { caracteristicasSociais, outrasDificuldades, nivelHabilidades, fatoresDif, estadoCivil, guarda, guardiaoLegal, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
 import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 import ListaAlternativas from '../../../components/ListaAlternativas'
+import Input from '../../../components/Input'
 
 export default function AnmenseAdolescentes(){
     const { setPaciente, paciente, formatarData, formatarSus, formatarCep } = useContext(AnamneseContext)
@@ -68,12 +69,11 @@ export default function AnmenseAdolescentes(){
                     <Text style={styles.titulo}>1. Dados de Identificação</Text>
 
                     <View style={styles.inputArea}>
-                        <Text style={styles.normal}>Nome completo:</Text>
-                        <TextInput
-                            placeholder={paciente.nome}
-                            style={styles.input}
-                            onChangeText={newText => setPaciente({...paciente, nome: newText})}
-                            value={paciente.nome}
+                        <Input
+                            titulo="Nome completo:"
+                            obj={paciente}
+                            callback={newText => setPaciente({...paciente, nome: newText})}
+                            chave="nome"
                         />
                         <Text style={styles.normal}>Nº SUS:</Text>
                         <TextInput
@@ -106,85 +106,81 @@ export default function AnmenseAdolescentes(){
                     </View>
 
                     <View style={[styles.inputArea, {gap: 7}]}>
-                        <Text style={styles.normal}>Endereço:</Text>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(newText) => setPaciente({...paciente, enderecoendereco: newText})}
-                            value={paciente.endereco}
-                            placeholder='Rua e número da casa'
+                        <Input
+                            titulo="Endereço:"
+                            obj={paciente}
+                            callback={newText => setPaciente({...paciente, endereco: newText})}
+                            chave="endereco"
+                            legenda='Rua e número da casa'
                         />
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(newText) => setPaciente({...paciente, endereco: newText})}
-                            value={paciente.endereco}
-                            placeholder='Bairro'
+                        <Input
+                            legenda="Bairro:"
+                            valor={paciente.bairro}
+                            callback={newText => setPaciente({...paciente, bairro: newText})}
                         />
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(newText) => setPaciente({...paciente, cidadeUf: newText})}
-                            value={paciente.cidadeUf}
-                            placeholder='Cidade, UF'
+                        <Input
+                            legenda="Cidade, UF:"
+                            obj={paciente}
+                            callback={newText => setPaciente({...paciente, cidadeUf: newText})}
+                            chave="cidadeUf"
                         />
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={formatarCep}
-                            value={paciente.cep}
-                            placeholder='CEP'
-                            keyboardType='numeric'
+                        <Input
+                            valor={paciente.cep}
+                            callback={formatarCep}
+                            legenda='CEP: __.___-___'
                         />
                     </View>
 
                     <View style={styles.inputArea}>
-                        <Text style={styles.normal}>Informante:</Text>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(newText) => setPaciente({...paciente, informante: newText})}
-                            value={paciente.informante}
-                            placeholder='Qual o nome de quem está informando?'
+                        <Input
+                            titulo="Informante:"
+                            valor={paciente.informante}
+                            callback={newText => setPaciente({...paciente, informante: newText})}
+                            legenda='Qual o nome de quem está informando?'
                         />
                     </View>
 
                     <View style={[styles.inputArea, {gap: 7}]}>
                         <Text style={styles.normal}>Dados da mãe:</Text>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={newText => setPaciente({...paciente, nomeMae: newText})}
-                            value={paciente.nomeMae}
-                            placeholder='Nome'
+                        <Input
+                            legenda="Nome:"
+                            obj={paciente}
+                            callback={newText => setPaciente({...paciente, nomeMae: newText})}
+                            chave="nomeMae"
                         />
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={texto=>formatarData(texto, setPaciente, 'nascimentoMae')}
-                            value={paciente.nascimentoMae}
-                            placeholder='Data de nascimento'
+                        <Input
+                            legenda="Data de nascimento:"
+                            obj={paciente}
+                            callback={texto=>formatarData(texto, setPaciente, 'nascimentoMae')}
+                            chave="nascimentoMae"
                         />
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.profissaoMae}
-                            onChangeText={newText => setPaciente({...paciente, profissaoMae: newText})}
-                            placeholder='Profissão'
+                        <Input
+                            legenda="Profissão:"
+                            obj={paciente}
+                            callback={newText => setPaciente({...paciente, profissaoMae: newText})}
+                            chave="profissaoMae"
                         />
                     </View>
 
                     <View style={[styles.inputArea, {gap: 7}]}>
                         <Text style={styles.normal}>Dados do pai:</Text>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={newText => setPaciente({...paciente, nomePai: newText})}
-                            value={paciente.nomePai}
-                            placeholder='Nome'
+                        <Input
+                            legenda="Nome:"
+                            obj={paciente}
+                            callback={newText => setPaciente({...paciente, nomePai: newText})}
+                            chave="nomePai"
                         />
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={texto=>formatarData(texto, setPaciente, 'nascimentoPai')}
-                            value={paciente.nascimentoPai}
-                            placeholder='Data de nascimento'
+                        <Input
+                            legenda="Data de nascimento:"
+                            obj={paciente}
+                            callback={texto=>formatarData(texto, setPaciente, 'nascimentoPai')}
+                            chave="nascimentoPai"
                         />
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.profissaoPai}
-                            onChangeText={newText => setPaciente({...paciente, profissaoPai: newText})}
-                            placeholder='Profissão'
+                        <Input
+                            legenda="Profissão:"
+                            obj={paciente}
+                            callback={newText => setPaciente({...paciente, profissaoPai: newText})}
+                            chave="profissaoPai"
                         />
                     </View>
 
@@ -198,12 +194,11 @@ export default function AnmenseAdolescentes(){
 
                         {paciente.estadoCivilSelecionado === 'separados' || paciente.estadoCivilSelecionado === 'divorciados'
                         ? <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
-                            <Text style={styles.normal}>Que idade a criança tinha quando os pais se separaram?</Text>
-                            <TextInput
-                                style={styles.input}
-                                value={paciente.idadeSeparacao}
-                                onChangeText={newText=>setPaciente({...paciente, idadeSeparacao: newText})}
-                                keyboardType='numeric'
+                            <Input
+                                titulo='Que idade a criança tinha quando os pais se separaram?'
+                                valor={paciente.idadeSeparacao}
+                                kt='numeric'
+                                callback={newText=>setPaciente({...paciente, idadeSeparacao: newText})}
                             />
                             <Text style={styles.normal}>Quem tem a guarda da criança?</Text>
                             <Seletor
@@ -213,19 +208,17 @@ export default function AnmenseAdolescentes(){
                             />
                             {paciente.guardaSelecionada !== 'outro'
                             ? <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
-                                <Text style={styles.normal}>Qual o nome do padrasto/madrasta?</Text>
-                                <TextInput
-                                style={styles.input}
-                                value={paciente.padrastroMadrasta}
-                                onChangeText={newText => setPaciente({...paciente, padrastoMadrasta: newText})}
+                                <Input
+                                    titulo='Qual o nome do padrasto/madrasta?'
+                                    valor={paciente.padrastoMadrasta}
+                                    callback={newText => setPaciente({...paciente, padrastoMadrasta: newText})}
                                 />
                             </View>
                             : <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
-                                <Text style={styles.normal}>Qual o motivo?</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    value={paciente.motivo}
-                                    onChangeText={newText=>setPaciente({...paciente, motivo: newText})}
+                                <Input
+                                    titulo='Qual o motivo?'
+                                    valor={paciente.motivo}
+                                    callback={newText=>setPaciente({...paciente, motivo: newText})}
                                 />
                                 <Text style={styles.normal}>Quem possui a guarda legal?</Text>
                                 <Seletor
@@ -233,11 +226,10 @@ export default function AnmenseAdolescentes(){
                                     aoMudar={value=>setPaciente({...paciente, guardiaoLegalSelecionado: value})}
                                     lista={guardiaoLegal}
                                 />
-                                <TextInput
-                                    style={styles.input }
-                                    value={paciente.guardiao}
-                                    onChangeText={newText=>setPaciente({...paciente, guardiao: newText})}
-                                    placeholder='Nome'
+                                <Input
+                                    valor={paciente.guardiao}
+                                    legenda='Nome'
+                                    callback={newText=>setPaciente({...paciente, guardiao: newText})}
                                 />
                             </View>}
                         </View> 
@@ -247,23 +239,20 @@ export default function AnmenseAdolescentes(){
                     <Text style={styles.titulo}>2 Sintomas</Text>
 
                     <View style={styles.inputArea}>
-                        <Text style={styles.normal}>Qual o principal motivo do paciente estar realizando esta avaliação?</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.motivo}
-                            onChangeText={newText=>setPaciente({...paciente, motivo: newText})}
+                        <Input
+                            titulo="Qual o principal motivo do paciente estar realizando esta avaliação?"
+                            valor={paciente.motivo}
+                            callback={newText=>setPaciente({...paciente, motivo: newText})}
                         />
-                        <Text style={styles.normal}>Que profissionais estão fazendo o acompanhamento?</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.profissionais}
-                            onChangeText={newText=>setPaciente({...paciente, profissionais: newText})}
+                        <Input
+                            titulo="Que profissionais estão fazendo o acompanhamento?"
+                            valor={paciente.profissionais}
+                            callback={newText=>setPaciente({...paciente, profissionais: newText})}
                         />
-                        <Text style={styles.normal}>Com quem o adolescente passa mais tempo?</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.convive}
-                            onChangeText={newText=>setPaciente({...paciente, convive: newText})}
+                        <Input
+                            titulo="Com quem o adolescente passa mais tempo?"
+                            valor={paciente.convive}
+                            callback={newText=>setPaciente({...paciente, convive: newText})}
                         />
                     </View>
 
@@ -386,14 +375,14 @@ export default function AnmenseAdolescentes(){
                             lista={simOuNao}
                         />
                         {paciente.difIntroAlimentarSelecionada === 'sim'
-                        ? <View style={styles.inputArea}>
-                            <Text style={styles.normal}>Quais?</Text>
-                            <TextInput
-                                value={paciente.difAlimentar}
-                                style={styles.input}
-                                onChangeText={newText=>setPaciente({...paciente, difAlimentar: newText})}
+                        ? 
+                        <>
+                            <Input
+                                titulo='Quais?'
+                                valor={paciente.difAlimentar}
+                                callback={newText=>setPaciente({...paciente, difAlimentar: newText})}
                             />
-                        </View>
+                        </>
                         : null}
                         <Text style={[styles.normal, {marginBottom: 5}]}>As respostas a seguir devem ser referentes ao estado atual do paciente</Text>
                         <ListaAlternativas
@@ -406,23 +395,21 @@ export default function AnmenseAdolescentes(){
                             lista={problemaAlimentacao}
                             chave='problemaAlimentacao'
                         />
-                        <Text style={styles.normal}>Apresenta alguma seletividade em relação a comida?</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.seletividadeAlimentar}
-                            onChangeText={newText=>setPaciente({...paciente, seletividadeAlimentar: newText})}
+                        <Input
+                            titulo="Apresenta alguma seletividade em relação a comida?"
+                            valor={paciente.seletividadeAlimentar}
+                            callback={newText=>setPaciente({...paciente, seletividadeAlimentar: newText})}
                         />    
                     </View>
 
                     <Text style={styles.titulo}>Sono e desenvolvimento</Text>
 
                     <View style={styles.inputArea}>
-                        <Text style={styles.normal}>Como é o sono?</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='É tranquilo, agitado, acorda durante a noite...?'
-                            value={paciente.formaSono}
-                            onChangeText={newText=>setPaciente({...paciente, formaSono: newText})}
+                        <Input
+                            titulo='Como é o sono?'
+                            legenda='É tranquilo, agitado, acorda durante a noite...?'
+                            valor={paciente.formaSono}
+                            callback={newText=>setPaciente({...paciente, formaSono: newText})}
                         />
                         <Text style={styles.normal}>Dorme sozinho?</Text>
                         <Seletor
@@ -430,23 +417,20 @@ export default function AnmenseAdolescentes(){
                             aoMudar={value=>setPaciente({...paciente, dormeSozinhoSelecionado: value})}
                             lista={simOuNao}
                         />
-                        <Text style={styles.normal}>Compartilha a cama com:</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.quemCompartilhaCama}
-                            onChangeText={newText=>setPaciente({...paciente, quemCompartilhaCama: newText})}
+                        <Input
+                            titulo="Compartilha a cama com:"
+                            valor={paciente.quemCompartilhaCama}
+                            callback={newText=>setPaciente({...paciente, quemCompartilhaCama: newText})}
                         />
-                        <Text style={styles.normal}>Dorme que horas?</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.horarioDormir}
-                            onChangeText={newText=> setPaciente({...paciente, horarioDormir: newText})}
+                        <Input
+                            titulo="Dorme que horas?"
+                            valor={paciente.horarioDormir}
+                            callback={newText=> setPaciente({...paciente, horarioDormir: newText})}
                         />
-                        <Text style={styles.normal}>Acorda que horas?</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.horarioAcordar}
-                            onChangeText={newText=> setPaciente({...paciente, horarioAcordar: newText})}
+                        <Input
+                            titulo="Acorda que horas?"
+                            valor={paciente.horarioAcordar}
+                            callback={newText=> setPaciente({...paciente, horarioAcordar: newText})}
                         />
                         <Text style={styles.normal}>Teve algum problema de crescimento ou desenvolvimento durante os primeiros anos de vida?</Text>
                         <Seletor
@@ -574,17 +558,15 @@ export default function AnmenseAdolescentes(){
                             lista={outrasDificuldades}
                             chave='outrasDificuldades'
                         />
-                        <Text style={styles.normal}>Descreva brevemente alguma outra habilidade cognitiva que seu filho apresente</Text>
-                        <TextInput
-                            value={paciente.outraDifCogn}
-                            onChangeText={newText=>setPaciente({...paciente, outraDifCogn: newText})}
-                            style={styles.input}
+                        <Input
+                            titulo="Descreva brevemente alguma outra habilidade cognitiva que seu filho apresente"
+                            valor={paciente.outraDifCogn}
+                            callback={newText=>setPaciente({...paciente, outraDifCogn: newText})}
                         />
-                        <Text style={styles.normal}>Descreva brevemente alguma habilidade especial que seu filho possua</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={paciente.habilidadeEspecial}
-                            onChangeText={newText=>setPaciente({...paciente, habilidadeEspecial: newText})}
+                        <Input
+                            titulo="Descreva brevemente alguma habilidade especial que seu filho possua"
+                            valor={paciente.habilidadeEspecial}
+                            callback={newText=>setPaciente({...paciente, habilidadeEspecial: newText})}
                         />
                         <Text style={styles.normal}>Apresenta dificuldade na compreensão de linguagem?</Text>
                         <Seletor
@@ -607,14 +589,22 @@ export default function AnmenseAdolescentes(){
                     </View>
 
                     <Text style={styles.titulo}>Desenvolvimento social</Text>
+
                     <View style={styles.inputArea}>
-                        <Text style={styles.normal}>Marque quais destas características sociais o paciente apresenta</Text>
-                        {
-                            
-                        }
+                        <ListaAlternativas
+                            titulo='Marque quais destas características sociais o paciente apresenta'
+                            lista={caracteristicasSociais}
+                            chave='caracteristicasSociais'
+                        />
+                        <Input
+                            titulo="Quais são as atividades favoritas do seu filho?"
+                            valor={paciente.atividadesFavoritas}
+                            callback={newText=>setPaciente({...paciente, atividadesFavoritas: newText})}
+                        />
+                        
                     </View>
 
-                    <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.comportamentos)}>
+                    <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.atividadesFavoritas)}>
                         <Text style={styles.buttonText}>Teste</Text>
                     </TouchableOpacity>
 
