@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Touchable opacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from '../Styles'
 
 export default function ListaAlternativas( {data, callback, paciente, entrada} ){
