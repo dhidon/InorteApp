@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { condicoes } from '../constants/anamneseOptions'
 
 export const AnamneseContext = createContext()
 
@@ -7,6 +8,7 @@ export default function AnamneseProvider({ children }){
         data: '',
         nome: '',
         sus: '',
+        condicoes: condicoes
     })
 
     const formatarData = (texto, callback, key) => {

@@ -1,53 +1,4 @@
-import React, { useContext, useEffect } from 'react'
-import { View, Text, KeyboardAvoidingView, TextInput, ScrollView, TouchableOpacity } from 'react-native'
-import { styles, colors } from '../../../styles/Styles'
-import Slider from '@react-native-community/slider'
-
-import { AnamneseContext } from '../../../contexts/anamneseContext'
-import { outrasDificuldades, nivelHabilidades, fatoresDif, estadoCivil, guarda, guardiaoLegal, condicoes, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
-import Header from '../../../components/Header'
-import Seletor from '../../../components/Seletor'
-import ListaAlternativas from '../../../components/ListaAlternativas'
-
-export default function AnmenseAdolescentes(){
-    const { setPaciente, paciente, formatarData, formatarSus, formatarCep } = useContext(AnamneseContext)
-
-    useEffect(()=>{
-        if (!paciente.nascimento) return;
-    
-        const partesData = paciente.nascimento.split('/');
-        if (partesData.length !== 3) return;
-    
-        const dataNascimento = new Date(`${partesData[2]}-${partesData[1]}-${partesData[0]}`);
-        const hoje = new Date();
-    
-        let idade = hoje.getFullYear() - dataNascimento.getFullYear();
-        const mes = hoje.getMonth() - dataNascimento.getMonth();
-    
-        if (mes < 0 || (mes === 0 && hoje.getDate() < dataNascimento.getDate())) {
-            idade -= 1;
-        }
-    
-        setPaciente({ ...paciente, idade: idade });
-    }, [paciente.nascimento])
-
-    useEffect(() => {
-        if (!paciente.comportamentos) {
-            setPaciente({...paciente, comportamentos: comportamentos})
-        }
-    }, [])
-
-    function atualizarComportamento(id, novoValor) {
-        const newComportamentos = paciente.comportamentos.map(opcao => {
-            if (opcao.value === id) {
-                return {...opcao, idade: novoValor}
-            }
-            return opcao
-        })
-        setPaciente({...paciente, comportamentos: newComportamentos})
-    }
-
-    return (
+return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
             <ScrollView>
                 <Header setor={'Anamnese de adolescentes'}/>
@@ -268,38 +219,36 @@ export default function AnmenseAdolescentes(){
                     </View>
 
                     <View style={styles.inputArea}>
-                        <Text style={styles.normal}>
-                            Pressione as condições ou doenças que algum membro da família (pais, irmãos, tias, tios, primos, avós) já teve. Anote o grau de parentesco com a criança
-                        </Text>
-                        {paciente.condicoes.map((item, index) =>
+                        <Text style={styles.normal}>Pressione as condições ou doenças que algum membro da família (pais, irmãos, tias, tios, primos, avós) já teve. Anote o grau de parentesco com a criança</Text>
+                        {paciente.condicoes?.map((item, index)=>
                             <TouchableOpacity key={index} onPress={() => {
                                 const newCondicoes = [...paciente.condicoes];
                                 newCondicoes[index] = {
                                     ...newCondicoes[index],
                                     value: newCondicoes[index].value === 'não' ? 'sim' : 'não'
                                 };
-                                setPaciente({ ...paciente, condicoes: newCondicoes });
+                                setPaciente({...paciente, condicoes: newCondicoes});
                             }}>
                                 <View>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1 }}>
+                                    <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1}}>
                                         <Text>{item.label}</Text>
-                                        <Text style={{ fontWeight: 'bold' }}>{item.value}</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
                                     </View>
                                     {item.value === 'sim'
-                                        ? <TextInput
-                                            placeholder='Qual o parentesco?'
-                                            style={[styles.input, { marginTop: 7 }]}
-                                            value={item.parentesco}
-                                            onChangeText={newText => {
-                                                const newCondicoes = [...paciente.condicoes];
-                                                newCondicoes[index] = {
-                                                    ...newCondicoes[index],
-                                                    parentesco: newText
-                                                };
-                                                setPaciente({ ...paciente, condicoes: newCondicoes });
-                                            }}
-                                        />
-                                        : null
+                                    ?<TextInput
+                                        placeholder='Qual o parentesco?'
+                                        style={[styles.input, {marginTop: 7}]}
+                                        value={item.parentesco}
+                                        onChangeText={newText=>{
+                                            const newCondicoes = [...paciente.condicoes];
+                                            newCondicoes[index] = {
+                                                ...newCondicoes[index],
+                                                parentesco: newText
+                                            };
+                                            setPaciente({...paciente, condicoes: newCondicoes});
+                                        }}
+                                    />
+                                    :null
                                     }
                                 </View>
                             </TouchableOpacity>
@@ -396,16 +345,32 @@ export default function AnmenseAdolescentes(){
                         </View>
                         : null}
                         <Text style={[styles.normal, {marginBottom: 5}]}>As respostas a seguir devem ser referentes ao estado atual do paciente</Text>
-                        <ListaAlternativas
-                            titulo='Quais das consistencias alimentares asseguir o adolescente aceita bem?'
-                            lista={consistencias}
-                            chave='consistencias'
-                        />
-                        <ListaAlternativas
-                            titulo='Apresentou algum problema na alimentação?'
-                            lista={problemaAlimentacao}
-                            chave='problemaAlimentacao'
-                        />
+                        <Text style={[styles.normal, {marginBottom: 5}]}>Quais das consistencias alimentares asseguir o adolescente aceita bem?</Text>
+                        {consistencias.map((item, index)=>{
+                            return <TouchableOpacity key={index} onPress={()=>{
+                                const newConsistencias = [...consistencias]
+                                newConsistencias[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, consistencias: newConsistencias})
+                            }}>
+                                <View style={{flexDirection: 'row', borderBottomWidth: 1, justifyContent: 'space-between', marginBottom: 5}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight:'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        })}
+                        <Text style={[styles.normal, {marginBottom: 5}]}>Apresentou algum problema na alimenteação?</Text>
+                        {problemaAlimentacao.map((item, index)=>{
+                            return <TouchableOpacity key={index} onPress={()=>{
+                                const newProbAlimentacao = [...problemaAlimentacao]
+                                newProbAlimentacao[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, problemaAlimentacao: newProbAlimentacao})
+                            }}>
+                                <View style={{flexDirection: 'row', borderBottomWidth: 1, justifyContent: 'space-between', marginBottom: 5}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight:'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        })}
                         <Text style={styles.normal}>Apresenta alguma seletividade em relação a comida?</Text>
                         <TextInput
                             style={styles.input}
@@ -454,11 +419,19 @@ export default function AnmenseAdolescentes(){
                             aoMudar={value=>setPaciente({...paciente, problemaCrescimentoSelecionado: value})}
                             lista={simOuNao}
                         />
-                        <ListaAlternativas
-                            titulo='Dentre os itens a seguir, pressione aqueles que estiveram presentes (com grau de significância) durante a infância nos primeiros anos de vida:'
-                            chave='itensSignificantes'
-                            lista={itensSignificantes}
-                        />
+                        <Text style={styles.normal}>Dentre os itens a seguir, pressione aqueles que estiveram presentes (com grau de significância) durante a infância nos primeiros anos de vida:</Text>
+                        {itensSignificantes.map((item, index)=> (
+                            <TouchableOpacity key={index} onPress={()=>{
+                                const newItensSignificantes = [...itensSignificantes]
+                                newItensSignificantes[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, itensSignificantes: newItensSignificantes})
+                            }}>
+                                <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        ))}
                         <Text style={styles.normal}>Indique a idade aproximada em que seu filho apresentou pela primeira vez os comportamentos a seguir:</Text>
                         <Text style={{fontSize: 13, marginTop: 5, marginBottom: 10}}>Obs.: Assinale 'nunca' se ele nunca demonstrou o comportamento listado. Se não se lembra a idade exata, assinale como cedo, na média ou tarde em relação a outras crianças.</Text>
                         {paciente.comportamentos?.map((item, index) => (
@@ -475,18 +448,34 @@ export default function AnmenseAdolescentes(){
 
                     <Text style={styles.titulo}>Saúde geral</Text>
 
-                    <View style={styles.inputArea}>
-                        <ListaAlternativas
-                            titulo='Pressione as condições que e doenças que seu filho já teve'
-                            lista={condicoesFilho}
-                            chave='condicoesFilho'
-                        />
+                    <View style={styles.inputArea}>7
+                        <Text style={styles.normal}>Pressione as condições e doenças que seu filho já teve</Text>
+                        {condicoesFilho.map((item, index) => {
+                            return <TouchableOpacity key={index} onPress={()=> {
+                                const newCondicoes = [...condicoesFilho]
+                                newCondicoes[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, condicoesFilho: newCondicoes})
+                            }}>
+                                <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        })}
                         <Text style={styles.normal}>As respostas a seguir devem ser referentes ao estado atual do paciente</Text>
-                        <ListaAlternativas
-                            titulo='Quais fatores você acha que podem contribuir para as dificuldades do paciente?'
-                            lista={fatoresDif}
-                            chave='fatoresDif'
-                        />
+                        <Text style={styles.normal}>Quais fatores você acha que podem contribuir para as dificuldades do seu filho?</Text>
+                        {fatoresDif.map((item, index) => {
+                            return <TouchableOpacity key={index} onPress={()=>{
+                                const newFatores = [...fatoresDif]
+                                newFatores[index].value = item.value === 'não' ? 'sim' : 'não'
+                                setPaciente({...paciente, fatoresDif: newFatores})
+                            }}>
+                                <View style={{flexDirection: 'row', borderBottomWidth: 1, justifyContent: 'space-between'}}>
+                                    <Text>{item.label}</Text>
+                                    <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        })}
                         <Text style={styles.normal}>Faz uso de alguma medicação?</Text>
                         <Seletor
                             lista={simOuNao}
@@ -569,11 +558,21 @@ export default function AnmenseAdolescentes(){
                             aoMudar={value=>setPaciente({...paciente, entendConceitos: value})}
                             lista={nivelHabilidades}
                         />
-                        <ListaAlternativas
-                            titulo='Marque outras possíveis dificuldades'
-                            lista={outrasDificuldades}
-                            chave='outrasDificuldades'
-                        />
+                        <Text style={styles.normal}>Marque outras possíveis dificuldades</Text>
+                        {outrasDificuldades.map((item, index) => {
+                            return (
+                                <TouchableOpacity key={index} onPress={()=>{
+                                    const newDificuldades = [...outrasDificuldades]
+                                    newDificuldades[index].value = item.value === 'sim' ? 'não' : 'sim'
+                                    setPaciente({...paciente, outrasDificuldades: newDificuldades})
+                                }}>
+                                    <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1}}>
+                                        <Text>{item.label}</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            )
+                        })}
                         <Text style={styles.normal}>Descreva brevemente alguma outra habilidade cognitiva que seu filho apresente</Text>
                         <TextInput
                             value={paciente.outraDifCogn}
