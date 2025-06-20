@@ -239,3 +239,8 @@ export const habilidadesMotoras = [
     {id: 'probPostura', label: 'Problemas de postura', value: 'não'},
     {id: 'hiperatividade', label: 'Demonstra hiperatividade', value: 'não'},
 ]
+
+export const parto = [
+    {id: 1, label: 'Normal', value: 'normal'},
+    {id: 2, label: 'Cesárea', value: 'cesarea'}
+]
