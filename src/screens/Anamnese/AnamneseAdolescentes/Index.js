@@ -194,8 +194,8 @@ export default function AnmenseAdolescentes(){
                         lista={estadoCivil}
                         />
 
-                        {paciente.estadoCivilSelecionado === 'separados' || paciente.estadoCivilSelecionado === 'divorciados'
-                        ? <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
+                        {(paciente.estadoCivilSelecionado === 'separados' || paciente.estadoCivilSelecionado === 'divorciados') &&
+                        <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
                             <Input
                                 titulo='Que idade a criança tinha quando os pais se separaram?'
                                 valor={paciente.idadeSeparacao}
@@ -235,7 +235,7 @@ export default function AnmenseAdolescentes(){
                                 />
                             </View>}
                         </View> 
-                        : null}
+                        }
                     </View>
 
                     <Text style={styles.titulo}>2 Sintomas</Text>
@@ -276,8 +276,8 @@ export default function AnmenseAdolescentes(){
                                         <Text>{item.label}</Text>
                                         <Text style={{ fontWeight: 'bold' }}>{item.value}</Text>
                                     </View>
-                                    {item.value === 'sim'
-                                        ? <TextInput
+                                    {item.value === 'sim' &&
+                                        <TextInput
                                             placeholder='Qual o parentesco?'
                                             style={[styles.input, { marginTop: 7 }]}
                                             value={item.parentesco}
@@ -290,7 +290,6 @@ export default function AnmenseAdolescentes(){
                                                 setPaciente({ ...paciente, condicoes: newCondicoes });
                                             }}
                                         />
-                                        : null
                                     }
                                 </View>
                             </TouchableOpacity>
@@ -325,8 +324,8 @@ export default function AnmenseAdolescentes(){
                             aoMudar={value=>setPaciente({...paciente, mamouSelecionado: value})}
                             lista={simOuNao}
                         />
-                        {paciente.mamouSelecionado === 'sim'
-                        ? <View style={[styles.inputArea, {width: '100%', gap: 7}]}>
+                        {paciente.mamouSelecionado === 'sim' &&
+                        <View style={[styles.inputArea, {width: '100%', gap: 7}]}>
                             <Text style={styles.normal}>Aleitamento materno exclusivo até quantos meses?</Text>
                             <TextInput
                                 style={styles.input}
@@ -342,7 +341,6 @@ export default function AnmenseAdolescentes(){
                                 keyboardType='numeric'
                             />
                         </View>
-                        : null
                         }
                         <Text style={styles.normal}>Usou mamadeira?</Text>
                         <Seletor
@@ -376,8 +374,7 @@ export default function AnmenseAdolescentes(){
                             aoMudar={value=>setPaciente({...paciente, difIntroAlimentarSelecionada: value})}
                             lista={simOuNao}
                         />
-                        {paciente.difIntroAlimentarSelecionada === 'sim'
-                        ? 
+                        {paciente.difIntroAlimentarSelecionada === 'sim' &&
                         <>
                             <Input
                                 titulo='Quais?'
@@ -385,7 +382,7 @@ export default function AnmenseAdolescentes(){
                                 callback={newText=>setPaciente({...paciente, difAlimentar: newText})}
                             />
                         </>
-                        : null}
+                        }
                         <Text style={[styles.normal, {marginBottom: 5}]}>As respostas a seguir devem ser referentes ao estado atual do paciente</Text>
                         <ListaAlternativas
                             titulo='Quais das consistencias alimentares asseguir o adolescente aceita bem?'
@@ -479,8 +476,8 @@ export default function AnmenseAdolescentes(){
                             selecionado={paciente.usoMedicacaoSelecionado}
                             aoMudar={value=>setPaciente({...paciente, usoMedicacaoSelecionado: value})}
                         />
-                        {paciente.usoMedicacaoSelecionado === 'sim'
-                        ? <View style={[styles.inputArea, {width: '100%', gap: 7}]}>
+                        {paciente.usoMedicacaoSelecionado === 'sim' &&
+                        <View style={[styles.inputArea, {width: '100%', gap: 7}]}>
                             <TextInput
                                 style={styles.input}
                                 value={paciente.qualMedicacao}
@@ -500,7 +497,7 @@ export default function AnmenseAdolescentes(){
                                 placeholder='Quem receitou esta medicação para o paciente?'
                             />
                         </View>
-                        : null}
+                        }
                     </View>
 
                     <Text style={styles.titulo}>Habilidades cognitivas</Text>
