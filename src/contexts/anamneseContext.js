@@ -11,6 +11,8 @@ export default function AnamneseProvider({ children }){
         condicoes: condicoes
     })
 
+    const [profissionais, setProfissionais] = useState({})
+
     const formatarData = (texto, callback, key) => {
         let textoFiltrado = texto.replace(/\D/g, '')
         if (textoFiltrado.length >= 5) {
@@ -44,7 +46,9 @@ export default function AnamneseProvider({ children }){
             paciente,
             formatarData,
             formatarSus,
-            formatarCep
+            formatarCep,
+            profissionais,
+            setProfissionais
         }}>
             {children}
         </AnamneseContext.Provider>

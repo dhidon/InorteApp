@@ -2,9 +2,10 @@ import React, { useContext, useEffect } from 'react'
 import { View, Text, KeyboardAvoidingView, TextInput, ScrollView, TouchableOpacity } from 'react-native'
 import { styles, colors } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
+import { useNavigation } from '@react-navigation/native'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
-import { caracteristicasSociais, outrasDificuldades, nivelHabilidades, fatoresDif, estadoCivil, guarda, guardiaoLegal, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
+import { habilidadesMotoras, comportamento, caracteristicasSociais, outrasDificuldades, nivelHabilidades, fatoresDif, estadoCivil, guarda, guardiaoLegal, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
 import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 import ListaAlternativas from '../../../components/ListaAlternativas'
@@ -12,6 +13,7 @@ import Input from '../../../components/Input'
 
 export default function AnmenseAdolescentes(){
     const { setPaciente, paciente, formatarData, formatarSus, formatarCep } = useContext(AnamneseContext)
+    const navigation = useNavigation()
 
     useEffect(()=>{
         if (!paciente.nascimento) return;
@@ -601,13 +603,147 @@ export default function AnmenseAdolescentes(){
                             valor={paciente.atividadesFavoritas}
                             callback={newText=>setPaciente({...paciente, atividadesFavoritas: newText})}
                         />
-                        
+
+                        <Text style={styles.titulo}>Comportamento</Text>
+
+                        <ListaAlternativas
+                            titulo='Marque as opções que descrevam comportamentos apresentados pelo paciente'
+                            lista={comportamento}
+                            chave='comportamento'
+                        />
+
+                        <Text style={styles.normal}>Seu filho tem problema com limites?</Text>
+                        <Seletor
+                            selecionado={paciente.probLimiteSelecionado}
+                            lista={simOuNao}
+                            aoMudar={value=>setPaciente({...paciente, probLimiteSelecionado: value})}
+                        />
+                        <Input
+                            titulo='Quais as estratégias mais bem sucedidas que você usa com seu filho e que dão certo?'
+                            valor={paciente.estrategiasUsadas}
+                            callback={newText=>setPaciente({...paciente, estrategiasUsadas: newText})}
+                        />
+                        <Text style={styles.normal}>O paciente consegue ser independente nas atividades de vida diárias?</Text>
+                        <Seletor
+                            selecionado={paciente.independenciaAtivSelecionado}
+                            lista={simOuNao}
+                            aoMudar={value=>setPaciente({...paciente, independenciaAtivSelecionado: value})}
+                        />
                     </View>
 
-                    <TouchableOpacity style={styles.teste} onPress={()=>console.log(paciente.atividadesFavoritas)}>
-                        <Text style={styles.buttonText}>Teste</Text>
-                    </TouchableOpacity>
+                    <Text style={styles.titulo}>Habilidades físicas e motoras</Text>
 
+                    <View style={styles.inputArea}>
+                        <ListaAlternativas
+                            titulo='Assinale as características que seu filho aprensenta'
+                            lista={habilidadesMotoras}
+                            chave='habilidadesMotoras'
+                        />
+
+                        <Text style={styles.titulo}>Visão</Text>
+
+                        <Text style={styles.normal}>Consegue manter contato visual por muito tempo?</Text>
+                        <Seletor
+                            selecionado={paciente.contatoVisualSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, contatoVisualSelecionado: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Aproxima objetos dos olhos?</Text>
+                        <Seletor
+                            selecionado={paciente.aproximaObjetosSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, aproximaObjetosSelecionado: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Afasta os objetos?</Text>
+                        <Seletor
+                            selecionado={paciente.afastaObjetosSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, afastaObjetosSelecionado: value})}
+                            lista={simOuNao}
+                        />
+
+
+                        <Text style={styles.normal}>Movimento excessivo dos olhos?</Text>
+                        <Seletor
+                            selecionado={paciente.movimentoOlhosSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, movimentoOlhosSelecionado: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Já realizou avaliação oftalmológica?</Text>
+                        <Seletor
+                            selecionado={paciente.avOftalmoSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, avOftalmoSelecionado: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Reclama de dores de cabeça constantes, principalmente na região fronto-temporal?</Text>
+                        <Seletor
+                            selecionado={paciente.dorCabecaSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, dorCabecaSelecionado: value})}
+                            lista={simOuNao}
+                        />
+
+                        <Text style={styles.titulo}>Audição</Text>
+
+                        <Text style={styles.normal}>Apresenta dificuldade auditiva?</Text>
+                        <Seletor
+                            selecionado={paciente.difAuditivaSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, difAuditivaSelecionado: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Já realizou avaliação?</Text>
+                        <Seletor
+                            selecionado={paciente.realizouAvSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, realizouAvSelecionado: value})}
+                            lista={simOuNao}
+                        />
+
+                        <Text style={styles.titulo}>Desempenho acadêmico</Text>
+
+                        <Text style={styles.normal}>Frequenta a escola?</Text>
+                        <Seletor
+                            selecionado={paciente.frequentaEscolaSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, frequentaEscolaSelecionado: value})}
+                            lista={simOuNao}
+                        />
+
+                        {paciente.frequentaEscolaSelecionado === 'sim' && (
+                            <Input
+                                titulo='Qual o nome da escola?'
+                                valor={paciente.nomeEscola}
+                                callback={newText=>setPaciente({...paciente, nomeEscola: newText})}
+                            />
+                        )}
+                        <Text style={styles.normal}>Faz AEE?</Text>
+                        <Seletor
+                            selecionado={paciente.fazAeeSelecionado}
+                            aoMudar={value=>setPaciente({...paciente, fazAeeSelecionado: value})}
+                            lista={simOuNao}
+                        />
+                        <Input
+                            titulo='Qual a série?'
+                            valor={paciente.serieEscola}
+                            callback={newText=>setPaciente({...paciente, serieEscola: newText})}
+                        />
+                        <Input
+                            titulo='Qual o turno?'
+                            valor={paciente.turnoEscola}
+                            callback={newText=>setPaciente({...paciente, turnoEscola: newText})}
+                        />
+                        <Input
+                            titulo='Apresenta dificuldade na aprendizagem?'
+                            valor={paciente.difAprend}
+                            callback={newText=>setPaciente({...paciente, difAprend: newText})}
+                        />
+                        <Input
+                            titulo='Como é o comportamento no âmbito escolar?'
+                            valor={paciente.comportEscola}
+                            callback={newText=>setPaciente({...paciente, comportEscola: newText})}
+                        />
+                    </View>
+                    <View style={styles.buttonArea}>
+                        <TouchableOpacity style={styles.teste} onPress={()=>navigation.navigate('Profissionais')}>
+                            <Text style={styles.buttonText}>Próximo</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
