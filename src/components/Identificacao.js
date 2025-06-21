@@ -20,9 +20,8 @@ export default function Identificacao(){
                 <View style={styles.inputArea}>
                     <Input
                         titulo="Nome completo:"
-                        obj={paciente}
+                        valor={paciente.nome}
                         callback={newText => setPaciente({...paciente, nome: newText})}
-                        chave="nome"
                     />
                     <Text style={styles.normal}>Nº SUS:</Text>
                     <TextInput
@@ -91,21 +90,18 @@ export default function Identificacao(){
                     <Text style={styles.normal}>Dados da mãe:</Text>
                     <Input
                         legenda="Nome:"
-                        obj={paciente}
+                        valor={paciente.nomeMae}
                         callback={newText => setPaciente({...paciente, nomeMae: newText})}
-                        chave="nomeMae"
                     />
                     <Input
                         legenda="Data de nascimento:"
-                        obj={paciente}
+                        valor={paciente.nascimentoMae}
                         callback={texto=>formatarData(texto, setPaciente, 'nascimentoMae')}
-                        chave="nascimentoMae"
                     />
                     <Input
                         legenda="Profissão:"
-                        obj={paciente}
+                        valor={paciente.profissaoMae}
                         callback={newText => setPaciente({...paciente, profissaoMae: newText})}
-                        chave="profissaoMae"
                     />
                 </View>
 
@@ -113,30 +109,27 @@ export default function Identificacao(){
                     <Text style={styles.normal}>Dados do pai:</Text>
                     <Input
                         legenda="Nome:"
-                        obj={paciente}
+                        valor={paciente.nomePai}
                         callback={newText => setPaciente({...paciente, nomePai: newText})}
-                        chave="nomePai"
                     />
                     <Input
                         legenda="Data de nascimento:"
-                        obj={paciente}
+                        valor={paciente.nascimentoPai}
                         callback={texto=>formatarData(texto, setPaciente, 'nascimentoPai')}
-                        chave="nascimentoPai"
                     />
                     <Input
                         legenda="Profissão:"
-                        obj={paciente}
+                        valor={paciente.profissaoPai}
                         callback={newText => setPaciente({...paciente, profissaoPai: newText})}
-                        chave="profissaoPai"
                     />
                 </View>
 
                 <View style={[styles.inputArea, {gap: 7}]}>
                     <Text style={styles.normal}>Estado civil dos pais</Text>
                     <Seletor
-                    selecionado={paciente.estadoCivilSelecionado}
-                    aoMudar={value=>setPaciente({...paciente, estadoCivilSelecionado: value})}
-                    lista={estadoCivil}
+                        selecionado={paciente.estadoCivilSelecionado}
+                        aoMudar={value=>setPaciente({...paciente, estadoCivilSelecionado: value})}
+                        lista={estadoCivil}
                     />
 
                     {(paciente.estadoCivilSelecionado === 'separados' || paciente.estadoCivilSelecionado === 'divorciados') &&
