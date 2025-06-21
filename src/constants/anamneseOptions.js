@@ -241,6 +241,7 @@ export const habilidadesMotoras = [
 ]
 
 export const parto = [
+    {id: 0, label: '---', value: null},
     {id: 1, label: 'Normal', value: 'normal'},
     {id: 2, label: 'Cesárea', value: 'cesarea'}
 ]

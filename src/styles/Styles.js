@@ -82,6 +82,8 @@ export const styles = StyleSheet.create({
   inputArea: {
     width: '90%',
     marginBottom: spacing.small,
+    borderWidth: 1,
+    borderColor: 'red'
   },
 
   pickerContainer: {
