@@ -3,7 +3,7 @@ import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { styles } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
 
-import { condDesenvolvAtuais, simOuNao, parto, consistencias, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
+import { comportApego, difSociabilidadeAfetividade, difAutocuidado, condDesenvolvAtuais, simOuNao, parto, consistencias, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
 import { AnamneseContext } from '../../../contexts/anamneseContext'
 
 import Header from '../../../components/Header'
@@ -359,9 +359,154 @@ export default function AnamneseCriancas(){
                             valor={paciente.reageContrariado}
                             callback={newText=>setDadosLocal({...dados, reacaoContrariado: newText})}
                         />
-                        
                     </View>
 
+                    <Text style={styles.titulo}>Autocuidado</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Toma banho sozinho?</Text>
+                        <Seletor
+                            selecionado={paciente.banhoSozinho}
+                            aoMudar={value=>setPaciente({...paciente, banhoSozinho: value})}
+                            lista={difAutocuidado}
+                        />
+                        <Text style={styles.normal}>Escova os dentes sozinho?</Text>
+                        <Seletor
+                            selecionado={paciente.escovaDentesSozinho}
+                            aoMudar={value=>setPaciente({...paciente, escovaDentesSozinho: value})}
+                            lista={difAutocuidado}
+                        />
+                        <Text style={styles.normal}>Limpa-se sozinho?</Text>
+                        <Seletor
+                            selecionado={paciente.limpaSozinho}
+                            aoMudar={value=>setPaciente({...paciente, limpaSozinho: value})}
+                            lista={difAutocuidado}
+                        />
+                        <Text style={styles.normal}>Ao cuidar da própria higiene, atrapalha-se com a sequência de tarefas?</Text>
+                        <Seletor
+                            selecionado={paciente.atrapalhaComHigiene}
+                            aoMudar={value=>setPaciente({...paciente, atrapalhaComHigiene: value})}
+                            lista={difAutocuidado}
+                        />
+                        <Text style={styles.normal}>Veste-se sozinho?</Text>
+                        <Seletor
+                            selecionado={paciente.vesteSozinho}
+                            aoMudar={value=>setPaciente({...paciente, vesteSozinho: value})}
+                            lista={difAutocuidado}
+                        />
+                        <Text style={styles.normal}>Amarra os cadarços sozinho?</Text>
+                        <Seletor
+                            selecionado={paciente.amarraCadarcos}
+                            aoMudar={value=>setPaciente({...paciente, amarraCadarcos: value})}
+                            lista={difAutocuidado}
+                        />
+                    </View>
+                    
+                    <Text style={styles.titulo}>Sociabilidade/afetividade</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Apresenta sorriso espontâneo a pessoas familiares</Text>
+                        <Seletor
+                            selecionado={paciente.sorrisoEspontaneoFamiliares}
+                            aoMudar={value=>setPaciente({...paciente, sorrisoEspontaneoFamiliares: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text>Apresenta sorriso espontâneo a pessoas não familiares</Text>
+                        <Seletor
+                            selecionado={paciente.sorrisoEspontaneoNaoFamiliares}
+                            aoMudar={value=>setPaciente({...paciente, sorrisoEspontaneoNaoFamiliares: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text>Apresenta sorriso em resposta ao sorriso de outras pessoas?</Text>
+                        <Seletor
+                            selecionado={paciente.sorrisoResposta}
+                            aoMudar={value=>setPaciente({...paciente, sorrisoResposta: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text>Variação na expressão facial (contentamento, frustração, surpresa, constrangimento)</Text>
+                        <Seletor
+                            selecionado={paciente.variacaoExpressaoFacial}
+                            aoMudar={value=>setPaciente({...paciente, variacaoExpressaoFacial: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text>Expressão emocional apropriada ao contexto</Text>
+                        <Seletor
+                            selecionado={paciente.exprEmocionalContexto}
+                            aoMudar={value=>setPaciente({...paciente, exprEmocionalContexto: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />  
+                    </View>
+
+                    <Text style={styles.titulo}>Atenção compartilhada</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Mostra, traz pra perto do rosto do parceiro ou aponta objetos / eventos de interesse variados apenas para compartilhar?</Text>
+                        <Seletor
+                            lista={difSociabilidadeAfetividade}
+                            selecionado={paciente.mostraObjComp}
+                            aoMudar={value=>setPaciente({...paciente, mostraObjComp: value})}
+                        />
+                        <Text style={styles.normal}>Olha para onde o parceiro aponta</Text>
+                        <Seletor
+                            lista={difSociabilidadeAfetividade}
+                            selecionado={paciente.olhaAponta}
+                            aoMudar={value=>setPaciente({...paciente, olhaAponta: value})}
+                        />
+                        <Text style={styles.normal}>Responde aos convites para brincar</Text>
+                        <Seletor
+                            lista={difSociabilidadeAfetividade}
+                            selecionado={paciente.respBrincar}
+                            aoMudar={value=>setPaciente({...paciente, respBrincar: value})}
+                        />
+                    </View>
+
+                    <Text style={styles.titulo}>Respostas / iniciativas sociais com outras crianças</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Iniciativa de aproximação ou interesse em outras crianças</Text>
+                        <Seletor
+                            lista={difSociabilidadeAfetividade}
+                            selecionado={paciente.aproxIntCriancas}
+                            aoMudar={value=>setPaciente({...paciente, aproxIntCriancas: value})}
+                        />
+                        <Text style={styles.normal}>Responde mas não toma iniciativa</Text>
+                        <Seletor
+                            lista={difSociabilidadeAfetividade}
+                            selecionado={paciente.respSemIniciativa}
+                            aoMudar={value=>setPaciente({...paciente, respSemIniciativa: value})}
+                        />
+                        <Text style={styles.normal}>Fica ansioso com a presença de outras crianças / adolescentes?</Text>
+                        <Seletor
+                            selecionado={paciente.ansiosoPresencaCriAdol}
+                            aoMudar={value => setPaciente({...paciente, ansiosoPresencaCriAdol: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Gosta de brincar com grupos</Text>
+                        <Seletor
+                            selecionado={paciente.brincaGrupos}
+                            aoMudar={value=>setPaciente({...paciente, brincaGrupos: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Fica intensamente ansioso quando na presença de pessoas que não são do seu convívio?</Text>
+                        <Seletor
+                            selecionado={paciente.ansiosoNaoConvivio}
+                            aoMudar={value=>setPaciente({...paciente, ansiosoNaoConvivio:value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Ignora ou evita de forma persistente esse contato?</Text>
+                        <Seletor
+                            selecionado={paciente.evitaContato}
+                            aoMudar={value=>setPaciente({...paciente, evitaContato: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Excessiva desinibição para a idade em relação a pessoas estranhas?</Text>
+                        <Seletor
+                            selecionado={paciente.excessivaDesinibicao}
+                            aoMudar={value=>setPaciente({...paciente, excessivaDesinibicao: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        
+                    </View>
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>

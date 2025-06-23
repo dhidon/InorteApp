@@ -256,3 +256,22 @@ export const condDesenvolvAtuais = [
     {id: 7, label: 'Repete a última palavra ou frase imediatamente ouvida?', value: 'não'},
     {id: 8, label: 'Faz confusão entre pronomes (eu, tu, eles)?', value: 'não'}
 ]
+export const difAutocuidado = [
+    {value: null, label: '---'},
+    {value: 'sim', label: 'Sim'},
+    {value: 'não', label: 'Não'},
+    {value: 'com dificuldade', label: 'Com dificuldade'}
+]
+
+export const difSociabilidadeAfetividade = [
+    {value: null, label: '---'},
+    {value: 'sim', label: 'Sim'},
+    {value: 'não', label: 'Não'},
+    {value: 'ocasionalmente', label: 'Ocasionalmente'}
+]
+
+export const comportApego = [
+    {id: 1, label: 'Demonstra preocupação quando separado dos pais', value:''},
+    {id: 2, label: 'Sorri ou demonstra excitação com o retorno dos pais?', value:''},
+    {id: 3, label: 'Busca a ajuda dos pais quando machucado', value:''}
+]
