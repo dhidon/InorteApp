@@ -522,6 +522,67 @@ export default function AnamneseCriancas(){
                             </View>
                         })}
                     </View>
+
+                    <Text style={styles.titulo}>Brincadeira</Text>
+
+                    <View style={styles.inputArea}>
+                        <Input
+                            titulo='Quais os brinquedos e atividades favoritas?'
+                            valor={paciente.brinquedoAtividade}
+                            callback={newText=>setPaciente({...paciente, brinquedoAtividade: newText})}
+                        />
+                        <Text style={styles.normal}>Manipula vários objetos/brinquedos</Text>
+                        <Seletor
+                            selecionado={paciente.manipulaObjBrinquedo}
+                            aoMudar={value=>setPaciente({...paciente, manipulaObjBrinquedo: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Brinca de faz de conta usando um objeto como se fosse outro?</Text>
+                        <Seletor
+                            selecionado={paciente.brincaFazDeConta}
+                            aoMudar={value=>setPaciente({...paciente, brincaFazDeConta: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Input
+                            titulo='Formas de exploração dos brinquedos (ex. brinca de faz de conta; usa os objetos de forma funcional; demonstra interesse pelo cheiro ou movimento dos objetos; atividade repetitiva - alinhar, girar objetos sem função aparente):'
+                            valor={paciente.exploraBrinquedos}
+                            callback={newText=>setPaciente({...paciente, exploraBrinquedos: newText})}
+                        />
+                        <Input
+                            titulo='Brinca de faz de conta atribuindo papéis a si mesmo (médico/enfermeira/professora)?'
+                            valor={paciente.brincaPapeis}
+                            callback={newText=>setPaciente({...paciente, brincaPapeis: newText})}
+                        />
+                    </View>
+
+                    <Text style={styles.titulo}>Comportamentos repetitivos e rituais</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text>Alinha, empilha objetos quando brincando sem aparente função no brenqudo?</Text>
+                        <Seletor
+                            selecionado={dados.alinhaEmpilhaObj}
+                            aoMudar={value=>setDadosLocal({...dados, alinhaEmpilhaObj: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text>Faz brincadeiras com partes de objetos em vez de um objeto como um todo (ex: ignora o carrinho e gira apenas as rodas por um longo tempo)?</Text>
+                        <Seletor
+                            selecionado={dados.brincPartesObj}
+                            aoMudar={value=>setDadosLocal({...dados, brincPartesObj: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text>Como reage quando a brincadeira é interrompida?</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={dados.reageBrincInterrompida}
+                            onChangeText={newText=>setDadosLocal({...dados, reageBrincInterrompida: newText})}
+                        />
+                        <Text>Resistência a mudanças na rotina pessoal / da casa?</Text>
+                        <Seletor
+                            selecionado={dados.resistenciaMudancaRotina}
+                            aoMudar={value=>setDadosLocal({...dados, resistenciaMudancaRotina: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                    </View>
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
