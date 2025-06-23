@@ -505,7 +505,22 @@ export default function AnamneseCriancas(){
                             aoMudar={value=>setPaciente({...paciente, excessivaDesinibicao: value})}
                             lista={difSociabilidadeAfetividade}
                         />
-                        
+
+                        <Text style={styles.normal}>Comportamento de apego</Text>
+                        {Array.isArray(paciente.comportApego) && paciente.comportApego.map((item, index)=>{
+                            return <View key={index}>
+                                <Text>{item.label}</Text>
+                                <Seletor
+                                    selecionado={item.value}
+                                    aoMudar={valor=>{
+                                        const newComportApego = [...paciente.comportApego]
+                                        newComportApego[index].value = valor
+                                        setPaciente({...paciente, comportApego: newComportApego})
+                                    }}
+                                    lista={difSociabilidadeAfetividade}
+                                />
+                            </View>
+                        })}
                     </View>
                 </View>
             </ScrollView>
