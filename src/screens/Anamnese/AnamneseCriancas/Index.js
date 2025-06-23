@@ -3,7 +3,7 @@ import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { styles } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
 
-import { simOuNao, parto, consistencias, problemaAlimentacao } from '../../../constants/anamneseOptions'
+import { simOuNao, parto, consistencias, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
 import { AnamneseContext } from '../../../contexts/anamneseContext'
 
 import Header from '../../../components/Header'
@@ -252,6 +252,89 @@ export default function AnamneseCriancas(){
                         />
                     </View>
 
+                    <Text style={styles.titulo}>Desenvolvimento neuropsicomotor</Text>
+                    <View style={styles.inputArea}>
+                        <Input
+                            titulo='Com qual idade passou a sentar sem apoio?'
+                            valor={paciente.sentouSemApoio}
+                            chave='sentouSemApoio'
+                        />
+                        <Input
+                            titulo='Com qual idade ele engatinhou?'
+                            valor={paciente.engatinhou}
+                            chave='engatinhou'
+                        />
+                        <Input
+                            titulo='Com qual idade começou a andar sem suporte'
+                            valor={paciente.andouSemSuporte}
+                            chave='andouSemSuporte'
+                        />
+                        <ListaAlternativas
+                            titulo='Dentre os itens a seguir, pressione aqueles que estiveram presentes (com grau de significância) durante a infância nos primeiros anos de vida'
+                            lista={itensSignificantes}
+                            chave='itensSignificantes'
+                        />
+                        <Text style={styles.normal}>Apresenta manipulação de objetos com os dedos</Text>
+                        <Seletor
+                            selecionado={paciente.manipObjDedos}
+                            aoMudar={value=>setPaciente({...paciente, manipObjDedos: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Pratica algum esporte?</Text>
+                        <Seletor
+                            selecionado={paciente.praticaEsporte}
+                            aoMudar={valor=>setPaciente({...paciente, praticaEsporte: valor})}
+                            lista={simOuNao}
+                        />
+                        {paciente.praticaEsporte === 'sim' &&
+                        <Input
+                            titulo='Qual esporte?'
+                            valor={paciente.qualEsporte}
+                            callback={newText=>setPaciente({...paciente, qualEsporte: newText})}
+                        />}
+                        <Text style={styles.normal}>Pratica autoagressão?</Text>
+                        <Seletor
+                            selecionado={paciente.autoAgressao}
+                            aoMudar={value=>setPaciente({...paciente, autoAgressao: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Pratica heteroagressão?</Text>
+                        <Seletor
+                            selecionado={paciente.autoAgressao}
+                            aoMudar={value=>setPaciente({...paciente, autoAgressao: value})}
+                            lista={simOuNao}
+                        />
+                    </View>
+
+                    <Text style={styles.titulo}>Desenvolvimento da linguagem</Text>
+                    <View>
+                        <Input
+                            titulo='Com qual idade começou a balbuciar?'
+                            valor={paciente.idadeBalbuciou}
+                            callback={newText=>setPaciente({...paciente, idadeBalbuciou: newText})}
+                        />
+                        <Input
+                            titulo='Com qual idade emitiu sílabas?'
+                            valor={paciente.idadeSilabas}
+                            callback={newText=>setPaciente({...paciente, idadeSilabas: newText})}
+                        />
+                        <Input
+                            titulo='Com que idade emitiu as primeiras palavras?'
+                            valor={paciente.idadePriPalavras}
+                            chave='idadePriPalavras'
+                        />
+                        <Input
+                            titulo='Com que idade emitiu as primeiras frases?'
+                            
+                        />
+                        
+                        <Text>Com que idade emitiu as primeiras frases</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={dados.primeirasFrases}
+                            onChangeText={newText=>setDadosLocal({...dados, primeirasFrases: newText})}
+                        />
+                    </View>
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
