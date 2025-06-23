@@ -339,8 +339,29 @@ export default function AnamneseCriancas(){
                             chave='condDesenvolvAtuais'
                             titulo='Marque as alternativas a seguir se baseando no estado atual do paciente'
                         />
-
+                        <Input
+                            titulo='Descreva brevemente alguma dificuldade cognitiva que seu filho apresente'
+                            valor={paciente.difCognitiva}
+                            callback={newText=>setPaciente({...paciente, difCognitiva: newText})}
+                        />
+                        <Input
+                            titulo='Descreva brevemente alguma dificuldade motora que seu filho apresente'
+                            valor={paciente.difMotora}
+                            callback={newText=>setPaciente({...paciente, difMotora: newText})}
+                        />
+                        <Input
+                            titulo='Possui dificuldades na compreensão da linguagem?'
+                            valor={paciente.difComprLinguagem}
+                            callback={newText=>setPaciente({...paciente, difComprLinguagem: newText})}
+                        />
+                        <Input
+                            titulo='Como reage quando contrariado?'
+                            valor={paciente.reageContrariado}
+                            callback={newText=>setDadosLocal({...dados, reacaoContrariado: newText})}
+                        />
+                        
                     </View>
+
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
