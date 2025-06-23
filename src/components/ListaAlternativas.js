@@ -18,7 +18,7 @@ return (
         {lista.map((item, index)=>{
             return <TouchableOpacity key={index} onPress={() => handlePress(item, index)}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1}}>
-                    <Text>{item.label}</Text>
+                    <Text style={{ flexShrink: 1, flexWrap: 'wrap', width: '100%' }}>{item.label}</Text>
                     <Text style={{fontWeight: 'bold'}}>{item.value}</Text>
                 </View>
             </TouchableOpacity>

@@ -57,40 +57,40 @@ export const problemaAlimentacao = [
 ]
 
 export const itensSignificantes = [
-            {id: 'extrQuietoInativo', label: 'Extremamente quieto ou inativo', value: 'não'},
-            {id: 'raramenteQuietoInativo', label: 'Raramente quieto ou inativo', value: 'não'},
-            {id: 'excessInquieto', label: 'Excessivamente inquieto', value: 'não'},
-            {id: 'naoColoAfago', label: 'Não gostava de colo ou afago', value: 'não'},
-            {id: 'poucoAlerta', label: 'Pouco alerta', value: 'não'},
-            {id: 'difAcalmar', label: 'Dificuldade para se acalmar', value: 'não'},
-            {id: 'colicas', label: 'Cólicas', value: 'não'},
-            {id: 'sonoExcess', label: 'Sono excessivo', value: 'não'},
-            {id: 'poucoSono', label: 'Pouco Sono', value: 'não'},
-            {id: 'batidasCabeca', label: 'Batidas na cabeça', value: 'não'},
-            {id: 'incomodoSom', label: 'Incômodo com som', value: 'não'},
-            {id: 'semNocaoPerigo', label: 'Sem noção do perigo', value: 'não'},
-            {id: 'eploraTudoSempre', label: 'Explorava tudo o tempo todo', value: 'não'},
-            {id: 'numeroAcidentesAcimaMedia', label: 'Excessivo número de acidentes em comparação com outras crianças', value: 'não'}
+    {id: 'extrQuietoInativo', label: 'Extremamente quieto ou inativo', value: 'não'},
+    {id: 'raramenteQuietoInativo', label: 'Raramente quieto ou inativo', value: 'não'},
+    {id: 'excessInquieto', label: 'Excessivamente inquieto', value: 'não'},
+    {id: 'naoColoAfago', label: 'Não gostava de colo ou afago', value: 'não'},
+    {id: 'poucoAlerta', label: 'Pouco alerta', value: 'não'},
+    {id: 'difAcalmar', label: 'Dificuldade para se acalmar', value: 'não'},
+    {id: 'colicas', label: 'Cólicas', value: 'não'},
+    {id: 'sonoExcess', label: 'Sono excessivo', value: 'não'},
+    {id: 'poucoSono', label: 'Pouco Sono', value: 'não'},
+    {id: 'batidasCabeca', label: 'Batidas na cabeça', value: 'não'},
+    {id: 'incomodoSom', label: 'Incômodo com som', value: 'não'},
+    {id: 'semNocaoPerigo', label: 'Sem noção do perigo', value: 'não'},
+    {id: 'eploraTudoSempre', label: 'Explorava tudo o tempo todo', value: 'não'},
+    {id: 'numeroAcidentesAcimaMedia', label: 'Excessivo número de acidentes em comparação com outras crianças', value: 'não'}
 ]
 
 export const comportamentos = [
-            {value: 'sorrir', label: 'Sorrir', idade:''},
-            {value: 'rolar', label: 'Rolar', idade: ''},
-            {value: 'sentarSemApoio', label: 'Sentar sem apoio', idade:''},
-            {value: 'engatinhar', label: 'Engatinhar', idade:''},
-            {value: 'andarSemApoio', label: 'Andar sem apoio', idade:''},
-            {value: 'correr', label: 'Correr', idade:''},
-            {value: 'balbuciar', label: 'Balbuciar', idade:''},
-            {value: 'silabas', label: 'Sílabas', idade:''},
-            {value: 'palavras', label: 'Palavras', idade:''},
-            {value: 'frasesDuasPalavras', label: 'Frases com 2 palavras', idade:''},
-            {value: 'amarrarCadarcos', label: 'Amarrar os cadarços', idade:''},
-            {value: 'vestirSozinho', label: 'Vestir-se sozinho', idade:''},
-            {value: 'comerSozinho', label: 'Comer sozinho', idade:''},
-            {value: 'controleDiurnoUrina', label: 'Controle diurno da urina', idade:''},
-            {value: 'controleNoturnoUrina', label: 'Controle noturno da urina', idade:''},
-            {value: 'controleFezes', label: 'Controle de fezes', idade:''},
-            {value: 'andarBicicleta', label: 'Andar de bicicleta', idade:''},
+    {value: 'sorrir', label: 'Sorrir', idade:''},
+    {value: 'rolar', label: 'Rolar', idade: ''},
+    {value: 'sentarSemApoio', label: 'Sentar sem apoio', idade:''},
+    {value: 'engatinhar', label: 'Engatinhar', idade:''},
+    {value: 'andarSemApoio', label: 'Andar sem apoio', idade:''},
+    {value: 'correr', label: 'Correr', idade:''},
+    {value: 'balbuciar', label: 'Balbuciar', idade:''},
+    {value: 'silabas', label: 'Sílabas', idade:''},
+    {value: 'palavras', label: 'Palavras', idade:''},
+    {value: 'frasesDuasPalavras', label: 'Frases com 2 palavras', idade:''},
+    {value: 'amarrarCadarcos', label: 'Amarrar os cadarços', idade:''},
+    {value: 'vestirSozinho', label: 'Vestir-se sozinho', idade:''},
+    {value: 'comerSozinho', label: 'Comer sozinho', idade:''},
+    {value: 'controleDiurnoUrina', label: 'Controle diurno da urina', idade:''},
+    {value: 'controleNoturnoUrina', label: 'Controle noturno da urina', idade:''},
+    {value: 'controleFezes', label: 'Controle de fezes', idade:''},
+    {value: 'andarBicicleta', label: 'Andar de bicicleta', idade:''},
 ]
 
 export const condicoesFilho = [
@@ -151,49 +151,49 @@ export const fatoresDif = [
 ]
 
 export const nivelHabilidades = [
-        {label: '---', value: null},
-        {label: 'Acima da média', value: 'acimaMedia'},
-        {label: 'Na média', value: 'naMedia'},
-        {label: 'Abaixo da média', value: 'abaixoMedia'},
-        {label: 'Dificuldades severas', value: 'difSeveras'}
+    {label: '---', value: null},
+    {label: 'Acima da média', value: 'acimaMedia'},
+    {label: 'Na média', value: 'naMedia'},
+    {label: 'Abaixo da média', value: 'abaixoMedia'},
+    {label: 'Dificuldades severas', value: 'difSeveras'}
 ]
 
 export const outrasDificuldades = [
-            {id: 'difArticulacao', label: 'Dificuldades de articulação', value: 'não'},
-            {id: 'difRitmoEntonacaoFala', label: 'Dificuldade no rítmo de entonação da fala', value: 'não'},
-            {id: 'repeteUltPalavra', label: 'Repete a última palavra ou frase ouvida', value: 'não'}, 
-            {id: 'difExpressDesejo', label: 'Dificuldade para expressar desejos', value: 'não'},
-            {id: 'falaDesorganizada', label: 'Fala desorganizada', value: 'não'},
-            {id: 'falaAgramatical', label: 'Fala agramatical', value: 'não'},
-            {id: 'falaInfantilizada', label: 'Fala infantilizada', value: 'não'},
-            {id: 'aprendizagemLenta', label: 'Aprendizagem lenta', value: 'não'},
-            {id: 'esqueceFazerCoisas', label: 'Esquece-se de fazer as coisas', value: 'não'},
-            {id: 'distraiFacilmente', label: 'Distrai-se facilmente', value: 'não'},
-            {id: 'esqueceInstrucoes', label: 'Esquece frequentemente instruções', value: 'não'},
-            {id: 'perdeFreqPertences', label: 'Perde frequentemente pertences', value: 'não'},
-            {id: 'difPlanTarefas', label: 'Dificuldade em planejar tarefas', value: 'não'},
-            {id: 'semConsequenciasAcoes', label: 'Não prevê consequências das ações', value: 'não'},
-            {id: 'pensamentoLentificado', label: 'Pensamento lentificado', value: 'não'},
-            {id: 'difDinheiroMatematica', label: 'Dificuldade com dinheiro/matemática', value: 'não'},
-            {id: 'poucaNocaoTemporal', label: 'Pouca noção temporal', value: 'não'}
+    {id: 'difArticulacao', label: 'Dificuldades de articulação', value: 'não'},
+    {id: 'difRitmoEntonacaoFala', label: 'Dificuldade no rítmo de entonação da fala', value: 'não'},
+    {id: 'repeteUltPalavra', label: 'Repete a última palavra ou frase ouvida', value: 'não'}, 
+    {id: 'difExpressDesejo', label: 'Dificuldade para expressar desejos', value: 'não'},
+    {id: 'falaDesorganizada', label: 'Fala desorganizada', value: 'não'},
+    {id: 'falaAgramatical', label: 'Fala agramatical', value: 'não'},
+    {id: 'falaInfantilizada', label: 'Fala infantilizada', value: 'não'},
+    {id: 'aprendizagemLenta', label: 'Aprendizagem lenta', value: 'não'},
+    {id: 'esqueceFazerCoisas', label: 'Esquece-se de fazer as coisas', value: 'não'},
+    {id: 'distraiFacilmente', label: 'Distrai-se facilmente', value: 'não'},
+    {id: 'esqueceInstrucoes', label: 'Esquece frequentemente instruções', value: 'não'},
+    {id: 'perdeFreqPertences', label: 'Perde frequentemente pertences', value: 'não'},
+    {id: 'difPlanTarefas', label: 'Dificuldade em planejar tarefas', value: 'não'},
+    {id: 'semConsequenciasAcoes', label: 'Não prevê consequências das ações', value: 'não'},
+    {id: 'pensamentoLentificado', label: 'Pensamento lentificado', value: 'não'},
+    {id: 'difDinheiroMatematica', label: 'Dificuldade com dinheiro/matemática', value: 'não'},
+    {id: 'poucaNocaoTemporal', label: 'Pouca noção temporal', value: 'não'}
 ]
 
 export const caracteristicasSociais = [
-            {id: 'prefereSozinho', label: 'Prefere ficar sozinho', value: 'não'},
-            {id: 'excQuietoTimido', label: 'Excessivamente quieto ou tímido', value: 'não'},
-            {id: 'interesseObjetos', label: 'Mais interessado em objetos que em pessoas', value: 'não'},
-            {id: 'difFazerAmigos', label: 'Dificuldade em fazer amigos', value: 'não'},
-            {id: 'provocadoPorCriancas', label: 'Provocado por outras crianças', value: 'não'},
-            {id: 'provocaCriancas', label: 'Provoca, ameaça, intimida outras crianças', value: 'não'},
-            {id: 'prefTrabSozinho', label: 'Prefere fazer trabalho escolar sozinho', value: 'não'},
-            {id: 'baixaTolFrustracao_Sociais', label: 'Baixa tolerância a frustração', value: 'não'},
-            {id: 'redeContVirtual', label: 'Possui rede de contatos virtuais', value: 'não'},
-            {id: 'mantemContatoForaEscola', label: 'Mantem contato com os colegas de sala de aula fora da escola', value: 'não'},
-            {id: 'nProcuradoPorPares', label: 'Não procurado para estabelecer vínculos de amizade por seus pares', value: 'não'},
-            {id: 'difPontoVistaOutro', label: 'Dificuldade em ver o ponto de vista de outra pessoa', value: 'não'},
-            {id: 'semEmpatia', label: 'Não tem empatia com os outros', value: 'não'},
-            {id: 'confiaDemais', label: 'Confia demais nos outros', value: 'não'},
-            {id: 'naoApreciaHumor', label: 'Não aprecia o humor', value: 'não'},
+    {id: 'prefereSozinho', label: 'Prefere ficar sozinho', value: 'não'},
+    {id: 'excQuietoTimido', label: 'Excessivamente quieto ou tímido', value: 'não'},
+    {id: 'interesseObjetos', label: 'Mais interessado em objetos que em pessoas', value: 'não'},
+    {id: 'difFazerAmigos', label: 'Dificuldade em fazer amigos', value: 'não'},
+    {id: 'provocadoPorCriancas', label: 'Provocado por outras crianças', value: 'não'},
+    {id: 'provocaCriancas', label: 'Provoca, ameaça, intimida outras crianças', value: 'não'},
+    {id: 'prefTrabSozinho', label: 'Prefere fazer trabalho escolar sozinho', value: 'não'},
+    {id: 'baixaTolFrustracao_Sociais', label: 'Baixa tolerância a frustração', value: 'não'},
+    {id: 'redeContVirtual', label: 'Possui rede de contatos virtuais', value: 'não'},
+    {id: 'mantemContatoForaEscola', label: 'Mantem contato com os colegas de sala de aula fora da escola', value: 'não'},
+    {id: 'nProcuradoPorPares', label: 'Não procurado para estabelecer vínculos de amizade por seus pares', value: 'não'},
+    {id: 'difPontoVistaOutro', label: 'Dificuldade em ver o ponto de vista de outra pessoa', value: 'não'},
+    {id: 'semEmpatia', label: 'Não tem empatia com os outros', value: 'não'},
+    {id: 'confiaDemais', label: 'Confia demais nos outros', value: 'não'},
+    {id: 'naoApreciaHumor', label: 'Não aprecia o humor', value: 'não'},
 ]
 
 export const comportamento = [
@@ -244,4 +244,15 @@ export const parto = [
     {id: 0, label: '---', value: null},
     {id: 1, label: 'Normal', value: 'normal'},
     {id: 2, label: 'Cesárea', value: 'cesarea'}
+]
+
+export const condDesenvolvAtuais = [
+    {id: 1, label: 'Segura o rosto do adulto para fazê-lo olhar em determinada direção', value: 'não'},
+    {id: 2, label: 'Pega na mão do adulto como se fosse uma ferramenta para alcançar algo', value: 'não'},
+    {id: 3, label: 'Faz uso de gestos para se comunicar', value: 'não'},
+    {id: 4, label: 'Atende quando chamada pelo nome?', value: 'não'},
+    {id: 5, label: 'Apresenta dificuldade na articulação e pronúncia?', value: 'não'},
+    {id: 6, label: 'Apresenta dificuldade no rítmo e entonação da voz?', value: 'não'},
+    {id: 7, label: 'Repete a última palavra ou frase imediatamente ouvida?', value: 'não'},
+    {id: 8, label: 'Faz confusão entre pronomes (eu, tu, eles)?', value: 'não'}
 ]

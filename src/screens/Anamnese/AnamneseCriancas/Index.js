@@ -3,7 +3,7 @@ import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { styles } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
 
-import { simOuNao, parto, consistencias, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
+import { condDesenvolvAtuais, simOuNao, parto, consistencias, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
 import { AnamneseContext } from '../../../contexts/anamneseContext'
 
 import Header from '../../../components/Header'
@@ -307,7 +307,7 @@ export default function AnamneseCriancas(){
                     </View>
 
                     <Text style={styles.titulo}>Desenvolvimento da linguagem</Text>
-                    <View>
+                    <View style={styles.inputArea}>
                         <Input
                             titulo='Com qual idade começou a balbuciar?'
                             valor={paciente.idadeBalbuciou}
@@ -325,15 +325,21 @@ export default function AnamneseCriancas(){
                         />
                         <Input
                             titulo='Com que idade emitiu as primeiras frases?'
-                            
+                            valor={paciente.idadeFrases}
+                            chave='idadeFrases'
                         />
-                        
-                        <Text>Com que idade emitiu as primeiras frases</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={dados.primeirasFrases}
-                            onChangeText={newText=>setDadosLocal({...dados, primeirasFrases: newText})}
+                        <Text style={styles.normal}>Apresentou dificuldades no desenvolvimento da linguagem?</Text>
+                        <Seletor
+                            selecionado={paciente.difDesenvolvimentoLinguagem}
+                            aoMudar={value=>setPaciente({...paciente, difDesenvolvimentoLinguagem: value})}
+                            lista={simOuNao}
                         />
+                        <ListaAlternativas
+                            lista={condDesenvolvAtuais}
+                            chave='condDesenvolvAtuais'
+                            titulo='Marque as alternativas a seguir se baseando no estado atual do paciente'
+                        />
+
                     </View>
                 </View>
             </ScrollView>
