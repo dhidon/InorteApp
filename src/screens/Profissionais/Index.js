@@ -33,7 +33,7 @@ export default function Profissionais(){
                     />
                 </View>
 
-                <TouchableOpacity style={styles.buttonArea} onPress={handleSend}>
+                <TouchableOpacity style={styles.buttonArea} onPress={()=>console.log(paciente)}>
                     <Text style={styles.buttonText}>Enviar dados</Text>
                 </TouchableOpacity>
             </View>

@@ -1,4 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
+
+// Detectar se está em web ou mobile
+const isWeb = Platform.OS === 'web';
+const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
+const { width, height } = Dimensions.get('window');
 
 // Variáveis globais
 export const colors = {
@@ -11,31 +16,88 @@ export const colors = {
 };
 
 export const spacing = {
-  small: 10,
-  medium: 15,
-  large: 20
+  small: isWeb ? 15 : 10,
+  medium: isWeb ? 20 : 15,
+  large: isWeb ? 25 : 20
 };
 
 export const typography = {
-  small: 16,
-  medium: 18,
-  large: 20
+  small: isWeb ? 18 : 16,
+  medium: isWeb ? 20 : 18,
+  large: isWeb ? 22 : 20
 };
+
+// Estilos condicionais baseados na plataforma
+const getPlatformStyles = () => {
+  if (isWeb) {
+    return {
+      container: {
+        maxWidth: 800,
+        marginHorizontal: 'auto',
+        paddingHorizontal: 20,
+      },
+      contentArea: {
+        paddingHorizontal: 30,
+        gap: 10,
+      },
+      inputArea: {
+        width: '100%',
+        maxWidth: 600,
+        marginBottom: spacing.medium,
+      },
+      buttonArea: {
+        width: '30%',
+        minWidth: 200,
+        height: 50,
+        cursor: 'pointer',
+      },
+      teste: {
+        width: '100%',
+        maxWidth: 400,
+        height: 50,
+        cursor: 'pointer',
+      }
+    };
+  } else {
+    return {
+      container: {
+        width: '100%',
+      },
+      contentArea: {
+        width: '100%',
+        gap: 5,
+      },
+      inputArea: {
+        width: '90%',
+        marginBottom: spacing.small,
+      },
+      buttonArea: {
+        width: '50%',
+        height: 40,
+      },
+      teste: {
+        width: '100%',
+        height: 40,
+      }
+    };
+  }
+};
+
+const platformStyles = getPlatformStyles();
 
 export const styles = StyleSheet.create({
   // Componentes base
   container: {
     flex: 1,
-    width: '100%',
     backgroundColor: colors.white,
+    ...platformStyles.container
   },
 
   contentArea: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    gap: 5
+    ...platformStyles.contentArea
   },
 
   // Estilos para tela de login
@@ -57,21 +119,18 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     marginBottom: spacing.medium,
-    
-    
-    
   },
 
   logo: {
-    width: 200,
-    height: 200,
+    width: isWeb ? 250 : 200,
+    height: isWeb ? 250 : 200,
     marginBottom: spacing.large,
     borderRadius: 8,
   },
 
   cabecalhoImg: {
-    height: 60,
-    width: 160
+    height: isWeb ? 80 : 60,
+    width: isWeb ? 200 : 160
   },
 
   cabecalhoArea: {
@@ -83,24 +142,24 @@ export const styles = StyleSheet.create({
 
   // Componentes de formulário
   inputArea: {
-    width: '90%',
     marginBottom: spacing.small,
     borderWidth: 1,
-    borderColor: 'red'
+    borderColor: 'red',
+    ...platformStyles.inputArea
   },
 
   pickerContainer: {
     backgroundColor: colors.primary,
     borderRadius: 8,
     overflow: 'hidden',
-    height: 40,
+    height: isWeb ? 50 : 40,
     justifyContent: 'center'
   },
 
   input: {
     backgroundColor: colors.primary,
     borderRadius: 8,
-    height: 40,
+    height: isWeb ? 50 : 40,
     paddingHorizontal: spacing.small,
     color: colors.white,
   },
@@ -116,7 +175,7 @@ export const styles = StyleSheet.create({
   },
 
   desktopPicker: {
-    height: 40,
+    height: isWeb ? 50 : 40,
     width: '100%', 
     borderRadius: 8, 
     borderWidth: 1, 
@@ -141,22 +200,20 @@ export const styles = StyleSheet.create({
   buttonArea: {
     backgroundColor: colors.secondary,
     borderRadius: 8,
-    width: '50%',
-    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.small,
+    ...platformStyles.buttonArea
   },
 
   teste: {
     backgroundColor: colors.secondary,
     borderRadius: 8,
-    width: '100%',
-    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: spacing.medium,
     marginBottom: spacing.small,
+    ...platformStyles.teste
   },
 
   buttonText: {
@@ -164,3 +221,11 @@ export const styles = StyleSheet.create({
     color: colors.white,
   },
 });
+
+// Exportar variáveis úteis para uso em componentes
+export const platformInfo = {
+  isWeb,
+  isMobile,
+  screenWidth: width,
+  screenHeight: height
+};
