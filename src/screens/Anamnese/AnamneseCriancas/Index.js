@@ -507,19 +507,20 @@ export default function AnamneseCriancas(){
                         />
 
                         <Text style={styles.normal}>Comportamento de apego</Text>
-                        {Array.isArray(paciente.comportApego) && paciente.comportApego.map((item, index)=>{
-                            return <View key={index}>
-                                <Text>{item.label}</Text>
-                                <Seletor
-                                    selecionado={item.value}
-                                    aoMudar={valor=>{
-                                        const newComportApego = [...paciente.comportApego]
-                                        newComportApego[index].value = valor
-                                        setPaciente({...paciente, comportApego: newComportApego})
-                                    }}
-                                    lista={difSociabilidadeAfetividade}
-                                />
-                            </View>
+                        {comportApego.map((item, index)=>{
+                            return (
+                                <View key={index}>
+                                    <Text>{item.label}</Text>
+                                    <Seletor
+                                        selecionado={item.value}
+                                        aoMudar={valor=>{
+                                            const newComportApego = [...paciente.comportApego]
+                                            newComportApego[index].value = valor
+                                            setPaciente({...paciente, comportApego: newComportApego})
+                                        }}
+                                        lista={difSociabilidadeAfetividade}
+                                    />
+                                </View>)
                         })}
                     </View>
 
@@ -558,28 +559,27 @@ export default function AnamneseCriancas(){
                     <Text style={styles.titulo}>Comportamentos repetitivos e rituais</Text>
 
                     <View style={styles.inputArea}>
-                        <Text>Alinha, empilha objetos quando brincando sem aparente função no brenqudo?</Text>
+                        <Text style={styles.normal}>Alinha, empilha objetos quando brincando sem aparente função no brenqudo?</Text>
                         <Seletor
-                            selecionado={dados.alinhaEmpilhaObj}
-                            aoMudar={value=>setDadosLocal({...dados, alinhaEmpilhaObj: value})}
+                            selecionado={paciente.alinhaEmpilhaObj}
+                            aoMudar={value=>setPaciente({...paciente, alinhaEmpilhaObj: value})}
                             lista={difSociabilidadeAfetividade}
                         />
-                        <Text>Faz brincadeiras com partes de objetos em vez de um objeto como um todo (ex: ignora o carrinho e gira apenas as rodas por um longo tempo)?</Text>
+                        <Text style={styles.normal}>Faz brincadeiras com partes de objetos em vez de um objeto como um todo (ex: ignora o carrinho e gira apenas as rodas por um longo tempo)?</Text>
                         <Seletor
-                            selecionado={dados.brincPartesObj}
-                            aoMudar={value=>setDadosLocal({...dados, brincPartesObj: value})}
+                            selecionado={paciente.brincPartesObj}
+                            aoMudar={value=>setPaciente({...paciente, brincPartesObj: value})}
                             lista={difSociabilidadeAfetividade}
                         />
-                        <Text>Como reage quando a brincadeira é interrompida?</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={dados.reageBrincInterrompida}
-                            onChangeText={newText=>setDadosLocal({...dados, reageBrincInterrompida: newText})}
+                        <Input
+                            titulo='Como reage quando a brincadeira é interrompida?'
+                            valor={paciente.reacaoBrincInterromp}
+                            callback={newText=>setPaciente({...paciente, reacaoBrincInterromp: newText})}
                         />
-                        <Text>Resistência a mudanças na rotina pessoal / da casa?</Text>
+                        <Text style={styles.normal}>Resistência a mudanças na rotina pessoal / da casa?</Text>
                         <Seletor
-                            selecionado={dados.resistenciaMudancaRotina}
-                            aoMudar={value=>setDadosLocal({...dados, resistenciaMudancaRotina: value})}
+                            selecionado={paciente.resistenciaMudancaRotina}
+                            aoMudar={value=>setPaciente({...paciente, resistenciaMudancaRotina: value})}
                             lista={difSociabilidadeAfetividade}
                         />
                     </View>
