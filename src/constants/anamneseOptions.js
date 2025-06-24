@@ -1,4 +1,4 @@
-export const estadoCivil = [
+export const listaEstadoCivil = [
     {label: '---', value: null},
     { label: 'Casados', value: 'casados' },
     { label: 'Separados', value: 'separados' },
@@ -15,7 +15,7 @@ export const guarda = [
     { label: 'Outro', value: 'outro' }
 ]
 
-export const guardiaoLegal = [
+export const listaGuardiaoLegal = [
     {label: '---', value: null},
     { label: 'Pais adotivos', value: 'pais adotivos' },
     { label: 'Pais de criação', value: 'pais de criação' },

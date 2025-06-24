@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { View, Text, TextInput } from 'react-native'
 import { styles, colors } from '../styles/Styles'
+import { parse, format } from 'date-fns'
 
 import { AnamneseContext } from '../contexts/anamneseContext'
 
-import { estadoCivil } from '../constants/anamneseOptions'
+import { listaEstadoCivil, guarda, listaGuardiaoLegal } from '../constants/anamneseOptions'
 
 import Input from './Input'
 import Seletor from './Seletor'
@@ -12,6 +13,30 @@ import Seletor from './Seletor'
 
 export default function Identificacao(){
     const {paciente, setPaciente, formatarCep, formatarData, formatarSus} = useContext(AnamneseContext)
+
+    function formatData(newDate, key, subkey){
+        const onlyNumbers = newDate.replace(/\D/g, '');
+
+        if (onlyNumbers.length === 8) {
+            const date = parse(onlyNumbers, 'ddMMyyyy', new Date());
+            const formatedDate = format(date, 'dd/MM/yyyy');
+            setPaciente({
+                ...paciente,
+                [key]: {
+                    ...paciente[key],
+                    [subkey]: formatedDate
+                }
+            });
+        } else {
+            setPaciente({
+                ...paciente,
+                [key]: {
+                    ...paciente[key],
+                    [subkey]: newDate
+                }
+            });
+        }
+    }
 
     return (
         <>
@@ -56,22 +81,22 @@ export default function Identificacao(){
                 <View style={[styles.inputArea, {gap: 7}]}>
                     <Input
                         titulo="Endereço:"
-                        valor={paciente.endereco}
-                        callback={newText => setPaciente({...paciente, endereco: newText})}
+                        valor={paciente.endereco.ruaN}
+                        callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, ruaN: newText}})}
                         legenda='Rua e número da casa'
                     />
                     <Input
                         legenda="Bairro:"
-                        valor={paciente.bairro}
-                        callback={newText => setPaciente({...paciente, bairro: newText})}
+                        valor={paciente.endereco.bairro}
+                        callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, bairro: newText}})}
                     />
                     <Input
                         legenda="Cidade, UF:"
-                        valor={paciente.cidadeUf}
-                        callback={newText => setPaciente({...paciente, cidadeUf: newText})}
+                        valor={paciente.endereco.cidadeUf}
+                        callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, cidadeUf: newText}})}
                     />
                     <Input
-                        valor={paciente.cep}
+                        valor={paciente.endereco.cep}
                         callback={formatarCep}
                         legenda='CEP: __.___-___'
                     />
@@ -90,18 +115,18 @@ export default function Identificacao(){
                     <Text style={styles.normal}>Dados da mãe:</Text>
                     <Input
                         legenda="Nome:"
-                        valor={paciente.nomeMae}
-                        callback={newText => setPaciente({...paciente, nomeMae: newText})}
+                        valor={paciente.mae.nome}
+                        callback={newText => setPaciente({...paciente, mae: {...paciente.mae, nome: newText}})}
                     />
                     <Input
                         legenda="Data de nascimento:"
-                        valor={paciente.nascimentoMae}
-                        callback={texto=>formatarData(texto, setPaciente, 'nascimentoMae')}
+                        valor={paciente.mae.nascimento}
+                        callback={texto=>formatData(texto, 'mae', 'nascimento')}
                     />
                     <Input
                         legenda="Profissão:"
-                        valor={paciente.profissaoMae}
-                        callback={newText => setPaciente({...paciente, profissaoMae: newText})}
+                        valor={paciente.mae.profissao}
+                        callback={newText => setPaciente({...paciente, mae: {...paciente.mae, profissao: newText}})}
                     />
                 </View>
 
@@ -109,30 +134,30 @@ export default function Identificacao(){
                     <Text style={styles.normal}>Dados do pai:</Text>
                     <Input
                         legenda="Nome:"
-                        valor={paciente.nomePai}
-                        callback={newText => setPaciente({...paciente, nomePai: newText})}
+                        valor={paciente.pai.nome}
+                        callback={newText => setPaciente({...paciente, pai: {...paciente.pai, nome: newText}})}
                     />
                     <Input
                         legenda="Data de nascimento:"
-                        valor={paciente.nascimentoPai}
-                        callback={texto=>formatarData(texto, setPaciente, 'nascimentoPai')}
+                        valor={paciente.pai.nascimento}
+                        callback={texto=>formatData(texto, 'pai', 'nascimento')}
                     />
                     <Input
                         legenda="Profissão:"
-                        valor={paciente.profissaoPai}
-                        callback={newText => setPaciente({...paciente, profissaoPai: newText})}
+                        valor={paciente.pai.profissao}
+                        callback={newText => setPaciente({...paciente, pai: {...paciente.pai, profissao: newText}})}
                     />
                 </View>
 
                 <View style={[styles.inputArea, {gap: 7}]}>
                     <Text style={styles.normal}>Estado civil dos pais</Text>
                     <Seletor
-                        selecionado={paciente.estadoCivilSelecionado}
-                        aoMudar={value=>setPaciente({...paciente, estadoCivilSelecionado: value})}
-                        lista={estadoCivil}
+                        selecionado={paciente.pais.estadoCivil}
+                        aoMudar={value=>setPaciente({...paciente, pais: {...paciente.pais, estadoCivil: value}})}
+                        lista={listaEstadoCivil}
                     />
 
-                    {(paciente.estadoCivilSelecionado === 'separados' || paciente.estadoCivilSelecionado === 'divorciados') &&
+                    {(paciente.pais.estadoCivil === 'separados' || paciente.pais.estadoCivil === 'divorciados') &&
                     <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
                         <Input
                             titulo='Que idade a criança tinha quando os pais se separaram?'
@@ -142,14 +167,14 @@ export default function Identificacao(){
                         />
                         <Text style={styles.normal}>Quem tem a guarda da criança?</Text>
                         <Seletor
-                            selecionado={paciente.guardaSelecionada}
-                            aoMudar={value=>setPaciente({...paciente, guardaSelecionada: value})}
+                            selecionado={paciente.guardiao}
+                            aoMudar={value=>setPaciente({...paciente, guardiao: value})}
                             lista={guarda}
                         />
-                        {paciente.guardaSelecionada !== 'outro'
+                        {paciente.guardiao !== 'outro'
                         ? <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
                             <Input
-                                titulo='Qual o nome do padrasto/madrasta?'
+                                titulo='Qual o nome do conjuge do guardião?'
                                 valor={paciente.padrastoMadrasta}
                                 callback={newText => setPaciente({...paciente, padrastoMadrasta: newText})}
                             />
@@ -157,19 +182,19 @@ export default function Identificacao(){
                         : <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
                             <Input
                                 titulo='Qual o motivo?'
-                                valor={paciente.motivo}
-                                callback={newText=>setPaciente({...paciente, motivo: newText})}
+                                valor={paciente.outroGuardiao.motivo}
+                                callback={newText=>setPaciente({...paciente, outroGuardiao: {...paciente.outroGuardiao, motivo: newText}})}
                             />
                             <Text style={styles.normal}>Quem possui a guarda legal?</Text>
                             <Seletor
-                                selecionado={paciente.guardiaoLegalSelecionado}
+                                selecionado={paciente.guardiaoLegal}
                                 aoMudar={value=>setPaciente({...paciente, guardiaoLegalSelecionado: value})}
-                                lista={guardiaoLegal}
+                                lista={listaGuardiaoLegal}
                             />
                             <Input
-                                valor={paciente.guardiao}
+                                valor={paciente.outroGuardiao.nome}
                                 legenda='Nome'
-                                callback={newText=>setPaciente({...paciente, guardiao: newText})}
+                                callback={newText=>setPaciente({...paciente, guardiao: {...paciente.guardiao, nome: newText}})}
                             />
                         </View>}
                     </View> 

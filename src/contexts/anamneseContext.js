@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import { condicoes } from '../constants/anamneseOptions'
+import { format } from "date-fns";
 
 export const AnamneseContext = createContext()
 
@@ -8,6 +9,31 @@ export default function AnamneseProvider({ children }){
         data: '',
         nome: '',
         sus: '',
+        nascimento: '',
+        idade: '',
+        endereco:{
+            ruaN: '',
+            bairro:'',
+            cidadeUf: ''
+        },
+        informante:'',
+        mae:{
+            nome:'',
+            nascimento:'',
+            profissao:''
+        },
+        pai:{
+            nome:'',
+            nascimento:'',
+            profissao:''
+        },
+        pais:{
+            estadoCivil:''
+        },
+        outroGuardiao:{
+            motivo:'',
+            nome:''
+        },
         condicoes: condicoes
     })
 
@@ -37,7 +63,7 @@ export default function AnamneseProvider({ children }){
             textoFiltrado = `${textoFiltrado.substring(0,2)}.${textoFiltrado.substring(2)}`
         }
 
-        setPaciente({...paciente, cep: textoFiltrado})
+        setPaciente({...paciente, endereco: {...paciente.endereco, cep: textoFiltrado}})
     }
 
     function enviarDadosAnamn(dados){
