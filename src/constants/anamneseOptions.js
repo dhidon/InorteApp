@@ -275,3 +275,12 @@ export const comportApego = [
     {id: 2, label: 'Sorri ou demonstra excitação com o retorno dos pais?', value:''},
     {id: 3, label: 'Busca a ajuda dos pais quando machucado', value:''}
 ]
+
+export const comportRepetitivos = [
+    {id: 1, label: 'Apega-se a objetos pouco comuns para a idade (ex: pedra, plástico...) e carrega consigo cotidianamente e se desorganiza quando retirados', value: 'não'},
+    {id: 2, label: 'Realiza movimentos das mãos perto do rosto', value: 'não'},
+    {id: 3, label: 'Realiza movimentos dos dedos e mãos junto ao corpo', value: 'não'},
+    {id: 4, label: 'Balanço do corpo', value: 'não'},
+    {id: 5, label: 'Realiza movimento de braços (flapping)', value: 'não'},
+    {id: 6, label: 'Apresenta reação exacerbada ao som, barulhos, ruídos', value: 'não'}
+]

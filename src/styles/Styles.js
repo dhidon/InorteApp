@@ -57,6 +57,9 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     marginBottom: spacing.medium,
+    
+    
+    
   },
 
   logo: {

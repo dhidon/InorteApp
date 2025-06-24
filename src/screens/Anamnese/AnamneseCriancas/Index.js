@@ -1,9 +1,10 @@
 import React, { useContext} from 'react'
-import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { View, Text, KeyboardAvoidingView, ScrollView, TouchableOpacity } from 'react-native'
 import { styles } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
+import { useNavigation } from '@react-navigation/native'
 
-import { comportApego, difSociabilidadeAfetividade, difAutocuidado, condDesenvolvAtuais, simOuNao, parto, consistencias, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
+import { comportRepetitivos, comportApego, difSociabilidadeAfetividade, difAutocuidado, condDesenvolvAtuais, simOuNao, parto, consistencias, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
 import { AnamneseContext } from '../../../contexts/anamneseContext'
 
 import Header from '../../../components/Header'
@@ -16,6 +17,7 @@ import ListaAlternativas from '../../../components/ListaAlternativas'
 
 export default function AnamneseCriancas(){
     const {paciente, setPaciente} = useContext(AnamneseContext)
+    const navigation = useNavigation()
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
@@ -357,7 +359,7 @@ export default function AnamneseCriancas(){
                         <Input
                             titulo='Como reage quando contrariado?'
                             valor={paciente.reageContrariado}
-                            callback={newText=>setDadosLocal({...dados, reacaoContrariado: newText})}
+                            callback={newText=>setPaciente({...paciente, reacaoContrariado: newText})}
                         />
                     </View>
 
@@ -460,7 +462,7 @@ export default function AnamneseCriancas(){
                         />
                     </View>
 
-                    <Text style={styles.titulo}>Respostas / iniciativas sociais com outras crianças</Text>
+                    <Text style={[styles.titulo, {width: '90%'}]}>Respostas/iniciativas sociais com outras crianças</Text>
 
                     <View style={styles.inputArea}>
                         <Text style={styles.normal}>Iniciativa de aproximação ou interesse em outras crianças</Text>
@@ -576,12 +578,91 @@ export default function AnamneseCriancas(){
                             valor={paciente.reacaoBrincInterromp}
                             callback={newText=>setPaciente({...paciente, reacaoBrincInterromp: newText})}
                         />
-                        <Text style={styles.normal}>Resistência a mudanças na rotina pessoal / da casa?</Text>
+                        <Text style={styles.normal}>Resistência a mudanças na rotina pessoal/da casa?</Text>
                         <Seletor
                             selecionado={paciente.resistenciaMudancaRotina}
                             aoMudar={value=>setPaciente({...paciente, resistenciaMudancaRotina: value})}
                             lista={difSociabilidadeAfetividade}
                         />
+                        <Text style={styles.normal}>Abre/fecha portas, gavetas; liga/desliga interruptores de luz; intenso interesse por objetos que giram (ex: máquina dalevar, ventilador, veículos em geral). Considerar a idade e persistência.</Text>
+                        <Seletor
+                            selecionado={paciente.abreFechaLigaDesliga}
+                            aoMudar={value=>setPaciente({...paciente, abreFechaLigaDesliga: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Sequência fixa e rígida para atividades (ex: vestir-se, arrumar a casa, higiene pessoal)?</Text>
+                        <Seletor
+                            selecionado={paciente.sequenciaFixaAtiv}
+                            aoMudar={value=>setPaciente({...paciente, sequenciaFixaAtiv: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Input
+                            titulo='Como reage quando interrompida?'
+                            valor={paciente.reageInterrompida}
+                            callback={newText=>setPaciente({...paciente, reageInterrompida: newText})}
+                        />
+                        <ListaAlternativas
+                            titulo='Apresenta os comportamentos a seguir de forma repetiviva?'
+                            lista={comportRepetitivos}
+                            chave='comportRepetitivos'
+                        />
+                        <Input
+                            titulo='Medos (relacionar medos discrepantes com a etapa evolutiva-frequÊncia, intensidade, grau de interferÊncia em outras atividades da família, facilidade com que é acalmado /distraído):'
+                            valor={paciente.medos}
+                            callback={newText=>setPaciente({...paciente, medos: newText})}
+                        />
+                    </View>
+
+                    <Text style={styles.titulo}>Desempenho acadêmico</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Frequenta a escola?</Text>
+                        <Seletor
+                            selecionado={paciente.frequentaEscola}
+                            aoMudar={value=>setPaciente({...paciente, frequentaEscola: value})}
+                            lista={simOuNao}
+                        />
+                        {paciente.frequentaEscola === 'sim' &&
+                        <View>
+                            <Input
+                                titulo='Qual o nome da escola?'
+                                valor={paciente.nomeEscola}
+                                callback={newText=>setPaciente({...paciente, nomeEscola: newText})}
+                            />
+                        </View>}
+                        <Text styel={styles.normal}>Faz AEE?</Text>
+                        <Seletor
+                            selecionado={paciente.fazAee}
+                            aoMudar={value=>setPaciente({...paciente, fazAee: value})}
+                            lista={simOuNao}
+                        />
+                        <Input
+                            titulo='Qual a série do paciente?'
+                            valor={paciente.serieEscola}
+                            callback={newText=>setPaciente({...paciente, serieEscola: newText})}
+                        />
+                        <Input
+                            titulo='Qual o turno?'
+                            valor={paciente.turnoEscola}
+                            callback={newText=>setPaciente({...paciente, turnoEscola: newText})}
+                        />
+                        <Text>Apresenta dificuldade na aprendizagem?</Text>
+                        <Seletor
+                            selecionado={paciente.difAprendizagem}
+                            aoMudar={valor=>setPaciente({...paciente, difAprendizagem: valor})}
+                            lista={simOuNao}
+                        />
+                        <Input
+                            titulo='Como é o comportamento no âmbito escolar?'
+                            valor={paciente.comportamentoEscola}
+                            callback={newText=>setPaciente({...paciente, comportamentoEscola: newText})}
+                        />
+                    </View>
+                    
+                    <View style={styles.buttonArea}>
+                        <TouchableOpacity style={styles.teste} onPress={()=>navigation.navigate('Profissionais')}>
+                            <Text style={styles.buttonText}>Próximo</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>

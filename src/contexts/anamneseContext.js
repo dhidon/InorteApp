@@ -40,6 +40,10 @@ export default function AnamneseProvider({ children }){
         setPaciente({...paciente, cep: textoFiltrado})
     }
 
+    function enviarDadosAnamn(dados){
+        console.log(dados)
+    }
+
     return (
         <AnamneseContext.Provider value={{ 
             setPaciente, 
@@ -48,7 +52,8 @@ export default function AnamneseProvider({ children }){
             formatarSus,
             formatarCep,
             profissionais,
-            setProfissionais
+            setProfissionais,
+            enviarDadosAnamn
         }}>
             {children}
         </AnamneseContext.Provider>
