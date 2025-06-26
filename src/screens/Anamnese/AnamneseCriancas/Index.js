@@ -21,9 +21,12 @@ export default function AnamneseCriancas(){
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
+
+            <Header setor='Anamnese de crianças'/>
+
             <ScrollView>
+                
                 <View style={styles.contentArea}>
-                    <Header setor='Anamnese de crianças'/>
                     
                     <DateInput/>
 
@@ -38,40 +41,41 @@ export default function AnamneseCriancas(){
 
                         <Text style={styles.normal}>A gestação foi planejada?</Text>
                         <Seletor
-                            selecionado={paciente.gestacaoSelecionada}
-                            aoMudar={valor=>setPaciente({...paciente, gestascaoSelecionada: valor})}
+                            selecionado={paciente.gestacaoPlanejada}
+                            aoMudar={valor=>setPaciente({...paciente, gestascaoPlanejada: valor})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Realizou pré-natal?</Text>
                         <Seletor
-                            selecionado={paciente.preNatal}
-                            aoMudar={valor=>setPaciente({...paciente, preNatal: valor})}
+                            selecionado={paciente.prenatal}
+                            aoMudar={valor=>setPaciente({...paciente, prenatal: valor})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Teve alguma intercorrência durante a gravidez?</Text>
                         <Seletor
-                            selecionado={paciente.intercorrenciaSelecionada}
-                            aoMudar={valor=>setPaciente({...paciente, intercorrenciaSelecionada: valor})}
+                            selecionado={paciente.intercorrencia}
+                            aoMudar={valor=>setPaciente({...paciente, intercorrencia: valor})}
                             lista={simOuNao}
                         />
-                        {paciente.intercorrenciaSelecionada === 'sim' &&
+                        {paciente.intercorrencia === 'sim' &&
                         <Input
                             titulo='Qual?'
-                            valor={paciente.intercorrencia}
-                            callback={newText=>setPaciente({...paciente, intercorrencia: newText})}
+                            valor={paciente.qualIntercorrencia}
+                            callback={newText=>setPaciente({...paciente, qualIntercorrencia: newText})}
                         />}
                         <Text>Fez uso de medicamentos durante a gestação?</Text>
                         <Seletor
-                            selecionado={paciente.medicamentoSelecionado}
-                            aoMudar={valor=>setPaciente({...paciente, medicamentoSelecionado: valor})}
+                            selecionado={paciente.medicamento}
+                            aoMudar={valor=>setPaciente({...paciente, medicamento: valor})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Qual foi o tipo de parto e por que?</Text>
                         <Seletor
-                            selecionado={paciente.partoSelecionado}
-                            aoMudar={valor=>setPaciente({...paciente, partoSelecionado: valor})}
+                            selecionado={paciente.tipoParto}
+                            aoMudar={valor=>setPaciente({...paciente, tipoParto: valor})}
                             lista={parto}
                         />
+                        <View style={{height: 7}}></View>
                         <Input
                             valor={paciente.motivoparto}
                             legenda='Qual o motivo?'
@@ -79,8 +83,8 @@ export default function AnamneseCriancas(){
                         />
                         <Input
                             titulo='A criança nasceu com quantas semanas?'
-                            valor={paciente.semanas}
-                            callback={newText=>setPaciente({...paciente, semanas: newText})}
+                            valor={paciente.nasceuSemanas}
+                            callback={newText=>setPaciente({...paciente, nasceuSemanas: newText})}
                         />
                     </View>
 
@@ -88,62 +92,62 @@ export default function AnamneseCriancas(){
                     <View style={[styles.inputArea, {gap: 7}]}>
                         <Input
                             titulo='APGAR'
-                            valor={paciente.primeiroMinuto}
+                            valor={paciente.apgar.primeiroMinuto}
                             legenda='1º minuto'
-                            callback={newText=>setPaciente({...paciente, primeiroMinuto: newText})}
+                            callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, primeiroMinuto: newText}})}
                         />
                         <Input
-                            valor={paciente.quintoMinuto}
+                            valor={paciente.apgar.quintoMinuto}
                             legenda='5º minuto'
-                            callback={newText=>setPaciente({...paciente, quintoMinuto: newText})}
+                            callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, quintoMinuto: newText}})}
                         />
                         <Input
-                            valor={paciente.peso}
+                            valor={paciente.apgar.peso}
                             legenda='Peso'
-                            callback={newText=>setPaciente({...paciente, peso: newText})}
+                            callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, peso: newText}})}
                         />
                         <Input
-                            valor={paciente.comprimento}
+                            valor={paciente.apgar.comprimento}
                             legenda='Comprimento'
-                            callback={newText=>setPaciente({...paciente, comprimento: newText})}
+                            callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, comprimento: newText}})}
                         />
                     </View>
 
                     <View style={styles.inputArea}>
                         <Text style={styles.normal}>Houve algum problema com o bebê logo que nasceu?</Text>
                         <Seletor
-                            selecionado={paciente.problemaSelecionado}
-                            aoMudar={valor=>setPaciente({...paciente, problemaSelecionado: valor})}
+                            selecionado={paciente.problemaNacimento}
+                            aoMudar={valor=>setPaciente({...paciente, problemaNascimento: valor})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>O bebê precisou de oxigênio?</Text>
                         <Seletor
-                            selecionado={paciente.oxigenioSelecionado}
-                            aoMudar={valor=>setPaciente({...paciente, oxigenioSelecionado: valor})}
+                            selecionado={paciente.oxigenio}
+                            aoMudar={valor=>setPaciente({...paciente, oxigenio: valor})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Nasceu cianótico?</Text>
                         <Seletor
-                            selecionado={paciente.cianoticoSelecionado}
-                            aoMudar={valor=>setPaciente({...paciente, cianoticoSelecionado: valor})}
+                            selecionado={paciente.cianotico}
+                            aoMudar={valor=>setPaciente({...paciente, cianotico: valor})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>O bebê chorou logo?</Text>
                         <Seletor
-                            selecionado={paciente.chorouSelecionado}
-                            aoMudar={valor=>setPaciente({...paciente, chorouSelecionado: valor})}
+                            selecionado={paciente.chorou}
+                            aoMudar={valor=>setPaciente({...paciente, chorou: valor})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>O bebê apresentava sinais de icterícia?</Text>
                         <Seletor
-                            selecionado={paciente.ictericiaSelecionado}
-                            aoMudar={valor=>setPaciente({...paciente, ictericiaSelecionado: valor})}
+                            selecionado={paciente.ictericia}
+                            aoMudar={valor=>setPaciente({...paciente, ictericia: valor})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Precisou fazer fototerapia?</Text>
                         <Seletor
-                            selecionado={paciente.fototerapiaSelecionado}
-                            aoMudar={valor=>setPaciente({...paciente, fototerapiaSelecionado: valor})}
+                            selecionado={paciente.fototerapia}
+                            aoMudar={valor=>setPaciente({...paciente, fototerapia: valor})}
                             lista={simOuNao}
                         />
                     </View>
@@ -153,11 +157,11 @@ export default function AnamneseCriancas(){
                     <View style={styles.inputArea}>
                         <Text style={styles.normal}>A criança mamou?</Text>
                         <Seletor
-                            selecionado={paciente.mamouSelecionado}
-                            aoMudar={valor=>setPaciente({...paciente, mamouSelecionado: valor})}
+                            selecionado={paciente.mamou}
+                            aoMudar={valor=>setPaciente({...paciente, mamou: valor})}
                             lista={simOuNao}
                         />
-                        {paciente.mamouSelecionado === 'sim' &&
+                        {paciente.mamou === 'sim' &&
                         <>
                             <Input
                                 titulo='Aleitamento materno exclusivo até quantos meses?'
@@ -172,9 +176,15 @@ export default function AnamneseCriancas(){
                         </>}
                         <Text style={styles.normal}>Usou mamadeira?</Text>
                         <Seletor
-                            selecionado={paciente.chupetaSelecionada}
-                            aoMudar={valor=>setPaciente({...paciente, chupetaSelecionada: valor})}
+                            selecionado={paciente.mamadeira}
+                            aoMudar={valor=>setPaciente({...paciente, mamadeira: valor})}
                             lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Usou chupeta?</Text>
+                        <Seletor
+                            selecionado={paciente.chupeta}
+                            aoMudar={valor=>setPaciente({...paciente, chupeta: valor})}
+                            lista={simOuNao}                      
                         />
                         <Text style={styles.normal}>Com qual idade foi feita a introdução alimentar?</Text>
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginRight: 10}}> 
@@ -198,8 +208,8 @@ export default function AnamneseCriancas(){
                         <>
                             <Input
                                 titulo='Quais?'
-                                valor={paciente.qualDifIntroAlimentar}
-                                callback={newText=>setPaciente({...paciente, qualDifIntroAlimentar: newText})}
+                                valor={paciente.difAlimentar}
+                                callback={newText=>setPaciente({...paciente, difAlimentar: newText})}
                             />
                         </>}
 
@@ -207,8 +217,8 @@ export default function AnamneseCriancas(){
                         
                         <ListaAlternativas
                             titulo='Aceita bem as consistências de alimentos a seguir?'
-                            lista={consistencias}
-                            chave='consistencias'
+                            lista={consistenciasAceitas}
+                            chave='consistenciasAceitas'
                         />
                         <ListaAlternativas
                             titulo='Apresentou algum problema na alimentação?'
@@ -217,8 +227,8 @@ export default function AnamneseCriancas(){
                         />
                         <Input
                             titulo='Apresenta alguma seletividade em relação a comida? Se "sim", quais?'
-                            valor={paciente.quaisSeletividadesAliment}
-                            callback={newText=>setPaciente({...paciente, quaisSeletividadesAliment: newText})}
+                            valor={paciente.seletividadeAlimentar}
+                            callback={newText=>setPaciente({...paciente, seletividadeAlimentar: newText})}
                         />
                     </View>
 
@@ -233,8 +243,8 @@ export default function AnamneseCriancas(){
                         />
                         <Text style={styles.normal}>Dorme sozinho?</Text>
                         <Seletor
-                            selecionado={paciente.dormeSozinhoSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, dormeSozinhoSelecionado: value})}
+                            selecionado={paciente.dormeSozinho}
+                            aoMudar={value=>setPaciente({...paciente, dormeSozinho: value})}
                             lista={simOuNao}
                         />
                         <Input
@@ -271,6 +281,10 @@ export default function AnamneseCriancas(){
                             valor={paciente.andouSemSuporte}
                             chave='andouSemSuporte'
                         />
+
+
+
+                        
                         <ListaAlternativas
                             titulo='Dentre os itens a seguir, pressione aqueles que estiveram presentes (com grau de significância) durante a infância nos primeiros anos de vida'
                             lista={itensSignificantes}

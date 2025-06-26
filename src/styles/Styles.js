@@ -32,7 +32,7 @@ const getPlatformStyles = () => {
   if (isWeb) {
     return {
       container: {
-        maxWidth: 800,
+        width: 800,
         marginHorizontal: 'auto',
         paddingHorizontal: 20,
       },
@@ -90,7 +90,8 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    ...platformStyles.container
+    ...platformStyles.container,
+    marginTop: 35
   },
 
   contentArea: {
@@ -98,6 +99,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     ...platformStyles.contentArea
+  },
+
+  userInfoArea:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20
   },
 
   // Estilos para tela de login
@@ -110,7 +118,7 @@ export const styles = StyleSheet.create({
 
   normal: {
     fontSize: typography.medium,
-    color: colors.black,
+    color: '#FFF',
     marginTop: 5
   },
 
@@ -118,7 +126,7 @@ export const styles = StyleSheet.create({
     fontSize: typography.medium,
     fontWeight: 'bold',
     alignSelf: 'center',
-    marginBottom: spacing.medium,
+    marginBottom: spacing.small,
   },
 
   logo: {
@@ -143,47 +151,28 @@ export const styles = StyleSheet.create({
   // Componentes de formulário
   inputArea: {
     marginBottom: spacing.small,
-    borderWidth: 1,
-    borderColor: 'red',
-    ...platformStyles.inputArea
+    ...platformStyles.inputArea,
+    backgroundColor: colors.primary,
+    borderRadius: 8,
+    padding: 10
   },
 
   pickerContainer: {
     backgroundColor: colors.primary,
     borderRadius: 8,
     overflow: 'hidden',
-    height: isWeb ? 50 : 40,
-    justifyContent: 'center'
+    height: isWeb ? 40 : 40,
+    justifyContent: 'center',
+    width: '100%',
+    alignSelf: 'center'
   },
 
   input: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.secondary,
     borderRadius: 8,
     height: isWeb ? 50 : 40,
     paddingHorizontal: spacing.small,
     color: colors.white,
-  },
-
-  mobilePicker: {
-    width: '100%', 
-    borderRadius: 8, 
-    borderWidth: 1, 
-    alignItems: 'center', 
-    marginTop: 5, 
-    marginBottom: 5,
-    backgroundColor: colors.primary
-  },
-
-  desktopPicker: {
-    height: isWeb ? 50 : 40,
-    width: '100%', 
-    borderRadius: 8, 
-    borderWidth: 1, 
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 5, 
-    marginBottom: 10,
-    color: colors.white
   },
 
   // Componentes de navegação
@@ -203,7 +192,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.small,
-    ...platformStyles.buttonArea
+    ...platformStyles.buttonArea,
   },
 
   teste: {

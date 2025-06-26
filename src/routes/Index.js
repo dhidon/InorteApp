@@ -11,7 +11,7 @@ export default function Routes(){
 
     return(
         <View style={{flex: 1}}>
-            {building ? <AppRoute/> : <AuthRoute/>}
+            {signed ? <AppRoute/> : <AuthRoute/>}
         </View>
     )
 }

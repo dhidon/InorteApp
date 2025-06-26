@@ -9,6 +9,7 @@ export const AuthContext = createContext({})
 function AuthProvider({ children }){
     const [signed, setSigned] = useState(false)
     const [authUser, setAuthUser] = useState(null)
+    const [user, setUser] = useState(null)
 
     const navigation = useNavigation()
 
@@ -22,20 +23,27 @@ function AuthProvider({ children }){
                 setSigned(true)
             }
         })
+
     }, [])
 
     async function signIn(email, password){
-        await signInWithEmailAndPassword(auth, email, password)
-        .then((userCredentials)=>{
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
             setAuthUser({
-                email: userCredentials.user.email,
-                uid: userCredentials.user.uid
+                email: userCredential.user.email,
+                uid: userCredential.user.uid
             })
             setSigned(true)
-        })
-        .catch((error)=>{
+
+            let userInfo = userCredential.user
+
+            setUser(userInfo)
+            console.log(userInfo)
+
+        } catch (error) {
+            alert(error.message)
             console.log(error)
-        })
+        }
     }
 
     async function registerUser(email, password){
@@ -43,10 +51,6 @@ function AuthProvider({ children }){
         .then((userCredentials)=>{
             console.log(userCredentials)
         })
-
-        const token = userCredentials.idToken
-
-        await AsyncStorage.setItem('@userToken', token)
 
         navigation.navigate('LogIn')
 
@@ -62,7 +66,7 @@ function AuthProvider({ children }){
     }
 
     return (
-        <AuthContext.Provider value={{ signed, signIn, registerUser, setSigned, authUser, logOut }}> 
+        <AuthContext.Provider value={{ signed, signIn, registerUser, setSigned, authUser, logOut, user }}> 
             {children}
         </AuthContext.Provider>
     )

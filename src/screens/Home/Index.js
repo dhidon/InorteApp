@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
-import { View, Text, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { View, Text, KeyboardAvoidingView, TouchableOpacity, Image } from "react-native";
 import { styles } from "../../styles/Styles";
 import { AuthContext } from "../../contexts/auth";
+import Feather from '@expo/vector-icons/Feather';
 
 import Header from "../../components/Header";
 
 export default function Home() {
-    const { logOut, authUser } = useContext(AuthContext)
+    const { logOut, user } = useContext(AuthContext)
 
     function handleLogout(){
         logOut()
@@ -14,9 +15,20 @@ export default function Home() {
 
     return (
         <KeyboardAvoidingView style={styles.container}>
-            <Header setor={'Home'}/>
+            <Header setor={'Início'}/>
             <View style={styles.contentArea}>
-                <Text style={styles.normal}>Bem-vindo, {authUser?.email}</Text>
+
+                <View style={styles.userInfoArea}>
+
+                    {user.photoURL 
+                    ? <Image
+                        source={uri(user.photoURL)}
+                    />
+                    :<Feather name="user" size={90} color="black" />}
+
+                    <Text style={[styles.normal, {color: 'black', numberOfLines: 1}]}>Bem-vindo, {user.displayName ? user.displayName : user.email}</Text>
+
+                </View>
 
                 <TouchableOpacity onPress={()=>handleLogout()} style={styles.buttonArea}>
                     <Text style={styles.buttonText}>Sair</Text>

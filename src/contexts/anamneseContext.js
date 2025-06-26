@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { condicoes } from '../constants/anamneseOptions'
 import { format } from "date-fns";
 
@@ -10,7 +10,12 @@ export default function AnamneseProvider({ children }){
         nome: '',
         sus: '',
         nascimento: '',
-        idade: '',
+        apgar:{
+            primeiroMinuto:'',
+            quintoMinuto:'',
+            peso:'',
+            comprimento:''
+        },
         endereco:{
             ruaN: '',
             bairro:'',
@@ -34,8 +39,24 @@ export default function AnamneseProvider({ children }){
             motivo:'',
             nome:''
         },
-        condicoes: condicoes
+        condicoes: condicoes,
+        escola:{
+            frequenta: '',
+            nome: '',
+            aee: '',
+            serie: '',
+            turno: ''
+        }
     })
+
+    useEffect(()=>{
+        function idadeHoje(){
+            const dataHoje = new Date()
+            console.log('Essa é a data de hoje:', dataHoje)
+        }
+
+        idadeHoje()
+    }, [paciente])
 
     const [profissionais, setProfissionais] = useState({})
 

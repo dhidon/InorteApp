@@ -18,7 +18,8 @@ export default function AppRoute(){
             drawerItemStyle:{
                 marginBottom: 10,
                 borderRadius: 8
-            }
+            },
+            headerShown: false
             }}
         >
             <AppDrawer.Screen name='Home' component={Home}/>

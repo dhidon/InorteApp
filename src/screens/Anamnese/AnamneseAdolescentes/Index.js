@@ -55,8 +55,9 @@ export default function AnmenseAdolescentes(){
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
+            <Header setor={'Anamnese de adolescentes'}/>
+            
             <ScrollView>
-                <Header setor={'Anamnese de adolescentes'}/>
                 
                 <View style={styles.contentArea}>
 
@@ -73,14 +74,14 @@ export default function AnmenseAdolescentes(){
                     <View style={styles.inputArea}>
                         <Text style={styles.normal}>A gestação foi planejada?</Text>
                         <Seletor
-                            selecionado={paciente.gestacaoSelecionada}
-                            aoMudar={value=>setPaciente({...paciente, gestacaoSelecionada: value})}
+                            selecionado={paciente.gestacaoPlanejada}
+                            aoMudar={value=>setPaciente({...paciente, gestacaoPlanejada: value})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Realizou pré-natal?</Text>
                         <Seletor
-                            selecionado={paciente.preNatalSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, preNatalSelecionado: value})}
+                            selecionado={paciente.prenatal}
+                            aoMudar={value=>setPaciente({...paciente, prenatal: value})}
                             lista={simOuNao}
                         />
                     </View>
@@ -90,38 +91,33 @@ export default function AnmenseAdolescentes(){
                     <View style={styles.inputArea}>
                         <Text style={styles.normal}>Mamou quando criança?</Text>
                         <Seletor
-                            selecionado={paciente.mamouSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, mamouSelecionado: value})}
+                            selecionado={paciente.mamou}
+                            aoMudar={value=>setPaciente({...paciente, mamou: value})}
                             lista={simOuNao}
                         />
-                        {paciente.mamouSelecionado === 'sim' &&
-                        <View style={[styles.inputArea, {width: '100%', gap: 7}]}>
-                            <Text style={styles.normal}>Aleitamento materno exclusivo até quantos meses?</Text>
-                            <TextInput
-                                style={styles.input}
-                                value={paciente.leiteMatExclMeses}
-                                onChangeText={newText=>setPaciente({...paciente, leiteMatExclMeses: newText})}
-                                keyboardType='numeric'
+                        {paciente.mamou === 'sim' &&
+                        <>
+                            <Input
+                                titulo='Aleitamento materno exclusivo até quantos meses?'
+                                valor={paciente.leiteMatExclMes}
+                                callback={newText=>setPaciente({...paciente, leiteMatExclMes: newText})}
                             />
-                            <Text style={styles.normal}>Mamou até quantos meses?</Text>
-                            <TextInput
-                                style={styles.input}
-                                value={paciente.mamouMeses}
-                                onChangeText={newText=>setPaciente({...paciente, mamouMeses: newText})}
-                                keyboardType='numeric'
+                            <Input
+                                titulo='Mamou até quantos meses?'
+                                valor={paciente.mamouIdade}
+                                callback={newText=>setPaciente({...paciente, mamouIdade: newText})}
                             />
-                        </View>
-                        }
+                        </>}
                         <Text style={styles.normal}>Usou mamadeira?</Text>
                         <Seletor
-                            selecionado={paciente.mamadeiraSelecionada}
-                            aoMudar={value=>setPaciente({...paciente, mamadeiraSelecionada: value})}
+                            selecionado={paciente.mamadeira}
+                            aoMudar={value=>setPaciente({...paciente, mamadeira: value})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Usou chupeta?</Text>
                         <Seletor
-                            selecionado={paciente.chupetaSelecionada}
-                            aoMudar={value=>setPaciente({...paciente, chupetaSelecioada: value})}
+                            selecionado={paciente.chupeta}
+                            aoMudar={value=>setPaciente({...paciente, chupeta: value})}
                             lista={simOuNao}
                         />
 
@@ -140,11 +136,11 @@ export default function AnmenseAdolescentes(){
 
                         <Text style={styles.normal}>Apresentou dificuldade na introdução alimentar?</Text>
                         <Seletor
-                            selecionado={paciente.difIntroAlimentarSelecionada}
-                            aoMudar={value=>setPaciente({...paciente, difIntroAlimentarSelecionada: value})}
+                            selecionado={paciente.difIntroAlimentar}
+                            aoMudar={value=>setPaciente({...paciente, difIntroAlimentar: value})}
                             lista={simOuNao}
                         />
-                        {paciente.difIntroAlimentarSelecionada === 'sim' &&
+                        {paciente.difIntroAlimentar === 'sim' &&
                         <>
                             <Input
                                 titulo='Quais?'
@@ -156,8 +152,8 @@ export default function AnmenseAdolescentes(){
                         <Text style={[styles.normal, {marginBottom: 5}]}>As respostas a seguir devem ser referentes ao estado atual do paciente</Text>
                         <ListaAlternativas
                             titulo='Quais das consistencias alimentares asseguir o adolescente aceita bem?'
-                            lista={consistencias}
-                            chave='consistencias'
+                            lista={consistenciasAceitas}
+                            chave='consistenciasAceitas'
                         />
                         <ListaAlternativas
                             titulo='Apresentou algum problema na alimentação?'
@@ -182,8 +178,8 @@ export default function AnmenseAdolescentes(){
                         />
                         <Text style={styles.normal}>Dorme sozinho?</Text>
                         <Seletor
-                            selecionado={paciente.dormeSozinhoSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, dormeSozinhoSelecionado: value})}
+                            selecionado={paciente.dormeSozinho}
+                            aoMudar={value=>setPaciente({...paciente, dormeSozinho: value})}
                             lista={simOuNao}
                         />
                         <Input
@@ -203,8 +199,8 @@ export default function AnmenseAdolescentes(){
                         />
                         <Text style={styles.normal}>Teve algum problema de crescimento ou desenvolvimento durante os primeiros anos de vida?</Text>
                         <Seletor
-                            selecionado={paciente.problemaCrescimentoSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, problemaCrescimentoSelecionado: value})}
+                            selecionado={paciente.problemaCrescimento}
+                            aoMudar={value=>setPaciente({...paciente, problemaCrescimento: value})}
                             lista={simOuNao}
                         />
                         <ListaAlternativas
@@ -230,7 +226,7 @@ export default function AnmenseAdolescentes(){
 
                     <View style={styles.inputArea}>
                         <ListaAlternativas
-                            titulo='Pressione as condições que e doenças que seu filho já teve'
+                            titulo='Pressione as condições que e doenças que o paciente já teve'
                             lista={condicoesFilho}
                             chave='condicoesFilho'
                         />
@@ -243,10 +239,10 @@ export default function AnmenseAdolescentes(){
                         <Text style={styles.normal}>Faz uso de alguma medicação?</Text>
                         <Seletor
                             lista={simOuNao}
-                            selecionado={paciente.usoMedicacaoSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, usoMedicacaoSelecionado: value})}
+                            selecionado={paciente.usoMedicacao}
+                            aoMudar={value=>setPaciente({...paciente, usoMedicacao: value})}
                         />
-                        {paciente.usoMedicacaoSelecionado === 'sim' &&
+                        {paciente.usoMedicacao === 'sim' &&
                         <View style={[styles.inputArea, {width: '100%', gap: 7}]}>
                             <TextInput
                                 style={styles.input}
@@ -392,9 +388,9 @@ export default function AnmenseAdolescentes(){
                         />
                         <Text style={styles.normal}>O paciente consegue ser independente nas atividades de vida diárias?</Text>
                         <Seletor
-                            selecionado={paciente.independenciaAtivSelecionado}
+                            selecionado={paciente.independenciaAtiv}
                             lista={simOuNao}
-                            aoMudar={value=>setPaciente({...paciente, independenciaAtivSelecionado: value})}
+                            aoMudar={value=>setPaciente({...paciente, independenciaAtiv: value})}
                         />
                     </View>
 
@@ -411,40 +407,40 @@ export default function AnmenseAdolescentes(){
 
                         <Text style={styles.normal}>Consegue manter contato visual por muito tempo?</Text>
                         <Seletor
-                            selecionado={paciente.contatoVisualSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, contatoVisualSelecionado: value})}
+                            selecionado={paciente.contatoVisual}
+                            aoMudar={value=>setPaciente({...paciente, contatoVisual: value})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Aproxima objetos dos olhos?</Text>
                         <Seletor
-                            selecionado={paciente.aproximaObjetosSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, aproximaObjetosSelecionado: value})}
+                            selecionado={paciente.aproximaObjetos}
+                            aoMudar={value=>setPaciente({...paciente, aproximaObjetos: value})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Afasta os objetos?</Text>
                         <Seletor
-                            selecionado={paciente.afastaObjetosSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, afastaObjetosSelecionado: value})}
+                            selecionado={paciente.afastaObjetos}
+                            aoMudar={value=>setPaciente({...paciente, afastaObjetos: value})}
                             lista={simOuNao}
                         />
 
 
                         <Text style={styles.normal}>Movimento excessivo dos olhos?</Text>
                         <Seletor
-                            selecionado={paciente.movimentoOlhosSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, movimentoOlhosSelecionado: value})}
+                            selecionado={paciente.movimentoOlhos}
+                            aoMudar={value=>setPaciente({...paciente, movimentoOlhos: value})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Já realizou avaliação oftalmológica?</Text>
                         <Seletor
-                            selecionado={paciente.avOftalmoSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, avOftalmoSelecionado: value})}
+                            selecionado={paciente.avOftalmo}
+                            aoMudar={value=>setPaciente({...paciente, avOftalmo: value})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Reclama de dores de cabeça constantes, principalmente na região fronto-temporal?</Text>
                         <Seletor
-                            selecionado={paciente.dorCabecaSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, dorCabecaSelecionado: value})}
+                            selecionado={paciente.dorCabeca}
+                            aoMudar={value=>setPaciente({...paciente, dorCabeca: value})}
                             lista={simOuNao}
                         />
 
@@ -452,14 +448,14 @@ export default function AnmenseAdolescentes(){
 
                         <Text style={styles.normal}>Apresenta dificuldade auditiva?</Text>
                         <Seletor
-                            selecionado={paciente.difAuditivaSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, difAuditivaSelecionado: value})}
+                            selecionado={paciente.difAuditiva}
+                            aoMudar={value=>setPaciente({...paciente, difAuditiva: value})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Já realizou avaliação?</Text>
                         <Seletor
-                            selecionado={paciente.realizouAvSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, realizouAvSelecionado: value})}
+                            selecionado={paciente.realizouAv}
+                            aoMudar={value=>setPaciente({...paciente, realizouAv: value})}
                             lista={simOuNao}
                         />
 
@@ -467,33 +463,33 @@ export default function AnmenseAdolescentes(){
 
                         <Text style={styles.normal}>Frequenta a escola?</Text>
                         <Seletor
-                            selecionado={paciente.frequentaEscolaSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, frequentaEscolaSelecionado: value})}
+                            selecionado={paciente.escola.frequenta}
+                            aoMudar={value=>setPaciente({...paciente, escola: {...paciente.escola, frequenta: value}})}
                             lista={simOuNao}
                         />
 
-                        {paciente.frequentaEscolaSelecionado === 'sim' && (
+                        {paciente.escola.frequenta === 'sim' && (
                             <Input
                                 titulo='Qual o nome da escola?'
-                                valor={paciente.nomeEscola}
-                                callback={newText=>setPaciente({...paciente, nomeEscola: newText})}
+                                valor={paciente.escola.nome}
+                                callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, nome: newText}})}
                             />
                         )}
                         <Text style={styles.normal}>Faz AEE?</Text>
                         <Seletor
-                            selecionado={paciente.fazAeeSelecionado}
-                            aoMudar={value=>setPaciente({...paciente, fazAeeSelecionado: value})}
+                            selecionado={paciente.escola.aee}
+                            aoMudar={value=>setPaciente({...paciente, escola: {...paciente.escola, aee: value}})}
                             lista={simOuNao}
                         />
                         <Input
                             titulo='Qual a série?'
-                            valor={paciente.serieEscola}
-                            callback={newText=>setPaciente({...paciente, serieEscola: newText})}
+                            valor={paciente.escola.serie}
+                            callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, aee: newText}})}
                         />
                         <Input
                             titulo='Qual o turno?'
-                            valor={paciente.turnoEscola}
-                            callback={newText=>setPaciente({...paciente, turnoEscola: newText})}
+                            valor={paciente.escola.turno}
+                            callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, turno: ''}})}
                         />
                         <Input
                             titulo='Apresenta dificuldade na aprendizagem?'

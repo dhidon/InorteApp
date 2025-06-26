@@ -69,7 +69,7 @@ export default function Identificacao(){
                             value={paciente.nascimento}
                             keyboardType='numeric'
                         />
-                        <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: 30}}>
+                        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 30}}>
                             <Text style={styles.normal}>Idade:</Text>
                             <Text style={{ borderRadius: 3, padding: 5, backgroundColor: colors.primary, color: colors.white, height: 40, fontSize: 18}}>
                                 {paciente.idade ? paciente.idade : '0'}

@@ -1,16 +1,15 @@
 import React from "react";
-import { View, KeyboardAvoidingView, Text } from "react-native";
+import { View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-import { styles } from "../styles/Styles";
+import { styles, colors } from "../styles/Styles";
 
 export default function Seletor({selecionado, aoMudar, lista}) {
     
     return (
-        <KeyboardAvoidingView style={[styles.container, {marginBottom: 5}]}>
             <View style={styles.pickerContainer}>
                 <Picker
-                    style={{height: 60}}
+                    style={{height: 60, backgroundColor: colors.secondary, width: '100%'}}
                     selectedValue={selecionado}
                     onValueChange={aoMudar}
                     mode='dialog'
@@ -20,6 +19,5 @@ export default function Seletor({selecionado, aoMudar, lista}) {
                     })}
                 </Picker>
             </View>
-        </KeyboardAvoidingView>
     )
 }
