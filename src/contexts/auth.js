@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { auth } from '../services/firebaseConnection'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from "@react-navigation/native";
 
 export const AuthContext = createContext({})
@@ -9,7 +8,7 @@ export const AuthContext = createContext({})
 function AuthProvider({ children }){
     const [signed, setSigned] = useState(false)
     const [authUser, setAuthUser] = useState(null)
-    const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const navigation = useNavigation()
 
@@ -17,32 +16,33 @@ function AuthProvider({ children }){
         const unsub = onAuthStateChanged(auth, (user)=>{
             if(user){
                 setAuthUser({
-                    email: user.user.email,
-                    uid: user.user.uid
+                    email: user.email,
+                    uid: user.uid,
+                    profilePic: user.photoURL,
+                    telefone: user.phoneNumber
                 })
                 setSigned(true)
+                setLoading(false)
+                return
+            } else {
+                setAuthUser(null)       
+                setSigned(false)         
             }
+            setLoading(false)
         })
+
+        return unsub
 
     }, [])
 
     async function signIn(email, password){
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password)
-            setAuthUser({
-                email: userCredential.user.email,
-                uid: userCredential.user.uid
-            })
-            setSigned(true)
-
-            let userInfo = userCredential.user
-
-            setUser(userInfo)
-            console.log(userInfo)
-
-        } catch (error) {
-            alert(error.message)
-            console.log(error)
+            await signInWithEmailAndPassword(auth, email, password)
+            console.log(user)
+            console.log(authUser)
+        } catch(err) {
+            console.log(err)
+            alert(err)
         }
     }
 
@@ -66,7 +66,7 @@ function AuthProvider({ children }){
     }
 
     return (
-        <AuthContext.Provider value={{ signed, signIn, registerUser, setSigned, authUser, logOut, user }}> 
+        <AuthContext.Provider value={{ signed, signIn, registerUser, setSigned, authUser, logOut, loading }}> 
             {children}
         </AuthContext.Provider>
     )

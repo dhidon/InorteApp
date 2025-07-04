@@ -4,7 +4,7 @@ import { styles } from '../../../styles/Styles'
 import Slider from '@react-native-community/slider'
 import { useNavigation } from '@react-navigation/native'
 
-import { comportRepetitivos, comportApego, difSociabilidadeAfetividade, difAutocuidado, condDesenvolvAtuais, simOuNao, parto, consistencias, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
+import { comportRepetitivos, comportApego, difSociabilidadeAfetividade, difAutocuidado, condDesenvolvAtuais, simOuNao, parto, consistenciasAceitas, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
 import { AnamneseContext } from '../../../contexts/anamneseContext'
 
 import Header from '../../../components/Header'
@@ -280,11 +280,7 @@ export default function AnamneseCriancas(){
                             titulo='Com qual idade começou a andar sem suporte'
                             valor={paciente.andouSemSuporte}
                             chave='andouSemSuporte'
-                        />
-
-
-
-                        
+                        />                    
                         <ListaAlternativas
                             titulo='Dentre os itens a seguir, pressione aqueles que estiveram presentes (com grau de significância) durante a infância nos primeiros anos de vida'
                             lista={itensSignificantes}
@@ -305,8 +301,8 @@ export default function AnamneseCriancas(){
                         {paciente.praticaEsporte === 'sim' &&
                         <Input
                             titulo='Qual esporte?'
-                            valor={paciente.qualEsporte}
-                            callback={newText=>setPaciente({...paciente, qualEsporte: newText})}
+                            valor={paciente.esporte}
+                            callback={newText=>setPaciente({...paciente, esporte: newText})}
                         />}
                         <Text style={styles.normal}>Pratica autoagressão?</Text>
                         <Seletor
@@ -316,8 +312,8 @@ export default function AnamneseCriancas(){
                         />
                         <Text style={styles.normal}>Pratica heteroagressão?</Text>
                         <Seletor
-                            selecionado={paciente.autoAgressao}
-                            aoMudar={value=>setPaciente({...paciente, autoAgressao: value})}
+                            selecionado={paciente.heteroagressao}
+                            aoMudar={value=>setPaciente({...paciente, heteroagressao: value})}
                             lista={simOuNao}
                         />
                     </View>
@@ -458,21 +454,21 @@ export default function AnamneseCriancas(){
                     <View style={styles.inputArea}>
                         <Text style={styles.normal}>Mostra, traz pra perto do rosto do parceiro ou aponta objetos / eventos de interesse variados apenas para compartilhar?</Text>
                         <Seletor
-                            lista={difSociabilidadeAfetividade}
                             selecionado={paciente.mostraObjComp}
                             aoMudar={value=>setPaciente({...paciente, mostraObjComp: value})}
+                            lista={difSociabilidadeAfetividade}
                         />
                         <Text style={styles.normal}>Olha para onde o parceiro aponta</Text>
                         <Seletor
-                            lista={difSociabilidadeAfetividade}
                             selecionado={paciente.olhaAponta}
                             aoMudar={value=>setPaciente({...paciente, olhaAponta: value})}
+                            lista={difSociabilidadeAfetividade}
                         />
                         <Text style={styles.normal}>Responde aos convites para brincar</Text>
                         <Seletor
-                            lista={difSociabilidadeAfetividade}
                             selecionado={paciente.respBrincar}
                             aoMudar={value=>setPaciente({...paciente, respBrincar: value})}
+                            lista={difSociabilidadeAfetividade}
                         />
                     </View>
 
@@ -481,17 +477,17 @@ export default function AnamneseCriancas(){
                     <View style={styles.inputArea}>
                         <Text style={styles.normal}>Iniciativa de aproximação ou interesse em outras crianças</Text>
                         <Seletor
-                            lista={difSociabilidadeAfetividade}
                             selecionado={paciente.aproxIntCriancas}
                             aoMudar={value=>setPaciente({...paciente, aproxIntCriancas: value})}
+                            lista={difSociabilidadeAfetividade}
                         />
                         <Text style={styles.normal}>Responde mas não toma iniciativa</Text>
                         <Seletor
-                            lista={difSociabilidadeAfetividade}
                             selecionado={paciente.respSemIniciativa}
                             aoMudar={value=>setPaciente({...paciente, respSemIniciativa: value})}
+                            lista={difSociabilidadeAfetividade}
                         />
-                        <Text style={styles.normal}>Fica ansioso com a presença de outras crianças / adolescentes?</Text>
+                        <Text style={styles.normal}>Fica ansioso com a presença de outras crianças/adolescentes?</Text>
                         <Seletor
                             selecionado={paciente.ansiosoPresencaCriAdol}
                             aoMudar={value => setPaciente({...paciente, ansiosoPresencaCriAdol: value})}

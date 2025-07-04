@@ -44,7 +44,7 @@ export const condicoes = [
 
 export const simOuNao = [{label: '---', value: null}, {label: 'Sim', value: 'sim'}, {label: 'Não', value: 'nao'}]
 
-export const consistencias = [
+export const consistenciasAceitas = [
     {id: 'solido', label: 'Sólido', value: 'não'},
     {id: 'liquido', label: 'Líquido', value: 'não'},
     {id: 'pastoso', label: 'Pastoso', value: 'não'}

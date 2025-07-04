@@ -43,23 +43,23 @@ export default function Identificacao(){
             <Text style={styles.titulo}>1. Dados de Identificação</Text>
 
                 <View style={styles.inputArea}>
-                    <Input
-                        titulo="Nome completo:"
-                        valor={paciente.nome}
-                        callback={newText => setPaciente({...paciente, nome: newText})}
-                    />
-                    <Text style={styles.normal}>Nº SUS:</Text>
-                    <TextInput
-                        value={paciente.sus}
-                        style={[styles.input, {width: 120}]}
-                        placeholder='___ ___ ___ ___'
-                        onChangeText={formatarSus}
-                        maxLength={19}
-                        keyboardType="numeric"
-                    />
-                </View>
+                    <View>
+                        <Input
+                            titulo="Nome completo:"
+                            valor={paciente.nome}
+                            callback={newText => setPaciente({...paciente, nome: newText})}
+                        />
+                        <Text style={styles.normal}>Nº SUS:</Text>
+                        <TextInput
+                            value={paciente.sus}
+                            style={[styles.input, {width: 120}]}
+                            placeholder='___ ___ ___ ___'
+                            onChangeText={formatarSus}
+                            maxLength={19}
+                            keyboardType="numeric"
+                        />
+                    </View>
 
-                <View style={styles.inputArea}>
                     <Text style={styles.normal}>Data de nascimento:</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <TextInput
@@ -76,33 +76,29 @@ export default function Identificacao(){
                             </Text>
                         </View>
                     </View>
-                </View>
-
-                <View style={[styles.inputArea, {gap: 7}]}>
-                    <Input
-                        titulo="Endereço:"
-                        valor={paciente.endereco.ruaN}
-                        callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, ruaN: newText}})}
-                        legenda='Rua e número da casa'
-                    />
-                    <Input
-                        legenda="Bairro:"
-                        valor={paciente.endereco.bairro}
-                        callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, bairro: newText}})}
-                    />
-                    <Input
-                        legenda="Cidade, UF:"
-                        valor={paciente.endereco.cidadeUf}
-                        callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, cidadeUf: newText}})}
-                    />
-                    <Input
-                        valor={paciente.endereco.cep}
-                        callback={formatarCep}
-                        legenda='CEP: __.___-___'
-                    />
-                </View>
-
-                <View style={styles.inputArea}>
+                    <View style={{gap: 7}}>
+                        <Input
+                            titulo="Endereço:"
+                            valor={paciente.endereco.ruaN}
+                            callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, ruaN: newText}})}
+                            legenda='Rua e número da casa'
+                        />
+                        <Input
+                            legenda="Bairro:"
+                            valor={paciente.endereco.bairro}
+                            callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, bairro: newText}})}
+                        />
+                        <Input
+                            legenda="Cidade, UF:"
+                            valor={paciente.endereco.cidadeUf}
+                            callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, cidadeUf: newText}})}
+                        />
+                        <Input
+                            valor={paciente.endereco.cep}
+                            callback={formatarCep}
+                            legenda='CEP: __.___-___'
+                        />
+                    </View>
                     <Input
                         titulo="Informante:"
                         valor={paciente.informante}

@@ -23,16 +23,14 @@ export default function LogIn() {
                 style={styles.logo}
                 source={require('../../assets/logo-card.png')}
             />
-            <View style={styles.inputArea}>
+            <Text style={styles.titulo}>Fazer Login</Text>
+            <View style={[styles.inputArea, {gap: 15}]}>
                 <TextInput 
                     style={styles.input}
                     placeholder='Seu email'
                     placeholderTextColor={styles.input.color}
                     onChangeText={newText=>setEmail(newText)}
                 />
-            </View>
-
-            <View style={styles.inputArea}>
                 <TextInput 
                     style={styles.input}
                     placeholder='Senha'

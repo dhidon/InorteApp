@@ -7,7 +7,7 @@ import Feather from '@expo/vector-icons/Feather';
 import Header from "../../components/Header";
 
 export default function Home() {
-    const { logOut, user } = useContext(AuthContext)
+    const { logOut, authUser } = useContext(AuthContext)
 
     function handleLogout(){
         logOut()
@@ -20,13 +20,13 @@ export default function Home() {
 
                 <View style={styles.userInfoArea}>
 
-                    {user.photoURL 
+                    {authUser.profilePic 
                     ? <Image
-                        source={uri(user.photoURL)}
+                        source={uri(authUser.profilePic)}
                     />
                     :<Feather name="user" size={90} color="black" />}
 
-                    <Text style={[styles.normal, {color: 'black', numberOfLines: 1}]}>Bem-vindo, {user.displayName ? user.displayName : user.email}</Text>
+                    <Text style={[styles.normal, {color: 'black', numberOfLines: 1}]}>Bem-vindo, {authUser.displayName ? authUser.displayName : authUser.email}</Text>
 
                 </View>
 

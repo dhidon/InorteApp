@@ -5,7 +5,7 @@ import Slider from '@react-native-community/slider'
 import { useNavigation } from '@react-navigation/native'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
-import { habilidadesMotoras, comportamento, caracteristicasSociais, outrasDificuldades, nivelHabilidades, fatoresDif, estadoCivil, guarda, guardiaoLegal, simOuNao, consistencias, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
+import { habilidadesMotoras, comportamento, caracteristicasSociais, outrasDificuldades, nivelHabilidades, fatoresDif, simOuNao, consistenciasAceitas, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
 import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 import ListaAlternativas from '../../../components/ListaAlternativas'
