@@ -10,9 +10,9 @@ export default function Header({ setor }) {
     return (
         <View style={styles.cabecalhoArea}>
 
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative', width: '100%'}}>
 
-                <TouchableOpacity onPress={()=>navigation.openDrawer()} style={{}}>
+                <TouchableOpacity onPress={()=>navigation.openDrawer()} style={{position: 'absolute', left: 0}}>
                     <Feather name='menu' size={35} color='#121212'/>
                 </TouchableOpacity>
 
