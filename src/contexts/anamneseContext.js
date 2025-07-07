@@ -2,10 +2,12 @@ import React, { createContext, useState, useEffect } from "react";
 import { condicoes } from '../constants/anamneseOptions'
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebaseConnection";
+import { useNavigation } from "@react-navigation/native";
 
 export const AnamneseContext = createContext()
 
 export default function AnamneseProvider({ children }){
+    const navigation = useNavigation()
     const [paciente, setPaciente] = useState({
         data: '',
         nome: '',
@@ -92,6 +94,7 @@ export default function AnamneseProvider({ children }){
         try {
             const docRef = await addDoc(collection(db, "pacientes"), data)
             console.log('Documento escrito com ID:', docRef.id)
+            navigation.navigate('Home')
         } catch (error) {
             console.log(error)
         }

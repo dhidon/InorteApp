@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, Alert } from "react-native";
 import { styles } from "../../styles/Styles";
 
 import { AnamneseContext } from "../../contexts/anamneseContext";
@@ -11,7 +11,20 @@ export default function Profissionais(){
     const {paciente, setPaciente, sendToDb} = useContext(AnamneseContext)
 
     function handleSend(){
-        sendToDb(paciente)
+        Alert.alert(
+                'Atenção!',
+                'Tem certeza que deseja enviar os dados do paciente e voltar para a tela inicial?',
+                [
+                    {
+                        text: 'Cancelar',
+                        style: 'cancel'
+                    },
+                    {
+                        text: 'Enviar',
+                        onPress: () => sendToDb(paciente)
+                    }
+                ])
+        
     }
 
     return (
