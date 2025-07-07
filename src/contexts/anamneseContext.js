@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { condicoes } from '../constants/anamneseOptions'
-import { format } from "date-fns";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../services/firebaseConnection";
 
 export const AnamneseContext = createContext()
 
@@ -87,8 +88,13 @@ export default function AnamneseProvider({ children }){
         setPaciente({...paciente, endereco: {...paciente.endereco, cep: textoFiltrado}})
     }
 
-    function enviarDadosAnamn(dados){
-        console.log(dados)
+    async function sendToDb(data){
+        try {
+            const docRef = await addDoc(collection(db, "pacientes"), data)
+            console.log('Documento escrito com ID:', docRef.id)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -100,7 +106,7 @@ export default function AnamneseProvider({ children }){
             formatarCep,
             profissionais,
             setProfissionais,
-            enviarDadosAnamn
+            sendToDb
         }}>
             {children}
         </AnamneseContext.Provider>

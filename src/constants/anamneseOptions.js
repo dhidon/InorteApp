@@ -24,9 +24,9 @@ export const listaGuardiaoLegal = [
 ]
 
 export const condicoes = [
-    {id: 'autismo_cg_21', label: 'Autismo', value: 'não', parentesco: ''},
-    {id: 'defictAtencao_cg_22', label: 'Déficit de atenção', value: 'não', parentesco: ''},
-    {id: 'convulsaoEpilepsia_cg_23', label: 'Convulsão ou epilepsia', value: 'não', parentesco: ''},
+    {id: 'autismo', label: 'Autismo', value: 'não', parentesco: ''},
+    {id: 'defictAtencao', label: 'Déficit de atenção', value: 'não', parentesco: ''},
+    {id: 'convulsaoEpilepsia', label: 'Convulsão ou epilepsia', value: 'não', parentesco: ''},
     {id: 'hiperatividade_cg_24', label: 'Hiperatividade', value: 'não', parentesco: ''},
     {id: 'difAprend_cg_25', label: 'Dificuldades de aprendizagem', value: 'não', parentesco: ''},
     {id: 'defIntelectual_cg_26', label: 'Deficiência intelectual', value: 'não', parentesco: ''},

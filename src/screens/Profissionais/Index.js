@@ -8,10 +8,10 @@ import Header from "../../components/Header";
 import Input from "../../components/Input";
 
 export default function Profissionais(){
-    const {paciente, setPaciente, enviarDadosAnamn} = useContext(AnamneseContext)
+    const {paciente, setPaciente, sendToDb} = useContext(AnamneseContext)
 
     function handleSend(){
-        enviarDadosAnamn(paciente)
+        sendToDb(paciente)
     }
 
     return (
@@ -33,7 +33,7 @@ export default function Profissionais(){
                     />
                 </View>
 
-                <TouchableOpacity style={styles.buttonArea} onPress={()=>console.log(paciente)}>
+                <TouchableOpacity style={styles.buttonArea} onPress={handleSend}>
                     <Text style={styles.buttonText}>Enviar dados</Text>
                 </TouchableOpacity>
             </View>

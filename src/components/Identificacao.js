@@ -52,7 +52,7 @@ export default function Identificacao(){
                         <Text style={styles.normal}>Nº SUS:</Text>
                         <TextInput
                             value={paciente.sus}
-                            style={[styles.input, {width: 120}]}
+                            style={[styles.input, {width: 160}]}
                             placeholder='___ ___ ___ ___'
                             onChangeText={formatarSus}
                             maxLength={19}
@@ -63,7 +63,7 @@ export default function Identificacao(){
                     <Text style={styles.normal}>Data de nascimento:</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <TextInput
-                            style={[styles.input, {width: '70%'}]}
+                            style={[styles.input, {width: '60%'}]}
                             placeholder='DD/MM/AAAA'
                             onChangeText={texto=>formatarData(texto, setPaciente, 'nascimento')}
                             value={paciente.nascimento}

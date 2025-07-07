@@ -16,7 +16,7 @@ export default function Sintomas(){
             <View style={styles.inputArea}>
                 <Input
                     titulo="Qual o principal motivo do paciente estar realizando esta avaliação?"
-                    valor={paciente.motivo}
+                    valor={paciente.motivoAvaliacao}
                     callback={newText=>setPaciente({...paciente, motivo: newText})}
                 />
                 <Input
