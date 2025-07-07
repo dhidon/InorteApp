@@ -91,7 +91,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     ...platformStyles.container,
-    marginTop: 35
+    marginTop: 35,
   },
 
   contentArea: {

@@ -1,10 +1,11 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { styles, colors } from "../styles/Styles";
+import { colors } from "../styles/Styles";
 import Home from "../screens/Home/Index";
 import AnamneseNavigator from "../screens/Anamnese/AnamneseNavigator";
-import Paciente from "../screens/Paciente/Index";
+import PacientesNavigator from "../screens/Pacientes/PacientesNavigator";
+
 
 export default function AppRoute(){
     const AppDrawer = createDrawerNavigator()
@@ -25,7 +26,7 @@ export default function AppRoute(){
         >
             <AppDrawer.Screen name='Home' component={Home}/>
             <AppDrawer.Screen name='Anamnese' component={AnamneseNavigator}/>
-            <AppDrawer.Screen name='Paciente' component={Paciente}/>
+            <AppDrawer.Screen name='Pacientes' component={PacientesNavigator}/>
         </AppDrawer.Navigator>
     )
 }

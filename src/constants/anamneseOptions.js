@@ -25,21 +25,21 @@ export const listaGuardiaoLegal = [
 
 export const condicoes = [
     {id: 'autismo', label: 'Autismo', value: 'não', parentesco: ''},
-    {id: 'defictAtencao', label: 'Déficit de atenção', value: 'não', parentesco: ''},
+    {id: 'deficitAtencao', label: 'Déficit de atenção', value: 'não', parentesco: ''},
     {id: 'convulsaoEpilepsia', label: 'Convulsão ou epilepsia', value: 'não', parentesco: ''},
-    {id: 'hiperatividade_cg_24', label: 'Hiperatividade', value: 'não', parentesco: ''},
-    {id: 'difAprend_cg_25', label: 'Dificuldades de aprendizagem', value: 'não', parentesco: ''},
-    {id: 'defIntelectual_cg_26', label: 'Deficiência intelectual', value: 'não', parentesco: ''},
-    {id: 'tiques_cg_27', label: 'Tiques ou Síndrome de Tourette', value: 'não', parentesco: ''},
-    {id: 'abusoAlcool_cg_28', label: 'Abuso de álcool', value: 'não', parentesco: ''},
-    {id: 'usoDrogas_cg_29', label: 'Uso de drogas', value: 'não', parentesco: ''},
-    {id: 'tentativaSuicidio_cg_30', label: 'Tentativa de suicídio', value: 'não', parentesco: ''},
-    {id: 'abusoFisico_cg_31', label: 'Abuso físico', value: 'não', parentesco: ''},
-    {id: 'probCompInfancia_cg_32', label: 'Problemas comportamentais na infância', value: 'não', parentesco: ''},
-    {id: 'doencaMental_cg_33', label: 'Doença mental', value: 'não', parentesco: ''},
-    {id: 'depressaoAnsiedade_cg_34', label: 'Depressão ou ansiedade', value: 'não', parentesco: ''},
-    {id: 'abusoSexual_cg_35', label: 'Abuso sexual', value: 'não', parentesco: ''},
-    {id: 'doencaNeurologica_cg_36', label: 'Doença ou enfermidade neurológica', value: 'não', parentesco: ''}
+    {id: 'hiperatividade', label: 'Hiperatividade', value: 'não', parentesco: ''},
+    {id: 'difAprend', label: 'Dificuldades de aprendizagem', value: 'não', parentesco: ''},
+    {id: 'defIntelectual', label: 'Deficiência intelectual', value: 'não', parentesco: ''},
+    {id: 'tiques', label: 'Tiques ou Síndrome de Tourette', value: 'não', parentesco: ''},
+    {id: 'abusoAlcool', label: 'Abuso de álcool', value: 'não', parentesco: ''},
+    {id: 'usoDrogas', label: 'Uso de drogas', value: 'não', parentesco: ''},
+    {id: 'tentativaSuicidio', label: 'Tentativa de suicídio', value: 'não', parentesco: ''},
+    {id: 'abusoFisico', label: 'Abuso físico', value: 'não', parentesco: ''},
+    {id: 'probCompInfancia', label: 'Problemas comportamentais na infância', value: 'não', parentesco: ''},
+    {id: 'doencaMental', label: 'Doença mental', value: 'não', parentesco: ''},
+    {id: 'depressaoAnsiedade', label: 'Depressão ou ansiedade', value: 'não', parentesco: ''},
+    {id: 'abusoSexual', label: 'Abuso sexual', value: 'não', parentesco: ''},
+    {id: 'doencaNeurologica', label: 'Doença ou enfermidade neurológica', value: 'não', parentesco: ''}
 ]
 
 export const simOuNao = [{label: '---', value: null}, {label: 'Sim', value: 'sim'}, {label: 'Não', value: 'nao'}]

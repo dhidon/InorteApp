@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, Alert } from "react-native";
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, Alert, Platform } from "react-native";
 import { styles } from "../../styles/Styles";
 
 import { AnamneseContext } from "../../contexts/anamneseContext";
@@ -11,7 +11,13 @@ export default function Profissionais(){
     const {paciente, setPaciente, sendToDb} = useContext(AnamneseContext)
 
     function handleSend(){
-        Alert.alert(
+        if (Platform.OS === 'web') {
+            const confirmado = window.confirm('Tem certeza que deseja enviar os dados do paciente e voltar para a tela inicial?')
+            if (confirmado) {
+                sendToDb(paciente)
+            }
+        } else {
+            Alert.alert(
                 'Atenção!',
                 'Tem certeza que deseja enviar os dados do paciente e voltar para a tela inicial?',
                 [
@@ -23,8 +29,9 @@ export default function Profissionais(){
                         text: 'Enviar',
                         onPress: () => sendToDb(paciente)
                     }
-                ])
-        
+                ]
+            )
+        }
     }
 
     return (

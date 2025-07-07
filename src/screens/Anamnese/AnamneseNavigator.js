@@ -8,6 +8,7 @@ import Profissionais from "../Profissionais/Index";
 
 export default function AnamneseNavigator(){
     const AnamneseStack = createNativeStackNavigator()
+    
     return (
         <AnamneseStack.Navigator screenOptions={{headerShown: false}}>
             <AnamneseStack.Screen name='Anamnese' component={Anamnese}/>

@@ -93,7 +93,50 @@ export default function AnamneseProvider({ children }){
     async function sendToDb(data){
         try {
             const docRef = await addDoc(collection(db, "pacientes"), data)
-            console.log('Documento escrito com ID:', docRef.id)
+            console.log('Documento gravado com o ID:', docRef.id)
+            setPaciente({
+                data: '',
+                nome: '',
+                sus: '',
+                nascimento: '',
+                apgar:{
+                    primeiroMinuto:'',
+                    quintoMinuto:'',
+                    peso:'',
+                    comprimento:''
+                },
+                endereco:{
+                    ruaN: '',
+                    bairro:'',
+                    cidadeUf: ''
+                },
+                informante:'',
+                mae:{
+                    nome:'',
+                    nascimento:'',
+                    profissao:''
+                },
+                pai:{
+                    nome:'',
+                    nascimento:'',
+                    profissao:''
+                },
+                pais:{
+                    estadoCivil:''
+                },
+                outroGuardiao:{
+                    motivo:'',
+                    nome:''
+                },
+                condicoes: condicoes,
+                escola:{
+                    frequenta: '',
+                    nome: '',
+                    aee: '',
+                    serie: '',
+                    turno: ''
+                }
+            })
             navigation.navigate('Home')
         } catch (error) {
             console.log(error)
