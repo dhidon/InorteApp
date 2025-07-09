@@ -10,8 +10,8 @@ import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 import ListaAlternativas from '../../../components/ListaAlternativas'
 import Input from '../../../components/Input'
-import Identificacao from '../../../components/Identificacao'
-import Sintomas from '../../../components/Sintomas'
+import Identificacao from '../../../constants/Identificacao'
+import Sintomas from '../../../constants/Sintomas'
 import DateInput from '../../../components/DateInput'
 
 export default function AnmenseAdolescentes(){

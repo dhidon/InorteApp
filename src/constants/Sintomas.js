@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { styles } from "../styles/Styles";
 
-import Input from './Input'
+import Input from '../components/Input'
 
 import { AnamneseContext } from "../contexts/anamneseContext";
 

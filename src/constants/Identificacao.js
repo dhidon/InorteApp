@@ -5,10 +5,10 @@ import { parse, format } from 'date-fns'
 
 import { AnamneseContext } from '../contexts/anamneseContext'
 
-import { listaEstadoCivil, guarda, listaGuardiaoLegal } from '../constants/anamneseOptions'
+import { listaEstadoCivil, guarda, listaGuardiaoLegal } from './anamneseOptions'
 
-import Input from './Input'
-import Seletor from './Seletor'
+import Input from '../components/Input'
+import Seletor from '../components/Seletor'
 
 
 export default function Identificacao(){
