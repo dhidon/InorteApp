@@ -79,26 +79,32 @@ export default function Identificacao(){
                     <View style={{gap: 7}}>
                         <Input
                             titulo="Endereço:"
-                            valor={paciente.endereco.ruaN}
+                            valor={paciente.endereco?.ruaN}
                             callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, ruaN: newText}})}
                             legenda='Rua e número da casa'
                         />
                         <Input
                             legenda="Bairro:"
-                            valor={paciente.endereco.bairro}
+                            valor={paciente.endereco?.bairro}
                             callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, bairro: newText}})}
                         />
                         <Input
                             legenda="Cidade, UF:"
-                            valor={paciente.endereco.cidadeUf}
+                            valor={paciente.endereco?.cidadeUf}
                             callback={newText => setPaciente({...paciente, endereco: {...paciente.endereco, cidadeUf: newText}})}
                         />
                         <Input
-                            valor={paciente.endereco.cep}
+                            valor={paciente.endereco?.cep}
                             callback={formatarCep}
                             legenda='CEP: __.___-___'
                         />
                     </View>
+                    <Input
+                        titulo='Contato:'
+                        valor={paciente.contato}
+                        callback={newText=>setPaciente({...paciente, contato: newText})}
+                        legenda='(__)_____-____'
+                    />
                     <Input
                         titulo="Informante:"
                         valor={paciente.informante}
@@ -111,17 +117,17 @@ export default function Identificacao(){
                     <Text style={styles.normal}>Dados da mãe:</Text>
                     <Input
                         legenda="Nome:"
-                        valor={paciente.mae.nome}
+                        valor={paciente.mae?.nome}
                         callback={newText => setPaciente({...paciente, mae: {...paciente.mae, nome: newText}})}
                     />
                     <Input
                         legenda="Data de nascimento:"
-                        valor={paciente.mae.nascimento}
+                        valor={paciente.mae?.nascimento}
                         callback={texto=>formatData(texto, 'mae', 'nascimento')}
                     />
                     <Input
                         legenda="Profissão:"
-                        valor={paciente.mae.profissao}
+                        valor={paciente.mae?.profissao}
                         callback={newText => setPaciente({...paciente, mae: {...paciente.mae, profissao: newText}})}
                     />
                 </View>
@@ -130,17 +136,17 @@ export default function Identificacao(){
                     <Text style={styles.normal}>Dados do pai:</Text>
                     <Input
                         legenda="Nome:"
-                        valor={paciente.pai.nome}
+                        valor={paciente.pai?.nome}
                         callback={newText => setPaciente({...paciente, pai: {...paciente.pai, nome: newText}})}
                     />
                     <Input
                         legenda="Data de nascimento:"
-                        valor={paciente.pai.nascimento}
+                        valor={paciente.pai?.nascimento}
                         callback={texto=>formatData(texto, 'pai', 'nascimento')}
                     />
                     <Input
                         legenda="Profissão:"
-                        valor={paciente.pai.profissao}
+                        valor={paciente.pai?.profissao}
                         callback={newText => setPaciente({...paciente, pai: {...paciente.pai, profissao: newText}})}
                     />
                 </View>
@@ -148,12 +154,12 @@ export default function Identificacao(){
                 <View style={[styles.inputArea, {gap: 7}]}>
                     <Text style={styles.normal}>Estado civil dos pais</Text>
                     <Seletor
-                        selecionado={paciente.pais.estadoCivil}
+                        selecionado={paciente.pais?.estadoCivil}
                         aoMudar={value=>setPaciente({...paciente, pais: {...paciente.pais, estadoCivil: value}})}
                         lista={listaEstadoCivil}
                     />
 
-                    {(paciente.pais.estadoCivil === 'separados' || paciente.pais.estadoCivil === 'divorciados') &&
+                    {(paciente.pais?.estadoCivil === 'separados' || paciente.pais?.estadoCivil === 'divorciados') &&
                     <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
                         <Input
                             titulo='Que idade a criança tinha quando os pais se separaram?'
@@ -168,17 +174,17 @@ export default function Identificacao(){
                             lista={guarda}
                         />
                         {paciente.guardiao !== 'outro'
-                        ? <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
+                        ? <>
                             <Input
                                 titulo='Qual o nome do conjuge do guardião?'
                                 valor={paciente.padrastoMadrasta}
                                 callback={newText => setPaciente({...paciente, padrastoMadrasta: newText})}
                             />
-                        </View>
-                        : <View style={[styles.inputArea, {gap: 7, width: '100%'}]}>
+                        </>
+                        : <View style={{gap: 7, width: '100%'}}>
                             <Input
                                 titulo='Qual o motivo?'
-                                valor={paciente.outroGuardiao.motivo}
+                                valor={paciente.outroGuardiao?.motivo}
                                 callback={newText=>setPaciente({...paciente, outroGuardiao: {...paciente.outroGuardiao, motivo: newText}})}
                             />
                             <Text style={styles.normal}>Quem possui a guarda legal?</Text>
@@ -188,7 +194,7 @@ export default function Identificacao(){
                                 lista={listaGuardiaoLegal}
                             />
                             <Input
-                                valor={paciente.outroGuardiao.nome}
+                                valor={paciente.outroGuardiao?.nome}
                                 legenda='Nome'
                                 callback={newText=>setPaciente({...paciente, guardiao: {...paciente.guardiao, nome: newText}})}
                             />

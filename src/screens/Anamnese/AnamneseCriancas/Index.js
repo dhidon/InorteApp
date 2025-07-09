@@ -92,22 +92,22 @@ export default function AnamneseCriancas(){
                     <View style={[styles.inputArea, {gap: 7}]}>
                         <Input
                             titulo='APGAR'
-                            valor={paciente.apgar.primeiroMinuto}
+                            valor={paciente.apgar?.primeiroMinuto}
                             legenda='1º minuto'
                             callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, primeiroMinuto: newText}})}
                         />
                         <Input
-                            valor={paciente.apgar.quintoMinuto}
+                            valor={paciente.apgar?.quintoMinuto}
                             legenda='5º minuto'
                             callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, quintoMinuto: newText}})}
                         />
                         <Input
-                            valor={paciente.apgar.peso}
+                            valor={paciente.apgar?.peso}
                             legenda='Peso'
                             callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, peso: newText}})}
                         />
                         <Input
-                            valor={paciente.apgar.comprimento}
+                            valor={paciente.apgar?.comprimento}
                             legenda='Comprimento'
                             callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, comprimento: newText}})}
                         />
@@ -628,7 +628,7 @@ export default function AnamneseCriancas(){
                     <View style={styles.inputArea}>
                         <Text style={styles.normal}>Frequenta a escola?</Text>
                         <Seletor
-                            selecionado={paciente.frequentaEscola}
+                            selecionado={paciente.escola?.frequenta}
                             aoMudar={value=>setPaciente({...paciente, frequentaEscola: value})}
                             lista={simOuNao}
                         />
@@ -636,24 +636,24 @@ export default function AnamneseCriancas(){
                         <View>
                             <Input
                                 titulo='Qual o nome da escola?'
-                                valor={paciente.nomeEscola}
+                                valor={paciente.escola?.nome}
                                 callback={newText=>setPaciente({...paciente, nomeEscola: newText})}
                             />
                         </View>}
                         <Text styel={styles.normal}>Faz AEE?</Text>
                         <Seletor
-                            selecionado={paciente.fazAee}
+                            selecionado={paciente.escola?.aee}
                             aoMudar={value=>setPaciente({...paciente, fazAee: value})}
                             lista={simOuNao}
                         />
                         <Input
                             titulo='Qual a série do paciente?'
-                            valor={paciente.serieEscola}
+                            valor={paciente.escola?.serie}
                             callback={newText=>setPaciente({...paciente, serieEscola: newText})}
                         />
                         <Input
                             titulo='Qual o turno?'
-                            valor={paciente.turnoEscola}
+                            valor={paciente.escola?.turno}
                             callback={newText=>setPaciente({...paciente, turnoEscola: newText})}
                         />
                         <Text>Apresenta dificuldade na aprendizagem?</Text>

@@ -9,58 +9,9 @@ export const AnamneseContext = createContext()
 export default function AnamneseProvider({ children }){
     const navigation = useNavigation()
     const [paciente, setPaciente] = useState({
-        data: '',
-        nome: '',
-        sus: '',
-        nascimento: '',
-        apgar:{
-            primeiroMinuto:'',
-            quintoMinuto:'',
-            peso:'',
-            comprimento:''
-        },
-        endereco:{
-            ruaN: '',
-            bairro:'',
-            cidadeUf: ''
-        },
-        informante:'',
-        mae:{
-            nome:'',
-            nascimento:'',
-            profissao:''
-        },
-        pai:{
-            nome:'',
-            nascimento:'',
-            profissao:''
-        },
-        pais:{
-            estadoCivil:''
-        },
-        outroGuardiao:{
-            motivo:'',
-            nome:''
-        },
-        condicoes: condicoes,
-        escola:{
-            frequenta: '',
-            nome: '',
-            aee: '',
-            serie: '',
-            turno: ''
-        }
+        condicoes: condicoes
     })
-
-    useEffect(()=>{
-        function idadeHoje(){
-            const dataHoje = new Date()
-            console.log('Essa é a data de hoje:', dataHoje)
-        }
-
-        idadeHoje()
-    }, [paciente])
-
+    
     const [profissionais, setProfissionais] = useState({})
 
     const formatarData = (texto, callback, key) => {
@@ -95,47 +46,7 @@ export default function AnamneseProvider({ children }){
             const docRef = await addDoc(collection(db, "pacientes"), data)
             console.log('Documento gravado com o ID:', docRef.id)
             setPaciente({
-                data: '',
-                nome: '',
-                sus: '',
-                nascimento: '',
-                apgar:{
-                    primeiroMinuto:'',
-                    quintoMinuto:'',
-                    peso:'',
-                    comprimento:''
-                },
-                endereco:{
-                    ruaN: '',
-                    bairro:'',
-                    cidadeUf: ''
-                },
-                informante:'',
-                mae:{
-                    nome:'',
-                    nascimento:'',
-                    profissao:''
-                },
-                pai:{
-                    nome:'',
-                    nascimento:'',
-                    profissao:''
-                },
-                pais:{
-                    estadoCivil:''
-                },
-                outroGuardiao:{
-                    motivo:'',
-                    nome:''
-                },
-                condicoes: condicoes,
-                escola:{
-                    frequenta: '',
-                    nome: '',
-                    aee: '',
-                    serie: '',
-                    turno: ''
-                }
+                condicoes: condicoes
             })
             navigation.navigate('Home')
         } catch (error) {

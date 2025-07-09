@@ -122,7 +122,7 @@ export default function AnmenseAdolescentes(){
                         />
 
                         <Text style={styles.normal}>Com qual idade foi feita a introdução alimentar?</Text>
-                            <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 15}}>
+                            <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 15, gap: 15}}>
                                 <Slider
                                     minimumValue={0}
                                     maximumValue={10}
@@ -226,7 +226,7 @@ export default function AnmenseAdolescentes(){
 
                     <View style={styles.inputArea}>
                         <ListaAlternativas
-                            titulo='Pressione as condições que e doenças que o paciente já teve'
+                            titulo='Pressione as condições e doenças que o paciente já teve'
                             lista={condicoesFilho}
                             chave='condicoesFilho'
                         />
@@ -243,7 +243,7 @@ export default function AnmenseAdolescentes(){
                             aoMudar={value=>setPaciente({...paciente, usoMedicacao: value})}
                         />
                         {paciente.usoMedicacao === 'sim' &&
-                        <View style={[styles.inputArea, {width: '100%', gap: 7}]}>
+                        <View style={{width: '100%', gap: 7, marginTop: 7}}>
                             <TextInput
                                 style={styles.input}
                                 value={paciente.qualMedicacao}
@@ -366,9 +366,11 @@ export default function AnmenseAdolescentes(){
                             valor={paciente.atividadesFavoritas}
                             callback={newText=>setPaciente({...paciente, atividadesFavoritas: newText})}
                         />
+                    </View>
 
                         <Text style={styles.titulo}>Comportamento</Text>
 
+                    <View style={styles.inputArea}>
                         <ListaAlternativas
                             titulo='Marque as opções que descrevam comportamentos apresentados pelo paciente'
                             lista={comportamento}
@@ -463,7 +465,7 @@ export default function AnmenseAdolescentes(){
 
                         <Text style={styles.normal}>Frequenta a escola?</Text>
                         <Seletor
-                            selecionado={paciente.escola.frequenta}
+                            selecionado={paciente.escola?.frequenta}
                             aoMudar={value=>setPaciente({...paciente, escola: {...paciente.escola, frequenta: value}})}
                             lista={simOuNao}
                         />
@@ -471,25 +473,25 @@ export default function AnmenseAdolescentes(){
                         {paciente.escola.frequenta === 'sim' && (
                             <Input
                                 titulo='Qual o nome da escola?'
-                                valor={paciente.escola.nome}
+                                valor={paciente.escola?.nome}
                                 callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, nome: newText}})}
                             />
                         )}
                         <Text style={styles.normal}>Faz AEE?</Text>
                         <Seletor
-                            selecionado={paciente.escola.aee}
+                            selecionado={paciente.escola?.aee}
                             aoMudar={value=>setPaciente({...paciente, escola: {...paciente.escola, aee: value}})}
                             lista={simOuNao}
                         />
                         <Input
                             titulo='Qual a série?'
-                            valor={paciente.escola.serie}
-                            callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, aee: newText}})}
+                            valor={paciente.escola?.serie}
+                            callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, serie: newText}})}
                         />
                         <Input
                             titulo='Qual o turno?'
-                            valor={paciente.escola.turno}
-                            callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, turno: ''}})}
+                            valor={paciente.escola?.turno}
+                            callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, turno: newText}})}
                         />
                         <Input
                             titulo='Apresenta dificuldade na aprendizagem?'

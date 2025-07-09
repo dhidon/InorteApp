@@ -17,7 +17,7 @@ export default function Sintomas(){
                 <Input
                     titulo="Qual o principal motivo do paciente estar realizando esta avaliação?"
                     valor={paciente.motivoAvaliacao}
-                    callback={newText=>setPaciente({...paciente, motivo: newText})}
+                    callback={newText=>setPaciente({...paciente, motivoAvaliacao: newText})}
                 />
                 <Input
                     titulo="Que profissionais estão fazendo o acompanhamento?"
@@ -62,6 +62,7 @@ export default function Sintomas(){
                                         };
                                         setPaciente({ ...paciente, condicoes: newCondicoes });
                                     }}
+                                    onClick={e => e.stopPropagation()}
                                 />
                             }
                         </View>
