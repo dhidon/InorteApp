@@ -92,6 +92,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.white,
     ...platformStyles.container,
     marginTop: 35,
+    paddingBottom: 20
   },
 
   contentArea: {

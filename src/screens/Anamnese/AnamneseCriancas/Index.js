@@ -65,8 +65,8 @@ export default function AnamneseCriancas(){
                         />}
                         <Text>Fez uso de medicamentos durante a gestação?</Text>
                         <Seletor
-                            selecionado={paciente.medicamento}
-                            aoMudar={valor=>setPaciente({...paciente, medicamento: valor})}
+                            selecionado={paciente.medicamentoGestacao}
+                            aoMudar={valor=>setPaciente({...paciente, medicamentoGestacao: valor})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Qual foi o tipo de parto e por que?</Text>
@@ -77,7 +77,7 @@ export default function AnamneseCriancas(){
                         />
                         <View style={{height: 7}}></View>
                         <Input
-                            valor={paciente.motivoparto}
+                            valor={paciente.motivoParto}
                             legenda='Qual o motivo?'
                             callback={newText=>setPaciente({...paciente, motivoParto: newText})}
                         />
@@ -632,7 +632,7 @@ export default function AnamneseCriancas(){
                             aoMudar={value=>setPaciente({...paciente, frequentaEscola: value})}
                             lista={simOuNao}
                         />
-                        {paciente.frequentaEscola === 'sim' &&
+                        {paciente.escola?.frequenta === 'sim' &&
                         <View>
                             <Input
                                 titulo='Qual o nome da escola?'

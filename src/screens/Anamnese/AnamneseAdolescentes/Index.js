@@ -5,7 +5,7 @@ import Slider from '@react-native-community/slider'
 import { useNavigation } from '@react-navigation/native'
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
-import { habilidadesMotoras, comportamento, caracteristicasSociais, outrasDificuldades, nivelHabilidades, fatoresDif, simOuNao, consistenciasAceitas, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
+import { parto, habilidadesMotoras, comportamento, caracteristicasSociais, outrasDificuldades, nivelHabilidades, fatoresDif, simOuNao, consistenciasAceitas, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
 import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 import ListaAlternativas from '../../../components/ListaAlternativas'
@@ -82,6 +82,105 @@ export default function AnmenseAdolescentes(){
                         <Seletor
                             selecionado={paciente.prenatal}
                             aoMudar={value=>setPaciente({...paciente, prenatal: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Teve alguma intercorrência durante a gravidez?</Text>
+                        <Seletor
+                            selecionado={paciente.intercorrencia}
+                            aoMudar={value=>setPaciente({...paciente, intercorrencia: value})}
+                            lista={simOuNao}
+                        />
+                        {paciente.intercorrencia === 'sim' && (
+                            <Input
+                                titulo='Qual?'
+                                valor={paciente.qualIntercorrencia}
+                                callback={newText=>setPaciente({...paciente, qualIntercorrencia: newText})}
+                            />
+                        )}
+                        <Text style={styles.normal}>Fez uso de medicamentos durante a gestação?</Text>
+                        <Seletor
+                            selecionado={paciente.medicamentoGestacao}
+                            aoMudar={value=>setPaciente({...paciente, medicamentoGestacao: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Qual foi o tipo de parto e por que?</Text>
+                        <Seletor
+                            selecionado={paciente.tipoParto}
+                            aoMudar={valor=>setPaciente({...paciente, tipoParto: valor})}
+                            lista={parto}
+                        />
+                        <View style={{height: 7}}></View>
+                        <Input
+                            valor={paciente.motivoParto}
+                            legenda='Qual o motivo?'
+                            callback={newText=>setPaciente({...paciente, motivoParto: newText})}
+                        />
+                        <Input
+                            titulo='A criança nasceu com quantas semanas?'
+                            valor={paciente.nasceuSemanas}
+                            callback={newText=>setPaciente({...paciente, nasceuSemanas: newText})}
+                        />
+                    </View>
+
+                    <View style={[styles.inputArea, {gap: 7}]}>
+                        <Input
+                            titulo='APGAR'
+                            valor={paciente.apgar?.primeiroMinuto}
+                            legenda='1º minuto'
+                            callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, primeiroMinuto: newText}})}
+                        />
+                        <Input
+                            valor={paciente.apgar?.quintoMinuto}
+                            legenda='5º minuto'
+                            callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, quintoMinuto: newText}})}
+                        />
+                        <Input
+                            valor={paciente.apgar?.peso}
+                            legenda='Peso'
+                            callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, peso: newText}})}
+                        />
+                        <Input
+                            valor={paciente.apgar?.comprimento}
+                            legenda='Comprimento'
+                            callback={newText=>setPaciente({...paciente, apgar: {...paciente.apgar, comprimento: newText}})}
+                        />
+                    </View>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Houve algum problema com o bebê logo que nasceu?</Text>
+                        <Seletor
+                            selecionado={paciente.problemaNacimento}
+                            aoMudar={valor=>setPaciente({...paciente, problemaNascimento: valor})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>O bebê precisou de oxigênio?</Text>
+                        <Seletor
+                            selecionado={paciente.oxigenio}
+                            aoMudar={valor=>setPaciente({...paciente, oxigenio: valor})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Nasceu cianótico?</Text>
+                        <Seletor
+                            selecionado={paciente.cianotico}
+                            aoMudar={valor=>setPaciente({...paciente, cianotico: valor})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>O bebê chorou logo?</Text>
+                        <Seletor
+                            selecionado={paciente.chorou}
+                            aoMudar={valor=>setPaciente({...paciente, chorou: valor})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>O bebê apresentava sinais de icterícia?</Text>
+                        <Seletor
+                            selecionado={paciente.ictericia}
+                            aoMudar={valor=>setPaciente({...paciente, ictericia: valor})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Precisou fazer fototerapia?</Text>
+                        <Seletor
+                            selecionado={paciente.fototerapia}
+                            aoMudar={valor=>setPaciente({...paciente, fototerapia: valor})}
                             lista={simOuNao}
                         />
                     </View>
@@ -470,7 +569,7 @@ export default function AnmenseAdolescentes(){
                             lista={simOuNao}
                         />
 
-                        {paciente.escola.frequenta === 'sim' && (
+                        {paciente.escola?.frequenta === 'sim' && (
                             <Input
                                 titulo='Qual o nome da escola?'
                                 valor={paciente.escola?.nome}
