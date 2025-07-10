@@ -79,7 +79,12 @@ export default function RelatorioCriancas({data}){
 
             {data.itensSignificantes.some(item=> item.value === 'sim') && <ListaCondicoes lista={data.itensSignificantes} titulo='Os itens a seguir estão presentes com significância no desenvolvimento do paciente'/>}
 
-            
+            <RelText campo='Apresenta manipulação de objetos com os dedos' data={data.manipObjDedos}/>
+            {data.praticaEsporte === 'sim' ? <RelText campo='O paciente pratica' data={data.esporte}/> : <Text style={{fontWeight: 'bold'}}>O paciente não pratica esporte</Text>}
+            <View style={{flexDirection: 'row', gap: 5}}>
+                <RelText campo='Pratica autoagressão' data={data.autoagressao}/>
+                <RelText campo='Pratica heteroagressão' data={data.heteroagressao}/>
+            </View>
         </View>
     )
 }

@@ -321,8 +321,8 @@ export default function AnamneseCriancas(){
                         />}
                         <Text style={styles.normal}>Pratica autoagressão?</Text>
                         <Seletor
-                            selecionado={paciente.autoAgressao}
-                            aoMudar={value=>setPaciente({...paciente, autoAgressao: value})}
+                            selecionado={paciente.autoagressao}
+                            aoMudar={value=>setPaciente({...paciente, autoagressao: value})}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Pratica heteroagressão?</Text>
