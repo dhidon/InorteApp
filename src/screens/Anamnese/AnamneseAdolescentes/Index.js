@@ -338,27 +338,27 @@ export default function AnmenseAdolescentes(){
                         <Text style={styles.normal}>Faz uso de alguma medicação?</Text>
                         <Seletor
                             lista={simOuNao}
-                            selecionado={paciente.usoMedicacao}
-                            aoMudar={value=>setPaciente({...paciente, usoMedicacao: value})}
+                            selecionado={paciente.medicacao?.usa}
+                            aoMudar={value=>setPaciente({...paciente, medicacao: {...medicacao, usa: value}})}
                         />
-                        {paciente.usoMedicacao === 'sim' &&
+                        {paciente.medicacao?.usa === 'sim' &&
                         <View style={{width: '100%', gap: 7, marginTop: 7}}>
                             <TextInput
                                 style={styles.input}
-                                value={paciente.qualMedicacao}
-                                onChangeText={newText=>setPaciente({...paciente, qualMedicacao: newText})}
+                                value={paciente.medicacao?.nome}
+                                onChangeText={newText=>setPaciente({...paciente, medicacao: {...medicacao, nome: newText}})}
                                 placeholder='Qual o nome da medicação que o paciente está tomando?'
                             />
                             <TextInput
                                 style={styles.input}
-                                value={paciente.motivoMedicacao}
-                                onChangeText={newText=>setPaciente({...paciente, motivoMedicacao: newText})}
+                                value={paciente.medicacao?.motivo}
+                                onChangeText={newText=>setPaciente({...paciente, medicacao: {...medicacao, motivo: newText}})}
                                 placeholder='Qual o motivo do uso desta medicação?'
                             />
                             <TextInput
                                 style={styles.input}
-                                value={paciente.quemReceitou}
-                                onChangeText={newText=>setPaciente({...paciente, quemReceitou: newText})}
+                                value={paciente.medicacao?.receitou}
+                                onChangeText={newText=>setPaciente({...paciente, medicacao: {...medicacao, receitou: newText}})}
                                 placeholder='Quem receitou esta medicação para o paciente?'
                             />
                         </View>
@@ -478,9 +478,15 @@ export default function AnmenseAdolescentes(){
 
                         <Text style={styles.normal}>Seu filho tem problema com limites?</Text>
                         <Seletor
-                            selecionado={paciente.probLimiteSelecionado}
+                            selecionado={paciente.probLimites}
                             lista={simOuNao}
-                            aoMudar={value=>setPaciente({...paciente, probLimiteSelecionado: value})}
+                            aoMudar={value=>setPaciente({...paciente, probLimites: value})}
+                        />
+                        <Text style={styles.normal}>O paciente costuma cumprir o que lhe é solicitado ou pedido?</Text>
+                        <Seletor
+                            selecionado={paciente.cumprePedidos}
+                            lista={simOuNao}
+                            aoMudar={value=>setPaciente({...paciente, cumprePedidos: value})}
                         />
                         <Input
                             titulo='Quais as estratégias mais bem sucedidas que você usa com seu filho e que dão certo?'
@@ -511,6 +517,12 @@ export default function AnmenseAdolescentes(){
                             selecionado={paciente.contatoVisual}
                             aoMudar={value=>setPaciente({...paciente, contatoVisual: value})}
                             lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Inclina a cabeça para olhar?</Text>
+                        <Seletor
+                            selecionado={paciente.inclinaCabeca}
+                            lista={simOuNao}
+                            aoMudar={value=>setPaciente({...paciente, inclinaCabeca: value})}
                         />
                         <Text style={styles.normal}>Aproxima objetos dos olhos?</Text>
                         <Seletor

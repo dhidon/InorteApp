@@ -6,6 +6,7 @@ import { styles } from "../../../styles/Styles";
 import Header from "../../../components/Header";
 import RelatorioAdolescentes from "../../../constants/relatorioAdolescentes";
 import RelatorioCriancas from "../../../constants/relatorioCriancas";
+import RelText from "../../../components/RelText";
 
 export default function Paciente(){
     const route = useRoute()
@@ -15,49 +16,67 @@ export default function Paciente(){
         <View style={styles.container}>
             <Header setor={data.nome}/>
             <ScrollView >
-                <View style={[styles.contentArea, {marginHorizontal: 20}]}>
-                    <Text style={{flexWrap: 'wrap', lineHeight: 22}}>
-                        <Text style={{fontWeight: 'bold'}}>Data do registro:</Text> {data.data} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Grupo do paciente:</Text> {data.grupo} {'\n'}
-                        {"\n"}
-                        <Text style={styles.titulo}>1 - Dados de Identificação {"\n"}</Text>
-                        {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Nome:</Text> {data.nome} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Nascimento: </Text>{data.nascimento} - <Text style={{fontWeight: 'bold'}}>Idade: </Text>{data.idade} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Nº do SUS: </Text>{data.sus} {'\n'}
-                        <Text style={{fontWeight: 'bold'}}>Endereço:</Text> {data.endereco?.ruaN}, <Text style={{fontWeight: 'bold'}}>Bairro: </Text>{data.endereco?.bairro}, {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>CEP: </Text>{data.endereco?.cep} - <Text style={{fontWeight: 'bold'}}>Cidade / UF: </Text>{data.endereco?.cidadeUf} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Contato: </Text>{data.contato}, <Text style={{fontWeight: 'bold'}}>Informante: </Text>{data.informante} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Nome da mãe:</Text> {data.mae?.nome}, <Text style={{fontWeight: 'bold'}}>Nascimento: </Text>{data.mae?.nascimento} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Profissão: </Text>{data.mae?.profissao} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Nome do pai: </Text>{data.pai?.nome}, <Text style={{fontWeight: 'bold'}}>Nascimento: </Text>{data.pai?.nascimento}{"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Profissão: </Text>{data.pai?.profissao}{"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Estado civil dos pais: </Text>{data.pais?.estadoCivil}{"\n"}
-                        {data.pais?.estadoCivil === 'separados' || data.pais?.estadoCivil === 'divorciados'
-                            ? `A criança tinha ${data.idadeSeparacao} anos quando os pais se separaram.\n`
-                            : ''}
-                        <Text style={{fontWeight: 'bold'}}>Guardião legal:</Text> {data.guardiao} - <Text style={{fontWeight: 'bold'}}>Nome do padrasto/madrasta:</Text> {data.padrastoMadrasta} {"\n"}
-                    
+                <View style={[styles.contentArea, {marginHorizontal: 20, alignItems: ''}]}>
+                    <RelText campo='Data do registro' data={data.data}/>
+                    <RelText campo='Grupo do paciente' data={data.grupo}/>
 
-                        {data.guardiao === 'outro' && (
-                            <Text>
-                                <Text style={{fontWeight: 'bold'}}>O guardião legal se chama:</Text> {data.outroGuardiao?.nome}
-                                <Text style={{fontWeight: 'bold'}}>O paciente mora com esse guardião pois:</Text> {data.outroGuardiao?.motivo}
-                            </Text>
-                        )}
-
-                        {'\n'}
-                        <Text style={{fontWeight: 'bold'}}>2 - Sintomas</Text> {'\n'}
-                        {'\n'}
-                        <Text style={{fontWeight: 'bold'}}>Queixa Principal:</Text> {data.motivoAvaliacao} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Profissionais que o acompanham:</Text> {data.profissionais} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Quem convive com o adolescente e com quem passa mais tempo:</Text> {data.convive} {"\n"}
-                        <Text style={{fontWeight: 'bold'}}>Condições ou doenças que parentes próximos já tiveram:</Text> {'\n'}
+                    <Text style={styles.titulo}>1 - Dados de Identificação</Text>
                         
+                    <View style={{flexDirection: 'row', gap: 5}}>
+                        <RelText campo='Nome' data={data.nome}/>
+                        <RelText campo='Nascimento' data={data.nascimento}/>
+                        <RelText campo='Idade' data={data.idade}/>
+                    </View>
+                    <RelText campo='Nº do SUS' data={data.sus}/>
+                    <View style={{flexDirection: 'row', gap: 5}}>
+                        <RelText campo="Endereço" data={data.endereco?.ruaN}/>
+                        <RelText campo="Bairro" data={data.endereco?.bairro}/>
+                    </View>
+                    <View style={{flexDirection: 'row', gap: 5}}>
+                        <RelText campo="CEP" data={data.endereco?.cep}/>
+                        <RelText campo="Cidade / UF" data={data.endereco?.cidadeUf}/>
+                    </View>
+                    <View style={{flexDirection: 'row', gap: 5}}>
+                        <RelText campo="Contato" data={data.contato}/>
+                        <RelText campo="Informante" data={data.informante}/>
+                    </View>
+                    <View style={{flexDirection: 'row', gap: 5}}>
+                        <RelText campo="Nome da mãe" data={data.mae?.nome}/>
+                        <RelText campo="Nascimento" data={data.mae?.nascimento}/>
+                        <RelText campo="Profissão" data={data.mae?.profissao}/>
+                    </View>
+                    <View style={{flexDirection: 'row', gap: 5}}>
+                        <RelText campo="Nome do pai" data={data.pai?.nome}/>
+                        <RelText campo="Nascimento" data={data.pai?.nascimento}/>
+                        <RelText campo="Profissão" data={data.pai?.profissao}/>
+                    </View>
+                    <RelText campo="Estado civil dos pais" data={data.pais?.estadoCivil}/>
+                    {data.pais?.estadoCivil === 'separados' || data.pais?.estadoCivil === 'divorciados'
+                        ? <Text>A criança tinha {data.idadeSeparacao} anos quando os pais se separaram</Text>
+                        : ''}
+                    <View style={{flexDirection: 'row', gap: 5}}>
+                        <RelText campo='Giardião legal' data={data.guardiao}/>
+                        <RelText campo='Nome do padrasto/madrasta' data={data.padrastoMadrasta}/>
+                    </View>                
+
+                    {data.guardiao === 'outro' && (
+                        <View>
+                            <RelText campo='O guardião legal se chama' data={data.outroGuardiao?.nome}/>
+                            <RelText campo='O paciente mora com esse guardião pois' data={data.outroGuardiao?.motivo}/>
+                        </View>
+                    )}
+
+                    <Text style={styles.titulo}>2 - Sintomas</Text>
+
+                    <RelText campo="Queixa Principal" data={data.motivoAvaliacao} />
+                    <RelText campo="Profissionais que o acompanham" data={data.profissionais} />
+                    <RelText campo="Quem convive com o adolescente e com quem passa mais tempo" data={data.convive} />
+                    <RelText campo="Condições ou doenças que parentes próximos já tiveram"/>
+                    <View>
                         {data.condicoes.map((item, index)=>{
                             if(item.value === 'sim'){
                                 return (
-                                    <View key={index} style={{alignItems: 'space-between'}}>
+                                    <View key={index}>
                                         <Text>
                                             <Text style={{fontWeight: 'bold'}}>Condição: </Text>{item.label} - <Text style={{fontWeight: 'bold'}}>Parentesco: </Text>{item.parentesco}
                                         </Text>
@@ -65,10 +84,11 @@ export default function Paciente(){
                                 )
                             }
                         })}
+                    </View>
 
-                        {data.grupo === 'criança' ? <RelatorioCriancas data={data}/> : <RelatorioAdolescentes data={data}/>}
+                    {data.grupo === 'criança' ? <RelatorioCriancas data={data}/> : <RelatorioAdolescentes data={data}/>}
 
-                    </Text>
+                    
                 </View>
             </ScrollView>
         </View>

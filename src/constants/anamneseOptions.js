@@ -152,10 +152,10 @@ export const fatoresDif = [
 
 export const nivelHabilidades = [
     {label: '---', value: null},
-    {label: 'Acima da média', value: 'acimaMedia'},
-    {label: 'Na média', value: 'naMedia'},
-    {label: 'Abaixo da média', value: 'abaixoMedia'},
-    {label: 'Dificuldades severas', value: 'difSeveras'}
+    {label: 'Acima da média', value: 'Acima da média'},
+    {label: 'Na média', value: 'Na média'},
+    {label: 'Abaixo da média', value: 'Abaixo da média'},
+    {label: 'Dificuldades severas', value: 'Dificuldades severas'}
 ]
 
 export const outrasDificuldades = [
