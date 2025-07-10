@@ -190,13 +190,14 @@ export default function Identificacao(){
                             <Text style={styles.normal}>Quem possui a guarda legal?</Text>
                             <Seletor
                                 selecionado={paciente.guardiaoLegal}
-                                aoMudar={value=>setPaciente({...paciente, guardiaoLegalSelecionado: value})}
+                                aoMudar={value=>setPaciente({...paciente, guardiaoLegal: value})}
                                 lista={listaGuardiaoLegal}
                             />
                             <Input
                                 valor={paciente.outroGuardiao?.nome}
                                 legenda='Nome'
-                                callback={newText=>setPaciente({...paciente, guardiao: {...paciente.guardiao, nome: newText}})}
+                                callback={newText=>setPaciente({...paciente, outroGuardiao: {...paciente.outroGuardiao, nome: newText}})}
+                                onClick={e => e.stopPropagation()}
                             />
                         </View>}
                     </View> 

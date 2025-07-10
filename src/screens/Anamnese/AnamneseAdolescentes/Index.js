@@ -339,26 +339,26 @@ export default function AnmenseAdolescentes(){
                         <Seletor
                             lista={simOuNao}
                             selecionado={paciente.medicacao?.usa}
-                            aoMudar={value=>setPaciente({...paciente, medicacao: {...medicacao, usa: value}})}
+                            aoMudar={value=>setPaciente({...paciente, medicacao: {...paciente.medicacao, usa: value}})}
                         />
                         {paciente.medicacao?.usa === 'sim' &&
                         <View style={{width: '100%', gap: 7, marginTop: 7}}>
                             <TextInput
                                 style={styles.input}
                                 value={paciente.medicacao?.nome}
-                                onChangeText={newText=>setPaciente({...paciente, medicacao: {...medicacao, nome: newText}})}
+                                onChangeText={newText=>setPaciente({...paciente, medicacao: {...paciente.medicacao, nome: newText}})}
                                 placeholder='Qual o nome da medicação que o paciente está tomando?'
                             />
                             <TextInput
                                 style={styles.input}
                                 value={paciente.medicacao?.motivo}
-                                onChangeText={newText=>setPaciente({...paciente, medicacao: {...medicacao, motivo: newText}})}
+                                onChangeText={newText=>setPaciente({...paciente, medicacao: {...paciente.medicacao, motivo: newText}})}
                                 placeholder='Qual o motivo do uso desta medicação?'
                             />
                             <TextInput
                                 style={styles.input}
                                 value={paciente.medicacao?.receitou}
-                                onChangeText={newText=>setPaciente({...paciente, medicacao: {...medicacao, receitou: newText}})}
+                                onChangeText={newText=>setPaciente({...paciente, medicacao: {...paciente.medicacao, receitou: newText}})}
                                 placeholder='Quem receitou esta medicação para o paciente?'
                             />
                         </View>

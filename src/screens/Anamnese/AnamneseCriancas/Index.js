@@ -63,7 +63,7 @@ export default function AnamneseCriancas(){
                             valor={paciente.qualIntercorrencia}
                             callback={newText=>setPaciente({...paciente, qualIntercorrencia: newText})}
                         />}
-                        <Text>Fez uso de medicamentos durante a gestação?</Text>
+                        <Text style={styles.normal}>Fez uso de medicamentos durante a gestação?</Text>
                         <Seletor
                             selecionado={paciente.medicamentoGestacao}
                             aoMudar={valor=>setPaciente({...paciente, medicamentoGestacao: valor})}
@@ -232,7 +232,7 @@ export default function AnamneseCriancas(){
                         />
                     </View>
 
-                    <Text style={styles.titulo}>Sono e desenvolvimento</Text>
+                    <Text style={styles.titulo}>Sono</Text>
 
                     <View style={styles.inputArea}>
                     <Input
@@ -269,18 +269,33 @@ export default function AnamneseCriancas(){
                         <Input
                             titulo='Com qual idade passou a sentar sem apoio?'
                             valor={paciente.sentouSemApoio}
-                            chave='sentouSemApoio'
+                            callback={newText=>setPaciente({...paciente, sentouSemApoio: newText})}
                         />
                         <Input
                             titulo='Com qual idade ele engatinhou?'
                             valor={paciente.engatinhou}
-                            chave='engatinhou'
+                            callback={newText=>setPaciente({...paciente, engatinhou: newText})}
                         />
                         <Input
                             titulo='Com qual idade começou a andar sem suporte'
                             valor={paciente.andouSemSuporte}
-                            chave='andouSemSuporte'
+                            callback={newText=>setPaciente({...paciente, andouSemSuporte: newText})}
                         />                    
+
+                        <Text style={styles.normal}>As respostas a seguir devem levar em consideração o estado atual do paciente</Text>
+
+                        <Text style={styles.normal}>Apresenta controle dos esfincteres?</Text>
+                        <Seletor
+                            selecionado={paciente.controlaEsfincter}
+                            aoMudar={value=>setPaciente({...paciente, controlaEsfincter: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Usa fraldas</Text>
+                        <Seletor
+                            selecionado={paciente.fraldas}
+                            aoMudar={value=>setPaciente({...paciente, fraldas: value})}
+                            lista={simOuNao}
+                        />
                         <ListaAlternativas
                             titulo='Dentre os itens a seguir, pressione aqueles que estiveram presentes (com grau de significância) durante a infância nos primeiros anos de vida'
                             lista={itensSignificantes}
@@ -398,7 +413,7 @@ export default function AnamneseCriancas(){
                         <Seletor
                             selecionado={paciente.atrapalhaComHigiene}
                             aoMudar={value=>setPaciente({...paciente, atrapalhaComHigiene: value})}
-                            lista={difAutocuidado}
+                            lista={simOuNao}
                         />
                         <Text style={styles.normal}>Veste-se sozinho?</Text>
                         <Seletor
@@ -517,23 +532,29 @@ export default function AnamneseCriancas(){
                             aoMudar={value=>setPaciente({...paciente, excessivaDesinibicao: value})}
                             lista={difSociabilidadeAfetividade}
                         />
+                    </View>
 
-                        <Text style={styles.normal}>Comportamento de apego</Text>
-                        {comportApego.map((item, index)=>{
-                            return (
-                                <View key={index}>
-                                    <Text>{item.label}</Text>
-                                    <Seletor
-                                        selecionado={item.value}
-                                        aoMudar={valor=>{
-                                            const newComportApego = [...paciente.comportApego]
-                                            newComportApego[index].value = valor
-                                            setPaciente({...paciente, comportApego: newComportApego})
-                                        }}
-                                        lista={difSociabilidadeAfetividade}
-                                    />
-                                </View>)
-                        })}
+                    <Text style={styles.titulo}>Comportamento de apego</Text>
+
+                    <View style={styles.inputArea}>
+                        <Text style={styles.normal}>Demonstra preocupação quando separado dos pais?</Text>
+                        <Seletor
+                            selecionado={paciente.preocupSeparaPais}
+                            aoMudar={value=>setPaciente({...paciente, preocupSeparaPais: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Sorri ou mostra excitação com o retorno dos pais</Text>
+                        <Seletor
+                            selecionado={paciente.excitRetornoPais}
+                            aoMudar={value=>setPaciente({...paciente, excitRetornoPais: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Busca a ajuda dos pais quando machucado</Text>
+                        <Seletor
+                            selecionado={paciente.ajudaPais}
+                            aoMudar={value=>setPaciente({...paciente, ajudaPais: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
                     </View>
 
                     <Text style={styles.titulo}>Brincadeira</Text>
@@ -617,7 +638,7 @@ export default function AnamneseCriancas(){
                             chave='comportRepetitivos'
                         />
                         <Input
-                            titulo='Medos (relacionar medos discrepantes com a etapa evolutiva-frequÊncia, intensidade, grau de interferÊncia em outras atividades da família, facilidade com que é acalmado /distraído):'
+                            titulo='Medos (relacionar medos discrepantes com a etapa evolutiva-frequência, intensidade, grau de interferÊncia em outras atividades da família, facilidade com que é acalmado /distraído):'
                             valor={paciente.medos}
                             callback={newText=>setPaciente({...paciente, medos: newText})}
                         />

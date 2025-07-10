@@ -15,7 +15,7 @@ export default function Seletor({selecionado, aoMudar, lista}) {
                     mode='dialog'
                 >
                     {lista.map((item, index) => {
-                        return <Picker.Item key={index} value={item.value} label={item.label} />
+                        return <Picker.Item key={index} value={item.label} label={item.label} />
                     })}
                 </Picker>
             </View>

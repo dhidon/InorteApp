@@ -16,7 +16,7 @@ export default function Paciente(){
         <View style={styles.container}>
             <Header setor={data.nome}/>
             <ScrollView >
-                <View style={[styles.contentArea, {marginHorizontal: 20, alignItems: ''}]}>
+                <View style={[styles.contentArea, {marginHorizontal: 20, alignItems: '', gap: 10}]}>
                     <RelText campo='Data do registro' data={data.data}/>
                     <RelText campo='Grupo do paciente' data={data.grupo}/>
 
