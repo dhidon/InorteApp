@@ -366,15 +366,39 @@ export default function AnamneseCriancas(){
                             chave='condDesenvolvAtuais'
                             titulo='Marque as alternativas a seguir se baseando no estado atual do paciente'
                         />
+                        <Text style={styles.normal}>Apresenta alguma dificuldade na articulação e pronúncia?</Text>
+                        <Seletor
+                            selecionado={paciente.difArtPronuncia}
+                            aoMudar={value=> setPaciente({...paciente, difArtPronuncia: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Apresenta dificuldade no rítmo e entonação de voz?</Text>
+                        <Seletor
+                            selecionado={paciente.difRitVoz}
+                            aoMudar={value=> setPaciente({...paciente, difRitVoz: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Repete a última palavra ou frase imediatamente ouvidoa?</Text>
+                        <Seletor
+                            selecionado={paciente.repeteFrase}
+                            aoMudar={value=> setPaciente({...paciente, repeteFrase: value})}
+                            lista={simOuNao}
+                        />
+                        <Text style={styles.normal}>Faz confusão entre pronomes (eu, tu, eles)?</Text>
+                        <Seletor
+                            selecionado={paciente.confusaoPron}
+                            aoMudar={value=> setPaciente({...paciente, confusaoPron: value})}
+                            lista={simOuNao}
+                        />
                         <Input
                             titulo='Descreva brevemente alguma dificuldade cognitiva que seu filho apresente'
                             valor={paciente.difCognitiva}
                             callback={newText=>setPaciente({...paciente, difCognitiva: newText})}
                         />
                         <Input
-                            titulo='Descreva brevemente alguma dificuldade motora que seu filho apresente'
-                            valor={paciente.difMotora}
-                            callback={newText=>setPaciente({...paciente, difMotora: newText})}
+                            titulo='Descreva brevemente alguma habilidade especial que o paciente apresente'
+                            valor={paciente.habEpecial}
+                            callback={newText=>setPaciente({...paciente, habEspecial: newText})}
                         />
                         <Input
                             titulo='Possui dificuldades na compreensão da linguagem?'
@@ -438,30 +462,60 @@ export default function AnamneseCriancas(){
                             aoMudar={value=>setPaciente({...paciente, sorrisoEspontaneoFamiliares: value})}
                             lista={difSociabilidadeAfetividade}
                         />
-                        <Text>Apresenta sorriso espontâneo a pessoas não familiares</Text>
+                        <Text style={styles.normal}>Apresenta sorriso espontâneo a pessoas não familiares</Text>
                         <Seletor
                             selecionado={paciente.sorrisoEspontaneoNaoFamiliares}
                             aoMudar={value=>setPaciente({...paciente, sorrisoEspontaneoNaoFamiliares: value})}
                             lista={difSociabilidadeAfetividade}
                         />
-                        <Text>Apresenta sorriso em resposta ao sorriso de outras pessoas?</Text>
+                        <Text style={styles.normal}>Apresenta sorriso em resposta ao sorriso de outras pessoas?</Text>
                         <Seletor
                             selecionado={paciente.sorrisoResposta}
                             aoMudar={value=>setPaciente({...paciente, sorrisoResposta: value})}
                             lista={difSociabilidadeAfetividade}
                         />
-                        <Text>Variação na expressão facial (contentamento, frustração, surpresa, constrangimento)</Text>
+                        <Text style={styles.normal}>Variação na expressão facial (contentamento, frustração, surpresa, constrangimento)</Text>
                         <Seletor
                             selecionado={paciente.variacaoExpressaoFacial}
                             aoMudar={value=>setPaciente({...paciente, variacaoExpressaoFacial: value})}
                             lista={difSociabilidadeAfetividade}
                         />
-                        <Text>Expressão emocional apropriada ao contexto</Text>
+                        <Text style={styles.normal}>Expressão emocional apropriada ao contexto</Text>
                         <Seletor
                             selecionado={paciente.exprEmocionalContexto}
                             aoMudar={value=>setPaciente({...paciente, exprEmocionalContexto: value})}
                             lista={difSociabilidadeAfetividade}
-                        />  
+                        />
+                        <Text style={styles.normal}>Compartilha atividades prazerosas com outras pessoas</Text>
+                        <Seletor
+                            selecionado={paciente.compartAtivPraz}
+                            aoMudar={value=>setPaciente({...paciente, compartAtivPraz: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Prefere ficar sozinho</Text>
+                        <Seletor
+                            selecionado={paciente.sozinho}
+                            aoMudar={value=>setPaciente({...paciente, sozinho: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Excessivamente quieto ou tímido</Text>
+                        <Seletor
+                            selecionado={paciente.excQuieto}
+                            aoMudar={value=>setPaciente({...paciente, excQuieto: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Mais interessado em objetos do que em pessoas</Text>
+                        <Seletor
+                            selecionado={paciente.interObjPess}
+                            aoMudar={value=>setPaciente({...paciente, interObjPess: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
+                        <Text style={styles.normal}>Demonstra preocupação se os pais estão tristes/doentes/machucados?</Text>
+                        <Seletor
+                            selecionado={paciente.preocupPais}
+                            aoMudar={value=>setPaciente({...paciente, preocupPais: value})}
+                            lista={difSociabilidadeAfetividade}
+                        />
                     </View>
 
                     <Text style={styles.titulo}>Atenção compartilhada</Text>

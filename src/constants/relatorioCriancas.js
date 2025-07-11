@@ -30,8 +30,6 @@ export default function RelatorioCriancas({data}){
             <RelText campo="Precisou fazer fototerapia" data={data.fototerapia} />
 
             <Text style={styles.titulo}>Alimentação</Text>
-
-            <Text style={styles.titulo}>Alimentação</Text>
             
             <RelText campo='A criança mamou' data={data.mamou}/>
             {data.mamou === 'sim' && 
@@ -85,6 +83,77 @@ export default function RelatorioCriancas({data}){
                 <RelText campo='Pratica autoagressão' data={data.autoagressao}/>
                 <RelText campo='Pratica heteroagressão' data={data.heteroagressao}/>
             </View>
+
+            <Text style={styles.titulo}>Desenvolvimento da linguagem</Text>
+            <RelText campo='Idades em que'/>
+
+            <View style={{flexDirection: 'row', gap: 5}}>
+                <RelText campo='Balbuciou' data={data.idadeBalbuciou}/>
+                <RelText campo='Emitiu sílabas' data={data.idadeSilabas}/>
+            </View>
+            <View style={{flexDirection: 'row', gap: 5}}>
+                <RelText campo='Emitiu as primeiras palavras' data={data.idadePriPalavras}/>
+                <RelText campo='Emitiu as primeiras frases' data={data.idadeFrases}/>
+            </View>
+            <RelText campo='Apresentou dificuldade no desenvolvimento da linguagem' data={data.difDesenvolvimentoLinguagem}/>
+
+            <ListaCondicoes titulo='Os comportamentos a seguir são baseados no estado atual do paciente' lista={data.condDesenvolvAtuais}/>
+            <RelText campo='Apresenta dificuldade na articulação e pronúncia' data={data.difArtPronuncia}/>
+            <RelText campo='Apresenta dificuldade no rítmo e entonação de voz' data={data.difRitVoz}/>
+            <RelText campo='Repete a última palavra ou frase imediatamente ouvida' data={data.repeteFrase}/>
+            <RelText campo='Faz confusão entre pronomes' data={data.confusaoPron}/>
+            <RelText campo='Uma dificuldade cognitiva apresentada pelo paciente' data={data.difCognitiva}/>
+            <RelText campo='Habilidade especial apresentada pelo paciente' data={data.habEspecial}/>
+            <RelText campo='Possui dificuldades na compreesão de linguagem' data={data.difComprLinguagem}/>
+            <RelText campo='Como reage quando contrariado' data={data.reacaoContrariado}/>
+
+            <Text style={styles.titulo}>Autocuidado</Text>
+            <RelText campo='Toma banho sozinho' data={data.banhoSozinho}/>
+            <RelText campo='Escova os dentes sozinho' data={data.escovaDentesSozinho}/>
+            <RelText campo='Limpa-se sozinho' data={data.limpaSozinho}/>
+            <RelText campo='Ao cuidar da própria higiene, atrapalha-se com a sequência de tarefas' data={data.atrapalhaComHigiene}/>
+            <RelText campo='Veste-se sozinho' data={data.vesteSozinho}/>
+            <RelText campo='Amarra os cadarços' data={data.amarraCadarcos}/>
+
+            <Text style={styles.titulo}>Sociabilidade/afetividade</Text>
+            <RelText campo='Apresenta sorriso espontâneo a pessoas familiares' data={data.sorrisoEspontaneoFamiliares}/>
+            <RelText campo='Apresenta sorriso espontâneo a pessoas não familiares' data={data.sorrisoEspontaneoNaoFamiliares}/>
+            <RelText campo='Sorriso em resposta ao sorriso de outras pessoas' data={data.sorrisoResposta}/>
+            <RelText campo='Variação na expressão facial' data={data.variacaoExpressaoFacial}/>
+            <RelText campo='Expressão emocional apropriada ao contexto' data={data.exprEmocionalContexto}/>
+            <RelText campo='Compartilha atividades prazerosas com outras pessoas' data={data.compartAtivPraz}/>
+            <RelText campo='Prefere ficar sozinho' data={data.sozinho}/>
+            <RelText campo='Excessivamente quieto ou timido' data={data.excQuieto}/>
+            <RelText campo='Mias interessado em objetos que em pessoas' data={data.interObjPess}/>
+            <RelText campo='Demonstra preocupação se os pais estão tristes/doentes/machucados?' data={data.preocupPais}/>
+
+            <Text style={styles.titulo}>Atenção compartilhada</Text>
+            <RelText campo='Mostra, traz para perto do rosto do parceiro ou aponta objetos/eventos de interesse variados apenas para compartilhar' data={data.mostraObjComp}/>
+            <RelText campo='Olha para onde o parceiro aponta' data={data.olhaAponta}/>
+            <RelText campo='Responde aos convites para brincar' data={data.respBrincar}/>
+
+            <Text style={styles.titulo}>Respostas/iniciativas sociais com outras crianças</Text>
+            <RelText campo='Iniciativa de aproximação ou interesse em outras crianças' data={data.aproxIntCriancas}/>
+            <RelText campo='Responde mas não toma iniciativa' data={data.respSemIniciativa}/>
+            <RelText campo='Fica ansioso com a presença de outras crianças/adolescentes' data={data.ansiosoPresencaCriAdol}/>
+            <RelText campo='Gosta de brincadeiras com grupos' data={data.brincaGrupos}/>
+            <RelText campo='Fica intensamente ansioso quando na presença de pessoas que não são de seu convívio' data={data.ansiosoNaoConvivio}/>
+            <RelText campo='Ignora ou evita de forma persistente esse contato' data={data.evitaContato}/>
+            <RelText campo='Excessiva desinibição social para a idade em relação a pessoas estranhas' data={data.excessivaDesinibicao}/>
+
+            <Text style={styles.titulo}>Comportamento de apego</Text>
+            <RelText campo='Demonstra preocupação quando separado dos pais' data={data.preocupSeparaPais}/>
+            <RelText campo='Sorri ou demonstra excitação com o retorno dos pais' data={data.excitRetornoPais}/>
+            <RelText campo='Busca a ajuda dos pais quando machucado' data={data.ajudaPais}/>
+
+            <Text style={styles.titulo}>Brincadeira</Text>
+            <RelText campo='Brinquedos e atividades favoritas' data={data.brinquedoAtividade}/>
+            <RelText campo='Manipula vários objetos/brinquedos' data={data.manipulaObjBrinquedo}/>
+            <RelText campo='Formas de exploração dos brinquedos' data={data.exploraBrinquedos}/>
+            <RelText campo='Brinca de faz de conta usando um objeto como se fosse outro' data={data.brincaFazDeConta}/>
+            <RelText campo='Brinca de faz de conta atribuindo papéis a si mesmo' data={data.brincaPapeis}/>
+
+            <Text>Comportamentos repetitivos e rituais</Text>
         </View>
     )
 }
