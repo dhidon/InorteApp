@@ -8,6 +8,7 @@ import ListaCondicoes from '../components/ListaCondicoes'
 export default function RelatorioCriancas({data}){
     return (
         <View style={{gap: 10}}>
+            
             <Text style={styles.titulo}>3 - Histórico do desenvolvimento</Text>
             <Text style={styles.titulo}>Gestação e nascimento</Text>
 

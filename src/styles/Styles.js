@@ -127,7 +127,7 @@ export const styles = StyleSheet.create({
     fontSize: typography.medium,
     fontWeight: 'bold',
     alignSelf: 'center',
-    marginBottom: spacing.small,
+    marginVertical: spacing.small,
   },
 
   logo: {

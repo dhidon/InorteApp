@@ -13,7 +13,7 @@ export default function ListaPacientes({data}){
             <Text style={styles.normal}>{data.nome}</Text>
 
             <TouchableOpacity onPress={()=>{navigation.navigate('Paciente', {data})}}>
-                <Entypo name="text-document" size={24} color="#FFF" />
+                <Entypo name="text-document" size={24} color="#FFF"/>
             </TouchableOpacity>
         </View>
     )

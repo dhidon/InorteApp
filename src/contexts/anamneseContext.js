@@ -14,6 +14,28 @@ export default function AnamneseProvider({ children }){
     
     const [profissionais, setProfissionais] = useState({})
 
+    useEffect(()=>{
+        function gerarIdade() {
+            if (!paciente.data || !paciente.nascimento) return "";
+        
+            const [diaAtual, mesAtual, anoAtual] = paciente.data.split("/").map(Number);
+            const [diaNasc, mesNasc, anoNasc] = paciente.nascimento.split("/").map(Number);
+        
+            const hoje = new Date(anoAtual, mesAtual - 1, diaAtual);
+            const nascimento = new Date(anoNasc, mesNasc - 1, diaNasc);
+        
+            let idade = hoje.getFullYear() - nascimento.getFullYear();
+            const m = hoje.getMonth() - nascimento.getMonth();
+        
+            if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+                idade--;
+            }
+        
+            setPaciente({...paciente, idade: idade});
+        }
+        gerarIdade()
+    }, [paciente.nascimento])
+
     const formatarData = (texto, callback, key) => {
         let textoFiltrado = texto.replace(/\D/g, '')
         if (textoFiltrado.length >= 5) {
