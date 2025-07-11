@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { View, Text, TextInput, KeyboardAvoidingView, ScrollView, TouchableOpacity } from 'react-native'
-import { styles, colors, platformInfo } from '../styles/Styles'
+import { View, Text, TextInput } from 'react-native'
+import { styles, colors } from '../styles/Styles'
 import { parse, format } from 'date-fns'
 
 import { AnamneseContext } from '../contexts/anamneseContext'
