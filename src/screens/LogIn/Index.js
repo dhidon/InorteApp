@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Image, TextInput, TouchableOpacity, Text, KeyboardAvoidingView } from "react-native";
+import { View, Image, TextInput, TouchableOpacity, Text, KeyboardAvoidingView, ActivityIndicator } from "react-native";
 import { styles } from "../../styles/Styles";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../../contexts/auth";
@@ -46,6 +46,7 @@ export default function LogIn() {
                 onPress={() => handleLogin()}
             >
                 <Text style={styles.buttonText}>Entrar</Text>
+                
             </TouchableOpacity>
 
             <TouchableOpacity 

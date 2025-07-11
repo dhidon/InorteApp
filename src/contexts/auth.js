@@ -8,7 +8,7 @@ export const AuthContext = createContext({})
 function AuthProvider({ children }){
     const [signed, setSigned] = useState(false)
     const [authUser, setAuthUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true) 
 
     const navigation = useNavigation()
 
@@ -22,8 +22,6 @@ function AuthProvider({ children }){
                     telefone: user.phoneNumber
                 })
                 setSigned(true)
-                setLoading(false)
-                return
             } else {
                 setAuthUser(null)       
                 setSigned(false)         
@@ -36,33 +34,39 @@ function AuthProvider({ children }){
     }, [])
 
     async function signIn(email, password){
+        setLoading(true) 
         try {
             await signInWithEmailAndPassword(auth, email, password)
-            console.log(user)
-            console.log(authUser)
+            
         } catch(err) {
             console.log(err)
             alert(err)
+            setLoading(false) 
         }
     }
 
     async function registerUser(email, password){
-        await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredentials)=>{
-            console.log(userCredentials)
-        })
-
-        navigation.navigate('LogIn')
-
-        .catch((error)=>{
+        setLoading(true) 
+        try {
+            await createUserWithEmailAndPassword(auth, email, password)
+            navigation.navigate('LogIn')
+        } catch(error) {
             console.log(error)
-        })
+            setLoading(false) 
+        }
+        
     }
 
     async function logOut(){
-        await signOut(auth)
-        setAuthUser(null)
-        setSigned(false)
+        setLoading(true) 
+        try {
+            await signOut(auth)
+            setAuthUser(null)
+            setSigned(false)
+        } catch(error) {
+            console.log(error)
+        }
+        setLoading(false) 
     }
 
     return (
