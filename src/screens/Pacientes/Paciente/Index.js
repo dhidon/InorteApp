@@ -1,6 +1,6 @@
 import React from "react";
-import { ScrollView, View, Text } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { ScrollView, View, Text, TouchableOpacity } from "react-native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import { styles } from "../../../styles/Styles";
 
 import Header from "../../../components/Header";
@@ -11,6 +11,11 @@ import RelText from "../../../components/RelText";
 export default function Paciente(){
     const route = useRoute()
     const { data } = route.params
+    const navigation = useNavigation()
+
+    function handlePrint(){
+        
+    }
 
     return (
         <View style={styles.container}>
@@ -87,6 +92,16 @@ export default function Paciente(){
                     </View>
 
                     {data.grupo === 'criança' ? <RelatorioCriancas data={data}/> : <RelatorioAdolescentes data={data}/>}
+
+                    <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-around'}}>
+                        <TouchableOpacity style={[styles.buttonArea, {width: 100}]} onPress={()=>navigation.goBack()}>
+                            <Text style={styles.buttonText}>Voltar</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={[styles.buttonArea, {width: 100}]} onPress={handlePrint}>
+                            <Text style={styles.buttonText}>Imprimir</Text>
+                        </TouchableOpacity>
+                    </View>
 
                     
                 </View>

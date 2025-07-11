@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, FlatList } from "react-native";
+import { View, ActivityIndicator, FlatList } from "react-native";
 import { styles } from "../../styles/Styles";
 import { db } from "../../services/firebaseConnection";
 import { collection, getDocs } from "firebase/firestore";
@@ -35,13 +35,19 @@ export default function Pacientes(){
     },[])
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <Header setor='Pacientes'/>
-                <FlatList
+
+                {
+                    !pacientes 
+                    ? <ActivityIndicator size={48} color={'#000'} />
+                    :<FlatList
                     data={pacientes}
                     keyExtractor={item => item.id}
                     renderItem={({item}) => <ListaPacientes data={item}/>}
-                />
-        </ScrollView>
+                    />
+                }
+                
+        </View>
     )
 }
