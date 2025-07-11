@@ -704,7 +704,7 @@ export default function AnamneseCriancas(){
                         <Text style={styles.normal}>Frequenta a escola?</Text>
                         <Seletor
                             selecionado={paciente.escola?.frequenta}
-                            aoMudar={value=>setPaciente({...paciente, frequentaEscola: value})}
+                            aoMudar={value=>setPaciente({...paciente, escola: {...paciente.escola, frequenta: value}})}
                             lista={simOuNao}
                         />
                         {paciente.escola?.frequenta === 'sim' &&
@@ -712,35 +712,35 @@ export default function AnamneseCriancas(){
                             <Input
                                 titulo='Qual o nome da escola?'
                                 valor={paciente.escola?.nome}
-                                callback={newText=>setPaciente({...paciente, nomeEscola: newText})}
+                                callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, nome: newText}})}
                             />
                         </View>}
                         <Text styel={styles.normal}>Faz AEE?</Text>
                         <Seletor
                             selecionado={paciente.escola?.aee}
-                            aoMudar={value=>setPaciente({...paciente, fazAee: value})}
+                            aoMudar={value=>setPaciente({...paciente, escola: {...paciente.escola, aee: value}})}
                             lista={simOuNao}
                         />
                         <Input
                             titulo='Qual a série do paciente?'
                             valor={paciente.escola?.serie}
-                            callback={newText=>setPaciente({...paciente, serieEscola: newText})}
+                            callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, serie: newText}})}
                         />
                         <Input
                             titulo='Qual o turno?'
                             valor={paciente.escola?.turno}
-                            callback={newText=>setPaciente({...paciente, turnoEscola: newText})}
+                            callback={newText=>setPaciente({...paciente, escola: {...paciente.escola, turno: newText}})}
                         />
                         <Text>Apresenta dificuldade na aprendizagem?</Text>
                         <Seletor
                             selecionado={paciente.difAprendizagem}
-                            aoMudar={valor=>setPaciente({...paciente, difAprendizagem: valor})}
+                            aoMudar={valor=>setPaciente({...paciente, difAprend: valor})}
                             lista={simOuNao}
                         />
                         <Input
                             titulo='Como é o comportamento no âmbito escolar?'
-                            valor={paciente.comportamentoEscola}
-                            callback={newText=>setPaciente({...paciente, comportamentoEscola: newText})}
+                            valor={paciente.comportEscola}
+                            callback={newText=>setPaciente({...paciente, comportEscola: newText})}
                         />
                     </View>
                     

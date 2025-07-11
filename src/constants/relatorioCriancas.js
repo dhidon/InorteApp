@@ -154,6 +154,32 @@ export default function RelatorioCriancas({data}){
             <RelText campo='Brinca de faz de conta atribuindo papéis a si mesmo' data={data.brincaPapeis}/>
 
             <Text>Comportamentos repetitivos e rituais</Text>
+            <RelText campo='Alinha, empilha objetos quando brincando, sem função aparente' data={data.alinhaEmpilhaObj}/>
+            <RelText campo='Faz brincadeiras com partes de objetos em vez de um objeto como um todo (ex: ignora o carrinho e gira apenas as rodas por um longo tempo)?' data={data.brincaPartesObj}/>
+            <RelText campo='Abre/fecha portas, gavetas; liga/desliga interruptores de luz; intenso interesse por objetos que giram (ex: máquina de lavar, ventilador, veículos em geral). Considerar a idade e persistência' data={data.abreFechaLigaDesliga}/>
+            <RelText campo='Reação à interrupção da brincadeira' data={data.reacaoBrincInterromp}/>
+            <RelText campo='Resistência a mudanças de rotina pessoal/da casa' data={data.resistenciaMudancaRotina}/>
+            <RelText campo='SequeÊncia fixa e rígida de atividades' data={data.sequenciaFixaAtiv}/>
+            <ListaCondicoes titulo='Apresenta os comportamentos a seguir' lista={data.comportRepetitivos}/>
+            <RelText campo='Medos (relacionar medos discrepantes com a etapa evolutiva - frequência, intensidade, grau de interferência em outras atividades da família, facilidade com que é acalmado/distraído)' data={data.medos}/>
+
+            <Text style={styles.titulo}>Desenvolvimento acadêmico</Text>
+            {data.escola?.frequenta === 'sim' 
+            ?<>
+                <RelText campo='O paciente frequenta a escola' data={data.escola.nome}/>
+                <View style={{flexDirection: 'row', gap: 5}}>
+                    <RelText campo='Faz AEE' data={data.escola.aee}/>
+                    <RelText campo='Série' data={data.escola.serie}/>
+                    <RelText campo='Turno' data={data.escola.turno}/>
+                </View>
+            </>
+            :<Text style={{fontWeight: 'bold'}}>O paciente não frequenta a escola</Text>}
+            <RelText campo='Apresenta dificuldade na aprendizagem' data={data.difAprend}/>
+            <RelText campo='Comportamento no âmbito escolar' data={data.comportEscola}/>
+
+            <Text style={styles.titulo}>Responsáveis pela avaliação</Text>
+            <RelText campo='Anamnese realizada com' data={data.medicoResponsavel}/>
+            <RelText campo='Técnico' data={data.tecnicoResponsavel}/>
         </View>
     )
 }
