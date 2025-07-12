@@ -34,7 +34,6 @@ const getPlatformStyles = () => {
       container: {
         width: 800,
         marginHorizontal: 'auto',
-        paddingHorizontal: 20,
       },
       contentArea: {
         paddingHorizontal: 30,
@@ -62,6 +61,7 @@ const getPlatformStyles = () => {
     return {
       container: {
         width: '100%',
+        marginTop: 35
       },
       contentArea: {
         width: '100%',
@@ -86,13 +86,23 @@ const getPlatformStyles = () => {
 const platformStyles = getPlatformStyles();
 
 export const styles = StyleSheet.create({
-  // Componentes base
+  list: {
+    marginHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '90%',
+    backgroundColor: colors.primary,
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 15,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.white,
     ...platformStyles.container,
-    marginTop: 35,
-    paddingBottom: 20
+    paddingBottom: 20,
+    alignItems: 'center'
   },
 
   contentArea: {
@@ -194,16 +204,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: spacing.small,
     ...platformStyles.buttonArea,
-  },
-
-  teste: {
-    backgroundColor: colors.secondary,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: spacing.medium,
-    marginBottom: spacing.small,
-    ...platformStyles.teste
   },
 
   buttonText: {

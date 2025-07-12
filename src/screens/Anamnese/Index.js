@@ -23,7 +23,8 @@ export default function Anamnese() {
     return (
         <KeyboardAvoidingView style={styles.container}>
             <Header setor={'Anamnese'}/>
-            <View style={styles.contentArea}>
+            <View style={[styles.contentArea]}>
+
                 <Text style={styles.normal}>Qual o público alvo da anamnese?</Text>
 
                 <TouchableOpacity style={styles.buttonArea} onPress={gotoCriancas}>

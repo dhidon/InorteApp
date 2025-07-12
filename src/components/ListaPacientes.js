@@ -8,13 +8,17 @@ export default function ListaPacientes({data}){
     const navigation = useNavigation()
     
     return (
-        <View style={[styles.inputArea, {marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between'}]}>
+        <View style={styles.list}>
 
-            <Text style={styles.normal}>{data.nome}</Text>
+            <View>
+                <Text style={styles.normal}>{data.nome}</Text>
+                <Text style={{color: '#FFF'}}>Nº SUS: {data.sus}</Text>
+            </View>
 
             <TouchableOpacity onPress={()=>{navigation.navigate('Paciente', {data})}}>
                 <Entypo name="text-document" size={24} color="#FFF"/>
             </TouchableOpacity>
+
         </View>
     )
 }
