@@ -46,7 +46,7 @@ export default function Pacientes(){
         <View style={styles.container}>
             <Header setor='Pacientes'/>
 
-            <View style={{width: '90%', alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View style={{width: '90%', alignItems: 'center', flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20}}>
                 <Input
                     legenda='Digite para procurar'
                     valor={search}
@@ -66,18 +66,18 @@ export default function Pacientes(){
                     <Text style={{color: 'white'}}>Limpar</Text>
                 </TouchableOpacity>
             </View>
-            {
-                !pacientesFiltrados 
-                ? <ActivityIndicator size={48} color={'#000'} />
-                :<FlatList
-                data={pacientesFiltrados}
-                keyExtractor={item => item.id}
-                renderItem={({item}) => <ListaPacientes data={item}/>}
-                showsVerticalScrollIndicator={false}
-                style={{ width: '90%' }}
-                contentContainerStyle={{ alignItems: 'center' }}
-                />
-            }
+            <View style={{width: '90%'}}>
+                {
+                    !pacientesFiltrados 
+                    ? <ActivityIndicator size={48} color={'#000'} />
+                    :<FlatList
+                    data={pacientesFiltrados}
+                    keyExtractor={item => item.id}
+                    renderItem={({item}) => <ListaPacientes data={item}/>}
+                    showsVerticalScrollIndicator={false}
+                    />
+                }
+            </View>
                 
         </View>
     )

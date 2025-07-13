@@ -31,8 +31,8 @@ export default function Paciente(){
         <View style={{flex: 1, justifuContent: 'center', alignItems: 'center', backgroundColor: '#fff'}}>
             <Header setor={data.nome}/>
             <ScrollView>
-                <View id="print-area" style={[styles.contentArea, {marginHorizontal: 20, alignItems: '', gap: 10}]}>
-                    <View style={styles.container}>
+                <View id="print-area" style={[styles.contentArea, {marginHorizontal: 20, alignItems: '', gap: 10,}]}>
+                    <View style={[styles.container, {alignItems: 'flex-start', gap: 5}]}>
                         <RelText campo='Data do registro' data={data.data}/>
                         <RelText campo='Grupo do paciente' data={data.grupo}/>
 
@@ -104,7 +104,7 @@ export default function Paciente(){
 
                         {data.grupo === 'criança' ? <RelatorioCriancas data={data}/> : <RelatorioAdolescentes data={data}/>}
 
-                        <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-around', marginTop: 20}}>
+                        <View style={{flexDirection: 'row', flex: 1, justifyContent: 'center', marginTop: 20, gap: 30, alignItems: 'center', marginHorizontal: 180}}>
                             <TouchableOpacity style={[styles.buttonArea, {width: 100, flexDirection: 'row', gap: 5, alignItems: 'center'}]} onPress={()=>navigation.goBack()}>
                             <Feather name="arrow-left" size={24} color="#FFF" />
                                 <Text style={styles.buttonText}>Voltar</Text>
@@ -115,6 +115,7 @@ export default function Paciente(){
                                 <Text style={styles.buttonText}>Imprimir</Text>
                             </TouchableOpacity>
                         </View>
+
                     </View>
                 </View>
             </ScrollView>

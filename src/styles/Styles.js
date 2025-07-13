@@ -87,11 +87,10 @@ const platformStyles = getPlatformStyles();
 
 export const styles = StyleSheet.create({
   list: {
-    marginHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '90%',
+    width: '100%',
     backgroundColor: colors.primary,
     borderRadius: 8,
     padding: 10,
