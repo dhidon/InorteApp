@@ -26,7 +26,8 @@ export default function Pacientes(){
                         ...doc.data()
                     })
                 })
-
+                
+                listaPacientes.sort((a, b) => a.nome.localeCompare(b.nome));
                 setPacientes(listaPacientes)
                 setPacientesFiltrados(listaPacientes)
             })
@@ -50,15 +51,17 @@ export default function Pacientes(){
                 <Input
                     legenda='Digite para procurar'
                     valor={search}
-                    callback={newText=>{
-                        setSearch(newText)
-                        if (newText.trim() === ''){
-                            setPacientesFiltrados(pacientes)
+                    callback={newText => {
+                        setSearch(newText);
+                        if (newText.trim() === '') {
+                            setPacientesFiltrados(pacientes);
                         } else {
-                            let pacientesEncontrados = pacientes?.filter(item => 
-                                item.nome.toLowerCase().includes(newText.toLowerCase())
-                            ) || []
-                            setPacientesFiltrados(pacientesEncontrados)
+                            let pacientesEncontrados = pacientes?.filter(item =>
+                                item.nome.toLowerCase().includes(newText.toLowerCase()) ||
+                                (item.sus && item.sus.toString().toLowerCase().includes(newText.toLowerCase()))
+                            ) || [];
+                            pacientesEncontrados.sort((a, b) => a.nome.localeCompare(b.nome));
+                            setPacientesFiltrados(pacientesEncontrados);
                         }
                     }}
                 />
