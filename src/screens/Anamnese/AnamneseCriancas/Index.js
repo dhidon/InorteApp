@@ -5,7 +5,7 @@ import Slider from '@react-native-community/slider'
 import { useNavigation } from '@react-navigation/native'
 import Feather from '@expo/vector-icons/Feather';
 
-import { comportRepetitivos, comportApego, difSociabilidadeAfetividade, difAutocuidado, condDesenvolvAtuais, simOuNao, parto, consistenciasAceitas, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
+import { comportRepetitivos, difSociabilidadeAfetividade, difAutocuidado, condDesenvolvAtuais, simOuNao, parto, consistenciasAceitas, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
 import { AnamneseContext } from '../../../contexts/anamneseContext'
 
 import Header from '../../../components/Header'

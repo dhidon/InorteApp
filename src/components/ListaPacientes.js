@@ -15,7 +15,7 @@ export default function ListaPacientes({data}){
                 <Text style={{color: '#FFF'}}>Nº SUS: {data.sus}</Text>
             </View>
 
-            <TouchableOpacity onPress={()=>{navigation.navigate('Paciente', {data})}}>
+            <TouchableOpacity onPress={()=>{navigation.navigate('Relatório', {data})}}>
                 <Entypo name="text-document" size={24} color="#FFF"/>
             </TouchableOpacity>
 

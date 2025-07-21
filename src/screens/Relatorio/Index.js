@@ -103,6 +103,26 @@ export default function Relatorio(){
 
                         {data.grupo === 'criança' ? <RelatorioCriancas data={data}/> : <RelatorioAdolescentes data={data}/>}
 
+                        <Text style={styles.titulo}>Desempenho acadêmico</Text>
+
+                        {data.escola?.frequenta === 'sim' 
+                        ?<>
+                            <RelText campo='O paciente frequenta a escola' data={data.escola.nome}/>
+                            <View style={{flexDirection: 'row', gap: 5}}>
+                                <RelText campo='Faz AEE' data={data.escola.aee}/>
+                                <RelText campo='Série' data={data.escola.serie}/>
+                                <RelText campo='Turno' data={data.escola.turno}/>
+                            </View>
+                        </>
+                        :<Text style={{fontWeight: 'bold'}}>O paciente não frequenta a escola</Text>}
+                        
+                        <RelText campo='Apresenta dificuldade na aprendizagem' data={data.difAprend}/>
+                        <RelText campo='Comportamento no âmbito escolar' data={data.comportEscola}/>
+
+                        <Text style={styles.titulo}>Responsáveis pela avaliação</Text>
+                        <RelText campo='Anamnese realizada com' data={data.medicoResponsavel}/>
+                        <RelText campo='Técnico' data={data.tecnicoResponsavel}/>
+
                         <View style={{flexDirection: 'row', flex: 1, justifyContent: 'center', marginTop: 20, gap: 30, alignItems: 'center', marginHorizontal: 180}}>
                             <TouchableOpacity style={[styles.buttonArea, {width: 100, flexDirection: 'row', gap: 5, alignItems: 'center'}]} onPress={()=>navigation.goBack()}>
                             <Feather name="arrow-left" size={24} color="#FFF" />
