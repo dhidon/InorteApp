@@ -1,14 +1,26 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { colors } from "../styles/Styles";
 import Home from "../screens/Home/Index";
 import AnamneseNavigator from "../screens/Anamnese/AnamneseNavigator";
-import PacientesNavigator from "../screens/Pacientes/PacientesNavigator";
+import Relatorio from "../screens/Relatorio/Index";
+import Pacientes from "../screens/Pacientes/Index";
 
 
 export default function AppRoute(){
     const AppDrawer = createDrawerNavigator()
+    const Stack = createNativeStackNavigator()
+
+    function PacienteStack(){
+        return (
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Screen name='Paciente' component={Pacientes}/>
+                <Stack.Screen name='Relatório'component={Relatorio}/>
+            </Stack.Navigator>
+        )
+    }
     
     return (
         <AppDrawer.Navigator 
@@ -26,7 +38,7 @@ export default function AppRoute(){
         >
             <AppDrawer.Screen name='Home' component={Home}/>
             <AppDrawer.Screen name='Anamnese' component={AnamneseNavigator}/>
-            <AppDrawer.Screen name='Pacientes' component={PacientesNavigator}/>
+            <AppDrawer.Screen name='Pacientes' component={PacienteStack}/>
         </AppDrawer.Navigator>
     )
 }

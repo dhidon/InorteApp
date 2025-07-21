@@ -1,16 +1,16 @@
 import React from "react";
 import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { styles } from "../../../styles/Styles";
+import { styles } from "../../styles/Styles";
 import Feather from '@expo/vector-icons/Feather';
 
-import Header from "../../../components/Header";
-import RelatorioAdolescentes from "../../../constants/relatorioAdolescentes";
-import RelatorioCriancas from "../../../constants/relatorioCriancas";
-import RelText from "../../../components/RelText";
+import Header from "../../components/Header";
+import RelatorioAdolescentes from "../../constants/relatorioAdolescentes";
+import RelatorioCriancas from "../../constants/relatorioCriancas";
+import RelText from "../../components/RelText";
 
 
-export default function Paciente(){
+export default function Relatorio(){
     const route = useRoute()
     const { data } = route.params
     const navigation = useNavigation()
