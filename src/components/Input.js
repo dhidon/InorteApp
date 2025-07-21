@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TextInput } from 'react-native'
 import { styles } from '../styles/Styles'
 
-export default function Input( {valor, titulo, callback, legenda, kt} ){
+export default function Input( {valor, titulo, callback, legenda, kt, st} ){
     return (
         <>
             <View style={{margin: 0}}>
@@ -13,6 +13,7 @@ export default function Input( {valor, titulo, callback, legenda, kt} ){
                     style={styles.input}
                     placeholder={legenda}
                     keyboardType={kt}
+                    secureTextEntry={st}
                 />
             </View>
         </>
