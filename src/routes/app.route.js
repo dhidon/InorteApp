@@ -1,12 +1,14 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Image } from "react-native";
 
-import { colors } from "../styles/Styles";
+import { styles, colors } from "../styles/Styles";
 import Home from "../screens/Home/Index";
 import AnamneseNavigator from "../screens/Anamnese/AnamneseNavigator";
 import Relatorio from "../screens/Relatorio/Index";
 import Pacientes from "../screens/Pacientes/Index";
+import CustomDrawer from "../components/CustomDrawer";
 
 
 export default function AppRoute(){
@@ -15,15 +17,23 @@ export default function AppRoute(){
 
     function PacienteStack(){
         return (
-            <Stack.Navigator screenOptions={{headerShown: false}}>
-                <Stack.Screen name='Paciente' component={Pacientes}/>
-                <Stack.Screen name='Relatório'component={Relatorio}/>
+            <Stack.Navigator>
+                <Stack.Screen 
+                name='Paciente' 
+                component={Pacientes}
+                />
+
+                <Stack.Screen 
+                name='Relatório'
+                component={Relatorio}
+                />
             </Stack.Navigator>
         )
     }
     
     return (
-        <AppDrawer.Navigator 
+        <AppDrawer.Navigator
+        drawerContent={props => <CustomDrawer {...props}/>}
         screenOptions={{
             drawerActiveBackgroundColor: colors.secondary,
             drawerActiveTintColor: colors.white,
@@ -33,12 +43,45 @@ export default function AppRoute(){
                 marginBottom: 10,
                 borderRadius: 8
             },
-            headerShown: false
             }}
         >
-            <AppDrawer.Screen name='Home' component={Home}/>
-            <AppDrawer.Screen name='Anamnese' component={AnamneseNavigator}/>
-            <AppDrawer.Screen name='Pacientes' component={PacienteStack}/>
+            <AppDrawer.Screen 
+            name='Home' 
+            component={Home}
+            options={{
+                title: 'Home',
+                headerTitleAlign: 'center',
+                headerTitleStyle: {
+                    fontSize: 36
+                },
+                headerRight: ()=>(
+                    <Image source={require('../assets/logoInorte.png')} style={[styles.cabecalhoImg, {height: '100%'}]}/>
+                )
+            }}
+            />
+
+            <AppDrawer.Screen 
+            name='Anamnese' 
+            component={AnamneseNavigator}
+            options={{
+                title: 'Anamnese',
+                headerTitleAlign: 'center',
+                headerTitleStyle: {
+                    fontSize: 36
+                },
+                headerRight: ()=>(
+                    <Image source={require('../assets/logoInorte.png')} style={[styles.cabecalhoImg, {height: '100%'}]}/>
+                )
+            }}
+            />
+
+            <AppDrawer.Screen 
+            name='Pacientes' 
+            component={PacienteStack}
+            options={{
+                headerShown: false
+            }}
+            />
         </AppDrawer.Navigator>
     )
 }

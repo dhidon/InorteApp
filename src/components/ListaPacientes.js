@@ -8,17 +8,20 @@ export default function ListaPacientes({data}){
     const navigation = useNavigation()
     
     return (
-        <View style={styles.list}>
+        <TouchableOpacity onPress={()=>{navigation.navigate('Relatório', {data})}}>
+            <View style={styles.list}>
 
-            <View>
-                <Text style={styles.normal}>{data.nome}</Text>
-                <Text style={{color: '#FFF'}}>Nº SUS: {data.sus}</Text>
+                <Text style={styles.normal}>
+                    Paciente: <Text style={{fontWeight: 'bold'}}>{data.nome}</Text> -
+                    Idade: <Text style={{fontWeight: 'bold'}}>{data.idade}</Text> - 
+                    Nº SUS: <Text style={{fontWeight: 'bold'}}>{data.sus}</Text>
+                </Text>
+
+                <View style={{right: 7}}>
+                    <Entypo name="text-document" size={24} color="#FFF"/>
+                </View>
+
             </View>
-
-            <TouchableOpacity onPress={()=>{navigation.navigate('Relatório', {data})}}>
-                <Entypo name="text-document" size={24} color="#FFF"/>
-            </TouchableOpacity>
-
-        </View>
+        </TouchableOpacity>
     )
 }

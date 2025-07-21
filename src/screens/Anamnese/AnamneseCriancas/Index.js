@@ -8,7 +8,6 @@ import Feather from '@expo/vector-icons/Feather';
 import { comportRepetitivos, difSociabilidadeAfetividade, difAutocuidado, condDesenvolvAtuais, simOuNao, parto, consistenciasAceitas, problemaAlimentacao, itensSignificantes } from '../../../constants/anamneseOptions'
 import { AnamneseContext } from '../../../contexts/anamneseContext'
 
-import Header from '../../../components/Header'
 import DateInput from '../../../components/DateInput'
 import Identificacao from '../../../constants/Identificacao'
 import Sintomas from '../../../constants/Sintomas'
@@ -23,11 +22,11 @@ export default function AnamneseCriancas(){
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
 
-            <Header setor='Anamnese de crianças'/>
-
             <ScrollView>
                 
                 <View style={styles.contentArea}>
+
+                    <Text style={styles.titulo}>ANAMNESE DA CRIANÇA</Text>
                     
                     <DateInput/>
 

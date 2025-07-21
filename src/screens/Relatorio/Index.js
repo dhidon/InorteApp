@@ -30,7 +30,7 @@ export default function Relatorio(){
         <View style={{flex: 1, justifuContent: 'center', alignItems: 'center', backgroundColor: '#fff'}}>
             <Header setor={data.nome}/>
             <ScrollView>
-                <View id="print-area" style={[styles.contentArea, {marginHorizontal: 20, alignItems: '', gap: 10,}]}>
+                <View id="print-area" style={[styles.contentArea, {marginHorizontal: 20, alignItems: '', gap: 10, width: 800}]}>
                     <View style={[styles.container, {alignItems: 'flex-start', gap: 5}]}>
                         <RelText campo='Data do registro' data={data.data}/>
                         <RelText campo='Grupo do paciente' data={data.grupo}/>

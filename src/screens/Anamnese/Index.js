@@ -4,8 +4,6 @@ import { styles } from '../../styles/Styles'
 import { useNavigation } from "@react-navigation/native";
 import { AnamneseContext } from "../../contexts/anamneseContext";
 
-import Header from "../../components/Header";
-
 export default function Anamnese() {
     const navigation = useNavigation()
     const {paciente, setPaciente} = useContext(AnamneseContext)
@@ -22,7 +20,7 @@ export default function Anamnese() {
 
     return (
         <KeyboardAvoidingView style={styles.container}>
-            <Header setor={'Anamnese'}/>
+
             <View style={[styles.contentArea]}>
 
                 <Text style={styles.normal}>Qual o público alvo da anamnese?</Text>

@@ -15,7 +15,7 @@ export default function Home() {
 
     return (
         <KeyboardAvoidingView style={styles.container}>
-            <Header setor={'Início'}/>
+            
             <View style={styles.contentArea}>
 
                 <View style={styles.userInfoArea}>

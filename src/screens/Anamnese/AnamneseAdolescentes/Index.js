@@ -7,7 +7,6 @@ import Feather from '@expo/vector-icons/Feather';
 
 import { AnamneseContext } from '../../../contexts/anamneseContext'
 import { parto, habilidadesMotoras, comportamento, caracteristicasSociais, outrasDificuldades, nivelHabilidades, fatoresDif, simOuNao, consistenciasAceitas, problemaAlimentacao, itensSignificantes, comportamentos, condicoesFilho } from '../../../constants/anamneseOptions'
-import Header from '../../../components/Header'
 import Seletor from '../../../components/Seletor'
 import ListaAlternativas from '../../../components/ListaAlternativas'
 import Input from '../../../components/Input'
@@ -56,11 +55,12 @@ export default function AnmenseAdolescentes(){
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
-            <Header setor={'Anamnese de adolescentes'}/>
             
             <ScrollView>
                 
                 <View style={styles.contentArea}>
+
+                    <Text style={styles.titulo}>ANAMNESE DO ADOLESCENTE</Text>
 
                     <DateInput/>
 

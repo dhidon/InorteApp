@@ -32,7 +32,7 @@ const getPlatformStyles = () => {
   if (isWeb) {
     return {
       container: {
-        width: 800,
+        width: "100%",
         marginHorizontal: 'auto',
       },
       contentArea: {
