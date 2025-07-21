@@ -88,7 +88,7 @@ export default function Pacientes(){
 
     return (
         <View style={styles.container}>
-            <View style={{width: '90%'}}>
+            <View style={{width: '90%', marginTop: 35}}>
                 {
                     !pacientesFiltrados 
                     ? <ActivityIndicator size={48} color={'#000'} />
