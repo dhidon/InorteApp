@@ -1,12 +1,14 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import { condicoes } from '../constants/anamneseOptions'
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebaseConnection";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "./auth";
 
 export const AnamneseContext = createContext()
 
 export default function AnamneseProvider({ children }){
+    const { user } = useContext(AuthContext)
     const navigation = useNavigation()
     const [paciente, setPaciente] = useState({
         condicoes: condicoes
@@ -65,7 +67,10 @@ export default function AnamneseProvider({ children }){
 
     async function sendToDb(data){
         try {
-            const docRef = await addDoc(collection(db, "pacientes"), data)
+            const docRef = await addDoc(collection(db, "pacientes"), {
+                ...data,
+                userId: user.uid
+            })
             console.log('Documento gravado com o ID:', docRef.id)
             setPaciente({
                 condicoes: condicoes
