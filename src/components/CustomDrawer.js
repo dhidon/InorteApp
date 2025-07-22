@@ -5,7 +5,7 @@ import { View, Image, Text } from 'react-native'
 import { AuthContext } from '../contexts/auth'
 
 export default function CustomDrawer(props){
-    const { authUser, signOut } = useContext(AuthContext)
+    const { user, signOut } = useContext(AuthContext)
 
     return (
         <DrawerContentScrollView>
@@ -19,7 +19,7 @@ export default function CustomDrawer(props){
                     Bem-vindo!
                 </Text>
                 <Text style={{fontSize: 17, fontWeight: 'bold', marginBottom: 14, paddingHorizontal: 20}} numberOfLines={1}>
-                    {authUser && authUser.email}
+                    {(user && user.nome || user.email)} 
                 </Text>
             </View>
 

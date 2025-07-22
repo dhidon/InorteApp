@@ -4,14 +4,9 @@ import { styles } from "../../styles/Styles";
 import { AuthContext } from "../../contexts/auth";
 import Feather from '@expo/vector-icons/Feather';
 
-import Header from "../../components/Header";
 
 export default function Home() {
-    const { logOut, authUser } = useContext(AuthContext)
-
-    function handleLogout(){
-        logOut()
-    }
+    const { user, authUser } = useContext(AuthContext)
 
     return (
         <KeyboardAvoidingView style={styles.container}>
@@ -26,13 +21,11 @@ export default function Home() {
                     />
                     :<Feather name="user" size={90} color="black" />}
 
-                    <Text style={[styles.normal, {color: 'black', numberOfLines: 1}]}>Bem-vindo, {authUser.displayName ? authUser.displayName : authUser.email}</Text>
+                    <Text style={[styles.normal, {color: 'black', numberOfLines: 1}]}>Bem-vindo, {user.displayName ? user.displayName : user.email}</Text>
 
                 </View>
 
-                <TouchableOpacity onPress={()=>handleLogout()} style={styles.buttonArea}>
-                    <Text style={styles.buttonText}>Sair</Text>
-                </TouchableOpacity>
+                
             </View>
         </KeyboardAvoidingView>
     )

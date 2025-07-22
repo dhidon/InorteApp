@@ -2,7 +2,6 @@ import React, { createContext, useState, useEffect } from 'react'
 import { auth } from '../services/firebaseConnection'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
 import { setDoc, doc } from 'firebase/firestore';
-import { useNavigation } from "@react-navigation/native";
 
 export const AuthContext = createContext({})
 
@@ -11,8 +10,6 @@ function AuthProvider({ children }){
     const [authUser, setAuthUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
-
-    const navigation = useNavigation()
 
     useEffect(()=>{
         const unsub = onAuthStateChanged(auth, (user)=>{
@@ -23,10 +20,14 @@ function AuthProvider({ children }){
                     profilePic: user.photoURL,
                     telefone: user.phoneNumber
                 })
-                setSigned(true)
+                setUser({
+                    email: user.email,
+                    uid: user.uid,
+                    telefone: user.phoneNumber
+                })
             } else {
                 setAuthUser(null)       
-                setSigned(false)         
+                setUser(null)        
             }
             setLoading(false)
         })
@@ -39,7 +40,7 @@ function AuthProvider({ children }){
         setLoading(true) 
         try {
             await signInWithEmailAndPassword(auth, email, password)
-            
+            setLoading(false)
         } catch(err) {
             console.log(err)
             alert(err)

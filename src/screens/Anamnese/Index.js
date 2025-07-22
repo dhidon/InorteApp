@@ -21,17 +21,27 @@ export default function Anamnese() {
     return (
         <KeyboardAvoidingView style={styles.container}>
 
-            <View style={[styles.contentArea]}>
+            <View style={[styles.contentArea, {gap: 20}]}>
 
-                <Text style={styles.normal}>Qual o público alvo da anamnese?</Text>
+                <Text style={[styles.normal, {color: "#000"}]}>Qual o público alvo da anamnese?</Text>
 
-                <TouchableOpacity style={styles.buttonArea} onPress={gotoCriancas}>
-                    <Text style={styles.buttonText}>Crianças</Text>
-                </TouchableOpacity>
-                
-                <TouchableOpacity style={styles.buttonArea} onPress={gotoAdolescentes}>
-                    <Text style={styles.buttonText}>Adolescentes</Text>
-                </TouchableOpacity>
+                <View style={{flexDirection: 'row', gap: 20}}>
+                    <TouchableOpacity 
+                    style={[styles.buttonArea, {height: 240, width: 240, borderRadius: 8}]} 
+                    onPress={gotoCriancas}
+                    activeOpacity={0.6}
+                    >
+                        <Text style={styles.buttonText}>Crianças</Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity 
+                    style={[styles.buttonArea, {height: 240, width: 240, borderRadius: 8}]} 
+                    onPress={gotoAdolescentes}
+                    activeOpacity={0.6}
+                    >
+                        <Text style={styles.buttonText}>Adolescentes</Text>
+                    </TouchableOpacity>
+                </View>
 
             </View>
         </KeyboardAvoidingView>
