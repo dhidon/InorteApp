@@ -20,7 +20,7 @@ export default function LogIn() {
 
     function handleRegister(){
         if(senha === confirmacao) {
-            registerUser(nome, email, senha)
+            registerUser(email, senha, nome)
             setLogin(true)
             alert('Novo usuário cadastrado!')
         } else {

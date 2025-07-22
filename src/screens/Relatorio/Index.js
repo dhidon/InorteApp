@@ -1,10 +1,9 @@
-import React from "react";
-import { ScrollView, View, Text, TouchableOpacity } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { ScrollView, View, Text, TouchableOpacity, Image } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { styles } from "../../styles/Styles";
 import Feather from '@expo/vector-icons/Feather';
 
-import Header from "../../components/Header";
 import RelatorioAdolescentes from "../../constants/relatorioAdolescentes";
 import RelatorioCriancas from "../../constants/relatorioCriancas";
 import RelText from "../../components/RelText";
@@ -24,11 +23,25 @@ export default function Relatorio(){
             window.print();
             document.body.innerHTML = originalContents;
         }
+        navigation.navigate('Pacientes')
     }
+
+    useLayoutEffect(()=>{
+        navigation.setOptions({
+            title: data.nome,
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 36 },
+            headerLeft: () => (
+                <TouchableOpacity onPress={()=> navigation.openDrawer()} style={{left: 20}}>
+                    <Feather name='menu' size={22} color="#000" />
+                </TouchableOpacity>
+            )    ,
+            headerRight: () => <Image source={require('../../assets/logoInorte.png')} style={[styles.cabecalhoImg, {height: '100%'}]}/>    
+        })
+    }, [navigation])
 
     return (
         <View style={{flex: 1, justifuContent: 'center', alignItems: 'center', backgroundColor: '#fff'}}>
-            <Header setor={data.nome}/>
             <ScrollView>
                 <View id="print-area" style={[styles.contentArea, {marginHorizontal: 20, alignItems: '', gap: 10, width: 800}]}>
                     <View style={[styles.container, {alignItems: 'flex-start', gap: 5}]}>

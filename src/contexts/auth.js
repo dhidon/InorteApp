@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { auth } from '../services/firebaseConnection'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
+import { setDoc, doc } from 'firebase/firestore';
 import { useNavigation } from "@react-navigation/native";
 
 export const AuthContext = createContext({})
@@ -8,7 +9,8 @@ export const AuthContext = createContext({})
 function AuthProvider({ children }){
     const [signed, setSigned] = useState(false)
     const [authUser, setAuthUser] = useState(null)
-    const [loading, setLoading] = useState(true) 
+    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null)
 
     const navigation = useNavigation()
 
@@ -45,11 +47,27 @@ function AuthProvider({ children }){
         }
     }
 
-    async function registerUser(email, password){
+    async function registerUser(email, password, nome){
         setLoading(true) 
         try {
-            await createUserWithEmailAndPassword(auth, email, password)
-            navigation.navigate('LogIn')
+            const response = await createUserWithEmailAndPassword(auth, email, password)
+            const uid = response.user.uid
+
+            await setDoc(doc(db, 'usuarios', uid), {
+                uid: uid,
+                nome: nome,
+                createdAt: new Date()
+            })
+
+            const data = {
+                uid: uid,
+                nome: nome,
+                email: response.user.email
+            }
+
+            setUser(data)
+            setLoading(false)
+
         } catch(error) {
             console.log(error)
             setLoading(false) 
@@ -70,7 +88,7 @@ function AuthProvider({ children }){
     }
 
     return (
-        <AuthContext.Provider value={{ signed, signIn, registerUser, setSigned, authUser, logOut, loading }}> 
+        <AuthContext.Provider value={{ signed: !!user, signIn, registerUser, setSigned, authUser, logOut, loading, user }}> 
             {children}
         </AuthContext.Provider>
     )
