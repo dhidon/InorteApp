@@ -49,14 +49,14 @@ export default function GestDesenvolv(){
                 <Text style={styles.normal}>Qual foi o tipo de parto e por que?</Text>
                 <Seletor
                     selecionado={paciente.parto?.tipo}
-                    aoMudar={valor=>setPaciente(prev => ({...prev, tipoParto: valor}))}
+                    aoMudar={valor=>setPaciente(prev => ({...prev, parto: {...prev.parto, tipo: valor}}))}
                     lista={parto}
                 />
                 <View style={{height: 7}}></View>
                 <Input
                     valor={paciente.parto?.motivo}
                     legenda='Qual o motivo?'
-                    callback={newText=>setPaciente(prev => ({...prev, motivoParto: newText}))}
+                    callback={newText=>setPaciente(prev => ({...prev, parto: {...prev.parto, motivo: newText}}))}
                 />
                 <Input
                     titulo='A criança nasceu com quantas semanas?'

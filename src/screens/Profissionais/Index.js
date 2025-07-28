@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, Alert, Platform } from "react-native";
 import { styles } from "../../styles/Styles";
+import { useNavigation } from "@react-navigation/native";
 
 import { AnamneseContext } from "../../contexts/anamneseContext";
 import { AuthContext } from "../../contexts/auth";
@@ -9,34 +10,34 @@ import Feather from '@expo/vector-icons/Feather';
 import Input from "../../components/Input";
 
 export default function Profissionais(){
-    const {paciente, setPaciente, sendToDb, sendFoto} = useContext(AnamneseContext)
+    const {paciente, setPaciente, sendToDb} = useContext(AnamneseContext)
     const { user } = useContext(AuthContext)
+    const navigation = useNavigation()
 
     async function handleSend() {
-        const confirm = Platform.OS === 'web'
-          ? window.confirm('Tem certeza que deseja enviar os dados do paciente e voltar para a tela inicial?')
-          : true
-      
-        if (confirm) {
-          const path = await sendFoto(paciente.imageUri, paciente.sus)
-          await sendToDb({ ...paciente, fotoPath: path, quemCadastrou: user.uid })
-        } else {
-          Alert.alert(
-            'Atenção!',
-            'Tem certeza que deseja enviar os dados do paciente e voltar para a tela inicial?',
-            [
-              { text: 'Cancelar', style: 'cancel' },
-              {
-                text: 'Enviar',
-                onPress: async () => {
-                  const path = await sendFoto(paciente.sus, paciente.imageUri)
-                  await sendToDb({ ...paciente, fotoPath: path, quemCadastrou: user.uid })
-                }
+      const confirm = Platform.OS === 'web'
+        ? window.confirm('Tem certeza que deseja enviar os dados do paciente e voltar para a tela inicial?')
+        : true;
+    
+      if (confirm) {
+        await sendToDb(user);
+      } else {
+        Alert.alert(
+          'Atenção!',
+          'Tem certeza que deseja enviar os dados do paciente e voltar para a tela inicial?',
+          [
+            { text: 'Cancelar', style: 'cancel' },
+            {
+              text: 'Enviar',
+              onPress: async () => {
+                await sendToDb(user);
               }
-            ]
-          )
-        }
+            }
+          ]
+        );
       }
+    }
+    
       
 
     return (

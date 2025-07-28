@@ -12,7 +12,7 @@ export default function AnamneseProvider({ children }){
     const { user } = useContext(AuthContext)
     const navigation = useNavigation()
     const [paciente, setPaciente] = useState({
-        uer: '',
+        user: '',
         grupo: '',
         data: '',
         nome: '',
@@ -180,10 +180,182 @@ export default function AnamneseProvider({ children }){
         sozinho: '',
         excQuieto: '',
         interObjPess: '',
-        preocupPais:''
+        preocupPais:'',
     })
     const [fotoPaciente, setFotoPaciente] = useState(null)
     const [profissionais, setProfissionais] = useState({})
+
+    const pacienteInicial = {
+        user: '',
+        grupo: '',
+        data: '',
+        nome: '',
+        sus: '',
+        nascimento: '',
+        idade: '0',
+        endereco: {
+            ruaN: '',
+            bairro: '',
+            cidadeUf: '',
+            cep: '',
+        },
+        informante: '',
+        contato: '',
+        mae: {
+            nome: '',
+            nascimento: '',
+            profissao: ''
+        },
+        pai: {
+            nome: '',
+            nascimento: '',
+            profissao: ''
+        },
+        pais: {
+            estadoCivil: '',
+        },
+        idadeSeparacao: '',
+        guardiao: '',
+        padrastoMadrasta: '',
+        outroGuardiao: {
+            motivo: '',
+            nome: ''
+        },
+        guardiaoLegal: '',
+        motivoAvaliacao: '',
+        profissionais: '',
+        convive: '',
+        condicoes: condicoes,
+        gestacaoPlanejada: '',
+        prenatal: '',
+        intercorrencia: '',
+        qualIntercorrencia: '',
+        medicamentoGestacao: '',
+        parto: {
+            tipo: '',
+            motivo: ''
+        },
+        nasceuSemanas: '',
+        apgar: {
+            primeiroMinuto: '',
+            quintoMinuto: '',
+            peso: '',
+            comprimento: ''
+        },
+        problemaNascimento: '',
+        oxigenio: '',
+        cianotico: '',
+        chorou: '',
+        ictericia: '',
+        fototerapia:'',
+        mamou: '',
+        leitMatExclMes: '',
+        mamouIdade: '',
+        mamadeira: '',
+        chupeta: '',
+        idadeIntroAlimentar: '',
+        difIntroAlimentar: '',
+        difAlimentar: '',
+        consistenciasAceitas: '',
+        problemaAlimentacao: '',
+        seletividadeAlimentar: '',
+        formaSono: '',
+        dormeSozinho: '',
+        quemCompartilhaCama: '',
+        horarioDormir: '',
+        horarioAcordar:'',
+        problemaCrescimento: '',
+        itensSignificantes: '',
+        condicoesFilho:'',
+        fatoresDif: '',
+        medicacao: {
+            usa:'',
+            nome: '',
+            motivo: '',
+            receitadaPor:''
+        },
+        compreensaoFala: '',
+        resolProblemas: '',
+        mantemAtencao: '',
+        habOrganizacao: '',
+        recEventos: '',
+        recFatos: '',
+        aprendExp: '',
+        entendConceitos: '',
+        outrasDificuldades: '',
+        outraDifCogn: '',
+        habilidadeEspecial: '',
+        difCompreensaoLing: '',
+        difComunicExpressiva: '',
+        estereotipiasMovCorporais: '',
+        caracteristicasSociais: '',
+        atividadesFavoritas: '',
+        comportamentos: comportamentos,
+        probLimites: '',
+        cumprePedidos: '',
+        estrategiasUsadas: '',
+        independenciaAtiv: '',
+        habilidadesMotoras: '',
+        contatoVisual: '',
+        inclinaCabeca: '',
+        aproximaObjetos: '',
+        afastaObjetos: '',
+        movimentoOlhos: '',
+        avOftalmo: '',
+        dorCabeca: '',
+        difAuditiva: '',
+        realizouAv: '',
+        escola: {
+            frequenta: '',
+            nome: '',
+            aee: '',
+            serie: '',
+            turno: ''
+        },
+        difAprend: '',
+        comportEscola: '',
+        medicoResponsavel: '',
+        tecnicoResponsavel: '',
+        sentouSemApoio: '',
+        engatinhou: '',
+        andouSemSuporte: '',
+        controlaEsfincter: '',
+        fraldas: '',
+        manipObjDedos: '',
+        praticaEsporte: '',
+        esporte: '',
+        autoAgressao: '',
+        heteroAgressao: '',
+        idadeBalbuciou: '',
+        idadeSilabas: '',
+        idadePriPalavras: '',
+        idadeFrases: '',
+        difDesenvolvimentoLinguagem: '',
+        difArtPronuncia: '',
+        difRitVoz: '',
+        repeteFrases: '',
+        confusaoPron: '',
+        difCognitiva: '',
+        habEspecial: '',
+        difComprLinguagem: '',
+        reacaoContrariado: '',
+        banhoSozinho: '',
+        escovaDentesSozinho: '',
+        limpaSozinho: '',
+        atrapalhaComHigiene: '',
+        vesteSozinho: '',
+        amarraCadarcos: '',
+        sorrisoEspontaneoFamiliares: '',
+        sorrisoEspontaneoNaoFamiliares: '',
+        sorrisoResposta: '',
+        variacaoExpressaoFacial: '',
+        exprEmocionalContexto: '',
+        compartAtivPraz: '',
+        sozinho: '',
+        excQuieto: '',
+        interObjPess: '',
+        preocupPais:'',
+    }
 
     useEffect(()=>{
         function gerarIdade() {
@@ -234,62 +406,60 @@ export default function AnamneseProvider({ children }){
         setPaciente( prev => ({...prev, endereco: {...prev.endereco, cep: textoFiltrado}}))
     }
 
-    async function sendToDb(data){
+    async function sendToDb(data) {
         try {
-            const docRef = await addDoc(collection(db, "pacientes"), {
-                ...data,
-                userId: user.uid
-            })
-            console.log('Documento gravado com o ID:', docRef.id)
-            setPaciente(pacienteInicial)
-            navigation.navigate('Home')
+          // 1. Upload da imagem para Supabase
+          const response = await fetch(fotoPaciente);
+          const blob = await response.blob();
+          const cleanedSus = (data.sus || '').toString().replace(/\s/g, '');
+          const filePath = `${cleanedSus}/profile.jpg`;
+      
+          const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('fotos-pacientes')
+            .upload(filePath, blob, {
+              cacheControl: '3600',
+              upsert: true,
+              contentType: 'image/jpg',
+            });
+      
+          if (uploadError) {
+            console.log('Erro ao enviar imagem:', uploadError);
+            return;
+          }
+      
+          // 2. Geração de URL assinada
+          const { data: signedData, error: signedError } = await supabase.storage
+            .from('fotos-pacientes')
+            .createSignedUrl(filePath, 3600);
+      
+          if (signedError) {
+            console.log('Erro ao gerar URL assinada:', signedError);
+            return;
+          }
+      
+          const imageUrl = signedData.signedUrl;
+      
+          // 3. Monta o objeto final
+          const pacienteData = {
+            ...data,
+            imageUrl,
+            userId: data.uid,
+          };
+      
+          // 4. Envia para o Firestore
+          const docRef = await addDoc(collection(db, 'pacientes'), pacienteData);
+      
+          console.log('Documento gravado com o ID:', docRef.id);
+      
+          // 5. Limpa e navega
+          setPaciente(pacienteInicial);
+          navigation.navigate('Home');
+      
         } catch (error) {
-            console.log(error)
+          console.log('Erro inesperado em sendToDb:', error);
         }
-    }
-
-    async function sendFoto(path, file) {
-        try {
-            const response = await fetch(file)
-            const blob = await response.blob()
-            const filePath = `${path}/profile.jpg`
-    
-            // Upload da imagem
-            const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('fotos-pacientes')
-                .upload(filePath, blob, {
-                    cacheControl: '3600',
-                    upsert: true,
-                    contentType: 'image/jpg'
-                })
-    
-            if (uploadError) {
-                console.log("Erro ao enviar imagem:", uploadError)
-                return null
-            }
-    
-           
-            const { data: signedData, error: signedError } = await supabase.storage
-                .from('fotos-pacientes')
-                .createSignedUrl(filePath, 3600)
-    
-            if (signedError) {
-                console.log("Erro ao gerar URL assinada:", signedError)
-                return null
-            }
-    
-            const imageUrl = signedData.signedUrl
-    
-            
-            setPaciente(prev => ({ ...prev, imageURL: imageUrl }))
-    
-            console.log('Imagem enviada com sucesso:', uploadData.path)
-            return uploadData.path
-        } catch (error) {
-            console.log("Erro inesperado em sendFoto:", error)
-            return null
-        }
-    }
+      }
+      
     
 
     return (
@@ -303,8 +473,7 @@ export default function AnamneseProvider({ children }){
             setProfissionais,
             sendToDb,
             fotoPaciente,
-            setFotoPaciente,
-            sendFoto
+            setFotoPaciente
         }}>
             {children}
         </AnamneseContext.Provider>

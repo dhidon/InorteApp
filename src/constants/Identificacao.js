@@ -72,7 +72,6 @@ export default function Identificacao(){
             if(!result.canceled && result.assets && result.assets.length > 0){
                 const imageUri = result.assets[0].uri
                 setFotoPaciente(imageUri)
-                setPaciente(prev => ({...prev, imageUri: imageUri}))
                 
                 return
             } else {
@@ -219,7 +218,7 @@ export default function Identificacao(){
                         aoMudar={value=>setPaciente(prev => ({...prev, guardiao: value}))}
                         lista={guarda}
                     />
-                    {paciente.guardiao !== 'outro'
+                    {paciente.guardiao !== 'Outro'
                     ? <>
                         <Input
                             titulo='Qual o nome do conjuge do guardião?'
