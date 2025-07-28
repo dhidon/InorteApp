@@ -70,17 +70,17 @@ export default function Desenvolvimento(){
                         <Input
                             titulo='Com qual idade passou a sentar sem apoio?'
                             valor={paciente.sentouSemApoio}
-                            callback={newText=>setPaciente({...paciente, sentouSemApoio: newText})}
+                            callback={newText=>setPaciente(prev => ({...prev, sentouSemApoio: newText}))}
                         />
                         <Input
                             titulo='Com qual idade ele engatinhou?'
                             valor={paciente.engatinhou}
-                            callback={newText=>setPaciente({...paciente, engatinhou: newText})}
+                            callback={newText=>setPaciente(prev => ({...prev, engatinhou: newText}))}
                         />
                         <Input
                             titulo='Com qual idade começou a andar sem suporte'
                             valor={paciente.andouSemSuporte}
-                            callback={newText=>setPaciente({...paciente, andouSemSuporte: newText})}
+                            callback={newText=>setPaciente(prev => ({...prev, andouSemSuporte: newText}))}
                         />                    
 
                         <Text style={styles.normal}>As respostas a seguir devem levar em consideração o estado atual do paciente</Text>
@@ -88,13 +88,13 @@ export default function Desenvolvimento(){
                         <Text style={styles.normal}>Apresenta controle dos esfincteres?</Text>
                         <Seletor
                             selecionado={paciente.controlaEsfincter}
-                            aoMudar={value=>setPaciente({...paciente, controlaEsfincter: value})}
+                            aoMudar={value=>setPaciente(prev => ({...prev, controlaEsfincter: value}))}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Usa fraldas</Text>
                         <Seletor
                             selecionado={paciente.fraldas}
-                            aoMudar={value=>setPaciente({...paciente, fraldas: value})}
+                            aoMudar={value=>setPaciente(prev => ({...prev, fraldas: value}))}
                             lista={simOuNao}
                         />
                         <ListaAlternativas
@@ -105,31 +105,31 @@ export default function Desenvolvimento(){
                         <Text style={styles.normal}>Apresenta manipulação de objetos com os dedos</Text>
                         <Seletor
                             selecionado={paciente.manipObjDedos}
-                            aoMudar={value=>setPaciente({...paciente, manipObjDedos: value})}
+                            aoMudar={value=>setPaciente(prev => ({...prev, manipObjDedos: value}))}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Pratica algum esporte?</Text>
                         <Seletor
                             selecionado={paciente.praticaEsporte}
-                            aoMudar={valor=>setPaciente({...paciente, praticaEsporte: valor})}
+                            aoMudar={valor=>setPaciente(prev => ({...prev, praticaEsporte: valor}))}
                             lista={simOuNao}
                         />
                         {paciente.praticaEsporte === 'sim' &&
                         <Input
                             titulo='Qual esporte?'
                             valor={paciente.esporte}
-                            callback={newText=>setPaciente({...paciente, esporte: newText})}
+                            callback={newText=>setPaciente(prev => ({...prev, esporte: newText}))}
                         />}
                         <Text style={styles.normal}>Pratica autoagressão?</Text>
                         <Seletor
                             selecionado={paciente.autoagressao}
-                            aoMudar={value=>setPaciente({...paciente, autoagressao: value})}
+                            aoMudar={value=>setPaciente(prev => ({...prev, autoagressao: value}))}
                             lista={simOuNao}
                         />
                         <Text style={styles.normal}>Pratica heteroagressão?</Text>
                         <Seletor
                             selecionado={paciente.heteroagressao}
-                            aoMudar={value=>setPaciente({...paciente, heteroagressao: value})}
+                            aoMudar={value=>setPaciente(prev => ({...prev, heteroagressao: value}))}
                             lista={simOuNao}
                         />
                     </View>

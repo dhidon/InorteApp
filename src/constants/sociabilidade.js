@@ -19,61 +19,61 @@ export default function Sociabilidade(){
                 <Text style={styles.normal}>Apresenta sorriso espontâneo a pessoas familiares</Text>
                 <Seletor
                     selecionado={paciente.sorrisoEspontaneoFamiliares}
-                    aoMudar={value=>setPaciente({...paciente, sorrisoEspontaneoFamiliares: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, sorrisoEspontaneoFamiliares: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
                 <Text style={styles.normal}>Apresenta sorriso espontâneo a pessoas não familiares</Text>
                 <Seletor
                     selecionado={paciente.sorrisoEspontaneoNaoFamiliares}
-                    aoMudar={value=>setPaciente({...paciente, sorrisoEspontaneoNaoFamiliares: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, sorrisoEspontaneoNaoFamiliares: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
                 <Text style={styles.normal}>Apresenta sorriso em resposta ao sorriso de outras pessoas?</Text>
                 <Seletor
                     selecionado={paciente.sorrisoResposta}
-                    aoMudar={value=>setPaciente({...paciente, sorrisoResposta: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, sorrisoResposta: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
                 <Text style={styles.normal}>Variação na expressão facial (contentamento, frustração, surpresa, constrangimento)</Text>
                 <Seletor
                     selecionado={paciente.variacaoExpressaoFacial}
-                    aoMudar={value=>setPaciente({...paciente, variacaoExpressaoFacial: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, variacaoExpressaoFacial: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
                 <Text style={styles.normal}>Expressão emocional apropriada ao contexto</Text>
                 <Seletor
                     selecionado={paciente.exprEmocionalContexto}
-                    aoMudar={value=>setPaciente({...paciente, exprEmocionalContexto: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, exprEmocionalContexto: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
                 <Text style={styles.normal}>Compartilha atividades prazerosas com outras pessoas</Text>
                 <Seletor
                     selecionado={paciente.compartAtivPraz}
-                    aoMudar={value=>setPaciente({...paciente, compartAtivPraz: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, compartAtivPraz: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
                 <Text style={styles.normal}>Prefere ficar sozinho</Text>
                 <Seletor
                     selecionado={paciente.sozinho}
-                    aoMudar={value=>setPaciente({...paciente, sozinho: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, sozinho: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
                 <Text style={styles.normal}>Excessivamente quieto ou tímido</Text>
                 <Seletor
                     selecionado={paciente.excQuieto}
-                    aoMudar={value=>setPaciente({...paciente, excQuieto: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, excQuieto: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
                 <Text style={styles.normal}>Mais interessado em objetos do que em pessoas</Text>
                 <Seletor
                     selecionado={paciente.interObjPess}
-                    aoMudar={value=>setPaciente({...paciente, interObjPess: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, interObjPess: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
                 <Text style={styles.normal}>Demonstra preocupação se os pais estão tristes/doentes/machucados?</Text>
                 <Seletor
                     selecionado={paciente.preocupPais}
-                    aoMudar={value=>setPaciente({...paciente, preocupPais: value})}
+                    aoMudar={value=>setPaciente(prev => ({...prev, preocupPais: value}))}
                     lista={difSociabilidadeAfetividade}
                 />
 

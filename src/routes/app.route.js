@@ -6,7 +6,7 @@ import { Image } from "react-native";
 import { styles, colors } from "../styles/Styles";
 import Home from "../screens/Home/Index";
 import Anamnese from "../screens/Anamnese/Index";
-import Registro from '../screens/Registro'
+import Registro from "../screens/Registro/Index";
 import Profissionais from "../screens/Profissionais/Index";
 import Relatorio from "../screens/Relatorio/Index";
 import Pacientes from "../screens/Pacientes/Index";
@@ -39,16 +39,19 @@ export default function AppRoute(){
                 <Stack.Screen
                 name='AnamneseHome'
                 component={Anamnese}
+                options={{headerShown: false}}
                 />
 
                 <Stack.Screen
                 name='Registro'
                 component={Registro}
+                options={{headerShown: false}}
                 />
 
                 <Stack.Screen
                 name='Profissionais'
                 component={Profissionais}
+                options={{headerShown: false}}
                 />
             </Stack.Navigator>
         )

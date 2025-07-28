@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, Alert, Platform } from "react-native";
+import { View, Text, TouchableOpacity, Alert, Platform } from "react-native";
 import { styles } from "../../styles/Styles";
 
 import { AnamneseContext } from "../../contexts/anamneseContext";
@@ -40,34 +40,34 @@ export default function Profissionais(){
       
 
     return (
-        <KeyboardAvoidingView style={[styles.container, {justifyContent: 'center', alignItems: 'center'}]} behavior='height'>
-          <View style={styles.inputArea}>
-            <Input
-              titulo='Anamnese realizada com'
-              valor={paciente.medicoResponsavel}
-              callback={newText=>setPaciente(prev => ({...prev, medicoResponsavel: newText}))}
-            />
-            <Input
-              titulo='Técnico:'
-              valor={paciente.tecnicoResponsavel}
-              callback={newText=>setPaciente(prev => ({...prev, tecnicoResponsavel: newText}))}
-            />
+          <View style={[styles.container, {justifyContent: 'center', alignItems: 'center'}]}>
+            <View style={styles.inputArea}>
+              <Input
+                titulo='Anamnese realizada com:'
+                valor={paciente.medicoResponsavel}
+                callback={newText=>setPaciente(prev => ({...prev, medicoResponsavel: newText}))}
+              />
+              <Input
+                titulo='Técnico:'
+                valor={paciente.tecnicoResponsavel}
+                callback={newText=>setPaciente(prev => ({...prev, tecnicoResponsavel: newText}))}
+              />
+            </View>
+
+
+
+            <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-around', marginTop: 20, gap: 30}}>
+
+                <TouchableOpacity style={[styles.buttonArea, {width: 120, flexDirection: 'row', gap: 5, alignItems: 'center'}]} onPress={()=>navigation.goBack()}>
+                <Feather name="arrow-left" size={24} color="#FFF" />
+                    <Text style={styles.buttonText}>Voltar</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.buttonArea, {width: 120, flexDirection: 'row', gap: 5}]} onPress={handleSend}>
+                    <Text style={styles.buttonText}>Enviar</Text>
+                </TouchableOpacity>
+
+            </View>
           </View>
-
-
-
-          <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-around', marginTop: 20, gap: 30}}>
-
-              <TouchableOpacity style={[styles.buttonArea, {width: 120, flexDirection: 'row', gap: 5, alignItems: 'center'}]} onPress={()=>navigation.goBack()}>
-              <Feather name="arrow-left" size={24} color="#FFF" />
-                  <Text style={styles.buttonText}>Voltar</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={[styles.buttonArea, {width: 120, flexDirection: 'row', gap: 5}]} onPress={handleSend}>
-                  <Text style={styles.buttonText}>Enviar</Text>
-              </TouchableOpacity>
-
-          </View>
-        </KeyboardAvoidingView>
     )
 }
