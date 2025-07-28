@@ -14,6 +14,7 @@ export default function Input( {valor, titulo, callback, legenda, kt, st} ){
                     placeholder={legenda}
                     keyboardType={kt}
                     secureTextEntry={st}
+                    placeholderTextColor={"#c7c7c7"}
                 />
             </View>
         </>

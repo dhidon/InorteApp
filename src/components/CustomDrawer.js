@@ -5,7 +5,7 @@ import { View, Image, Text } from 'react-native'
 import { AuthContext } from '../contexts/auth'
 
 export default function CustomDrawer(props){
-    const { user, signOut } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
 
     return (
         <DrawerContentScrollView>
@@ -28,7 +28,7 @@ export default function CustomDrawer(props){
             <DrawerItem
                 {...props}
                 label='Sair'
-                onPress={signOut}
+                onPress={logOut}
                 labelStyle={{textAlign: 'center', color: "#000"}}
                 style={{backgroundColor: '#FF6347'}}
             />

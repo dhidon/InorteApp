@@ -1,9 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { condicoes } from '../constants/anamneseOptions'
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebaseConnection";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "./auth";
+import { supabase } from '../services/supabase'
+import { condicoes, comportamentos } from "../constants/anamneseOptions";
 
 export const AnamneseContext = createContext()
 
@@ -11,9 +12,138 @@ export default function AnamneseProvider({ children }){
     const { user } = useContext(AuthContext)
     const navigation = useNavigation()
     const [paciente, setPaciente] = useState({
-        condicoes: condicoes
+        uer: '',
+        grupo: '',
+        data: '',
+        nome: '',
+        sus: '',
+        nascimento: '',
+        idade: '0',
+        endereco: {
+            ruaN: '',
+            bairro: '',
+            cidadeUf: '',
+            cep: '',
+        },
+        informante: '',
+        contato: '',
+        mae: {
+            nome: '',
+            nascimento: '',
+            profissao: ''
+        },
+        pai: {
+            nome: '',
+            nascimento: '',
+            profissao: ''
+        },
+        pais: {
+            estadoCivil: '',
+        },
+        idadeSeparacao: '',
+        guardiao: '',
+        padrastoMadrasta: '',
+        outroGuardiao: {
+            motivo: '',
+            nome: ''
+        },
+        guardiaoLegal: '',
+        motivoAvaliacao: '',
+        profissionais: '',
+        convive: '',
+        condicoes: condicoes,
+        gestacaoPlanejada: '',
+        prenatal: '',
+        intercorrencia: '',
+        qualIntercorrencia: '',
+        medicamentoGestacao: '',
+        parto: {
+            tipo: '',
+            motivo: ''
+        },
+        nasceuSemanas: '',
+        apgar: {
+            primeiroMinuto: '',
+            quintoMinuto: '',
+            peso: '',
+            comprimento: ''
+        },
+        problemaNascimento: '',
+        oxigenio: '',
+        cianotico: '',
+        chorou: '',
+        ictericia: '',
+        fototerapia:'',
+        mamou: '',
+        leitMatExclMes: '',
+        mamouIdade: '',
+        mamadeira: '',
+        chupeta: '',
+        idadeIntroAlimentar: '',
+        difIntroAlimentar: '',
+        difAlimentar: '',
+        consistenciasAceitas: '',
+        problemaAlimentacao: '',
+        seletividadeAlimentar: '',
+        formaSono: '',
+        dormeSozinho: '',
+        quemCompartilhaCama: '',
+        horarioDormir: '',
+        horarioAcordar:'',
+        problemaCrescimento: '',
+        itensSignificantes: '',
+        condicoesFilho:'',
+        fatoresDif: '',
+        medicacao: {
+            usa:'',
+            nome: '',
+            motivo: '',
+            receitadaPor:''
+        },
+        compreensaoFala: '',
+        resolProblemas: '',
+        mantemAtencao: '',
+        habOrganizacao: '',
+        recEventos: '',
+        recFatos: '',
+        aprendExp: '',
+        entendConceitos: '',
+        outrasDificuldades: '',
+        outraDifCogn: '',
+        habilidadeEspecial: '',
+        difCompreensaoLing: '',
+        difComunicExpressiva: '',
+        estereotipiasMovCorporais: '',
+        caracteristicasSociais: '',
+        atividadesFavoritas: '',
+        comportamentos: comportamentos,
+        probLimites: '',
+        cumprePedidos: '',
+        estrategiasUsadas: '',
+        independenciaAtiv: '',
+        habilidadesMotoras: '',
+        contatoVisual: '',
+        inclinaCabeca: '',
+        aproximaObjetos: '',
+        afastaObjetos: '',
+        movimentoOlhos: '',
+        avOftalmo: '',
+        dorCabeca: '',
+        difAuditiva: '',
+        realizouAv: '',
+        escola: {
+            frequenta: '',
+            nome: '',
+            aee: '',
+            serie: '',
+            turno: ''
+        },
+        difAprend: '',
+        comportEscola: '',
+        medicoResponsavel: '',
+        tecnicoResponsavel: ''
     })
-    
+    const [fotoPaciente, setFotoPaciente] = useState(null)
     const [profissionais, setProfissionais] = useState({})
 
     useEffect(()=>{
@@ -33,7 +163,7 @@ export default function AnamneseProvider({ children }){
                 idade--;
             }
         
-            setPaciente({...paciente, idade: idade});
+            setPaciente(prev => ({...prev, idade: idade}));
         }
         gerarIdade()
     }, [paciente.nascimento])
@@ -45,13 +175,13 @@ export default function AnamneseProvider({ children }){
         } else if (textoFiltrado.length >= 3) {
             textoFiltrado = textoFiltrado.substring(0, 2) + '/' + textoFiltrado.substring(2, 4)
         }
-        callback({...paciente, [key]: textoFiltrado})
+        callback(prev => ({...prev, [key]: textoFiltrado}))
     }
 
     const formatarSus = (texto) => {
         let textoFiltrado = texto.replace(/\D/g, '')
         textoFiltrado = textoFiltrado.match(/.{1,4}/g)?.join(' ') || textoFiltrado
-        setPaciente({...paciente, sus: textoFiltrado})
+        setPaciente(prev => ({...prev, sus: textoFiltrado}))
     }
 
     const formatarCep = (texto) => {
@@ -62,7 +192,7 @@ export default function AnamneseProvider({ children }){
             textoFiltrado = `${textoFiltrado.substring(0,2)}.${textoFiltrado.substring(2)}`
         }
 
-        setPaciente({...paciente, endereco: {...paciente.endereco, cep: textoFiltrado}})
+        setPaciente( prev => ({...prev, endereco: {...prev.endereco, cep: textoFiltrado}}))
     }
 
     async function sendToDb(data){
@@ -72,14 +202,56 @@ export default function AnamneseProvider({ children }){
                 userId: user.uid
             })
             console.log('Documento gravado com o ID:', docRef.id)
-            setPaciente({
-                condicoes: condicoes
-            })
+            setPaciente(pacienteInicial)
             navigation.navigate('Home')
         } catch (error) {
             console.log(error)
         }
     }
+
+    async function sendFoto(path, file) {
+        try {
+            const response = await fetch(file)
+            const blob = await response.blob()
+            const filePath = `${path}/profile.jpg`
+    
+            // Upload da imagem
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('fotos-pacientes')
+                .upload(filePath, blob, {
+                    cacheControl: '3600',
+                    upsert: true,
+                    contentType: 'image/jpg'
+                })
+    
+            if (uploadError) {
+                console.log("Erro ao enviar imagem:", uploadError)
+                return null
+            }
+    
+           
+            const { data: signedData, error: signedError } = await supabase.storage
+                .from('fotos-pacientes')
+                .createSignedUrl(filePath, 3600)
+    
+            if (signedError) {
+                console.log("Erro ao gerar URL assinada:", signedError)
+                return null
+            }
+    
+            const imageUrl = signedData.signedUrl
+    
+            
+            setPaciente(prev => ({ ...prev, imageURL: imageUrl }))
+    
+            console.log('Imagem enviada com sucesso:', uploadData.path)
+            return uploadData.path
+        } catch (error) {
+            console.log("Erro inesperado em sendFoto:", error)
+            return null
+        }
+    }
+    
 
     return (
         <AnamneseContext.Provider value={{ 
@@ -90,7 +262,10 @@ export default function AnamneseProvider({ children }){
             formatarCep,
             profissionais,
             setProfissionais,
-            sendToDb
+            sendToDb,
+            fotoPaciente,
+            setFotoPaciente,
+            sendFoto
         }}>
             {children}
         </AnamneseContext.Provider>

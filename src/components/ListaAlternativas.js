@@ -9,7 +9,7 @@ export default function ListaAlternativas( {lista, chave, titulo} ){
     function handlePress(item, index){
         const newList = [...lista]
         newList[index].value = item.value === 'não' ? 'sim' : 'não'
-        setPaciente({...paciente, [chave]: newList})
+        setPaciente(prev => ({...prev, [chave]: newList}))
     }
  
 return (

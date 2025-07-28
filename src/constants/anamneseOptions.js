@@ -73,6 +73,28 @@ export const itensSignificantes = [
     {id: 'numeroAcidentesAcimaMedia', label: 'Excessivo número de acidentes em comparação com outras crianças', value: 'não'}
 ]
 
+export const itensSignificantesCrianca = [
+    {id: 'extrQuietoInativo', label: 'Extremamente quieto ou inativo', value: 'não'},
+    {id: 'raramenteQuietoInativo', label: 'Raramente quieto ou inativo', value: 'não'},
+    {id: 'excessInquieto', label: 'Excessivamente inquieto', value: 'não'},
+    {id: 'caminhaPontaPes', label: 'Caminha na ponta dos pés', value: 'não'},
+    {id: 'balancaAndar', label: 'Balança-se ao andar', value: 'não'},
+    {id: 'desequilibrio', label: 'Apresenta desequilíbrio', value: 'não'},
+    {id: 'dificuldadeCorrer', label: 'Apresenta dificuldade para correr', value: 'não'},
+    {id: 'probPostura', label: 'Apresenta problemas de postura', value: 'não'},
+    {id: 'naoColoAfago', label: 'Não gostava de colo ou afago', value: 'não'},
+    {id: 'poucoAlerta', label: 'Pouco alerta', value: 'não'},
+    {id: 'difAcalmar', label: 'Dificuldade para se acalmar', value: 'não'},
+    {id: 'colicas', label: 'Cólicas', value: 'não'},
+    {id: 'sonoExcess', label: 'Sono excessivo', value: 'não'},
+    {id: 'poucoSono', label: 'Pouco Sono', value: 'não'},
+    {id: 'batidasCabeca', label: 'Batidas na cabeça', value: 'não'},
+    {id: 'incomodoSom', label: 'Incômodo com som', value: 'não'},
+    {id: 'semNocaoPerigo', label: 'Sem noção do perigo', value: 'não'},
+    {id: 'eploraTudoSempre', label: 'Explorava tudo o tempo todo', value: 'não'},
+    {id: 'numeroAcidentesAcimaMedia', label: 'Excessivo número de acidentes em comparação com outras crianças', value: 'não'}
+]
+
 export const comportamentos = [
     {value: 'sorrir', label: 'Sorrir', idade:''},
     {value: 'rolar', label: 'Rolar', idade: ''},

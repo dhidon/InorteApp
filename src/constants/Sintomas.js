@@ -17,18 +17,26 @@ export default function Sintomas(){
                 <Input
                     titulo="Qual o principal motivo do paciente estar realizando esta avaliação?"
                     valor={paciente.motivoAvaliacao}
-                    callback={newText=>setPaciente({...paciente, motivoAvaliacao: newText})}
+                    callback={newText=>setPaciente(prev => ({...prev, motivoAvaliacao: newText}))}
                 />
                 <Input
                     titulo="Que profissionais estão fazendo o acompanhamento?"
                     valor={paciente.profissionais}
-                    callback={newText=>setPaciente({...paciente, profissionais: newText})}
+                    callback={newText=>setPaciente( prev => ({...prev, profissionais: newText}))}
                 />
                 <Input
                     titulo="Com quem o adolescente passa mais tempo?"
                     valor={paciente.convive}
-                    callback={newText=>setPaciente({...paciente, convive: newText})}
+                    callback={newText=>setPaciente(prev => ({...prev, convive: newText}))}
                 />
+
+                {paciente.grupo === 'criança' && (
+                    <Input
+                        titulo='Faz uso de medicação contínua?'
+                        valor={paciente.medContinua}
+                        callback={newText => setPaciente(prev => ({...prev, medContinua: newText}))}
+                    />
+                )}
             </View>
 
             <View style={styles.inputArea}>
@@ -42,7 +50,7 @@ export default function Sintomas(){
                             ...newCondicoes[index],
                             value: newCondicoes[index].value === 'não' ? 'sim' : 'não'
                         };
-                        setPaciente({ ...paciente, condicoes: newCondicoes });
+                        setPaciente(prev => ({ ...prev, condicoes: newCondicoes }));
                     }}>
                         <View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 1 }}>
@@ -60,7 +68,7 @@ export default function Sintomas(){
                                             ...newCondicoes[index],
                                             parentesco: newText
                                         };
-                                        setPaciente({ ...paciente, condicoes: newCondicoes });
+                                        setPaciente(prev => ({ ...prev, condicoes: newCondicoes }));
                                     }}
                                     onClick={e => e.stopPropagation()}
                                 />

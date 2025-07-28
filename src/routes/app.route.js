@@ -5,7 +5,9 @@ import { Image } from "react-native";
 
 import { styles, colors } from "../styles/Styles";
 import Home from "../screens/Home/Index";
-import AnamneseNavigator from "../screens/Anamnese/AnamneseNavigator";
+import Anamnese from "../screens/Anamnese/Index";
+import Registro from '../screens/Registro'
+import Profissionais from "../screens/Profissionais/Index";
 import Relatorio from "../screens/Relatorio/Index";
 import Pacientes from "../screens/Pacientes/Index";
 import CustomDrawer from "../components/CustomDrawer";
@@ -26,6 +28,27 @@ export default function AppRoute(){
                 <Stack.Screen 
                 name='Relatório'
                 component={Relatorio}
+                />
+            </Stack.Navigator>
+        )
+    }
+
+    function AnamneseStack(){
+        return (
+            <Stack.Navigator>
+                <Stack.Screen
+                name='AnamneseHome'
+                component={Anamnese}
+                />
+
+                <Stack.Screen
+                name='Registro'
+                component={Registro}
+                />
+
+                <Stack.Screen
+                name='Profissionais'
+                component={Profissionais}
                 />
             </Stack.Navigator>
         )
@@ -62,7 +85,7 @@ export default function AppRoute(){
 
             <AppDrawer.Screen 
             name='Anamnese' 
-            component={AnamneseNavigator}
+            component={AnamneseStack}
             options={{
                 title: 'Anamnese',
                 headerTitleAlign: 'center',

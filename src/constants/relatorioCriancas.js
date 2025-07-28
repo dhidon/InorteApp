@@ -19,8 +19,8 @@ export default function RelatorioCriancas({data}){
             <RelText campo="Teve alguma intercorrência durante a gravidez" data={data.intercorrencia} />
             {data.intercorrencia === 'sim' && <RelText campo="A intercorrencia foi" data={data.qualIntercorrencia} />}
             <RelText campo="Fez uso de medicamentos durante a gestação" data={data.medicamentoGestacao} />
-            <RelText campo="O tipo de parto foi" data={data.tipoParto} />
-            <RelText campo="O motivo do parto" data={data.motivoParto} />
+            <RelText campo="O tipo de parto foi" data={data.parto.tipo} />
+            <RelText campo="O motivo do parto" data={data.parto.motivo} />
             <Text style={{fontWeight: 'bold'}}>A criança nasceu com {data.nasceuSemanas} semanas</Text>
             <RelText campo="APGAR" data={`1º min: ${data.apgar?.primeiroMinuto} - 5º min: ${data.apgar?.quintoMinuto} - Peso: ${data.apgar?.peso} - Comp: ${data.apgar?.comprimento}`} />
             <RelText campo="Houve algum problema com o bebê logo que nasceu?" data={data.problemaNascimento} />

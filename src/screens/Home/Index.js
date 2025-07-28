@@ -8,6 +8,8 @@ import Feather from '@expo/vector-icons/Feather';
 export default function Home() {
     const { user, authUser } = useContext(AuthContext)
 
+    console.log(user)
+
     return (
         <KeyboardAvoidingView style={styles.container}>
             
@@ -21,7 +23,7 @@ export default function Home() {
                     />
                     :<Feather name="user" size={90} color="black" />}
 
-                    <Text style={[styles.normal, {color: 'black', numberOfLines: 1}]}>Bem-vindo, {user.displayName ? user.displayName : user.email}</Text>
+                    <Text style={[styles.normal, {color: 'black', numberOfLines: 1}]}>Bem-vindo, {user.nome ? user.nome : user.email}</Text>
 
                 </View>
 

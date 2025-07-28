@@ -22,7 +22,6 @@ export default function LogIn() {
         if(senha === confirmacao) {
             registerUser(email, senha, nome)
             setLogin(true)
-            alert('Novo usuário cadastrado!')
         } else {
             alert('As senhas devem ser iguais')
         }

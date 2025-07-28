@@ -3,6 +3,7 @@ import { ScrollView, View, Text, TouchableOpacity, Image } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { styles } from "../../styles/Styles";
 import Feather from '@expo/vector-icons/Feather';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import RelatorioAdolescentes from "../../constants/relatorioAdolescentes";
 import RelatorioCriancas from "../../constants/relatorioCriancas";
@@ -50,10 +51,18 @@ export default function Relatorio(){
 
                         <Text style={styles.titulo}>1 - Dados de Identificação</Text>
                             
-                        <View style={{flexDirection: 'row', gap: 5}}>
-                            <RelText campo='Nome' data={data.nome}/>
-                            <RelText campo='Nascimento' data={data.nascimento}/>
-                            <RelText campo='Idade' data={data.idade}/>
+                        <View style={{flexDirection: 'row', gap: 100}}>
+                            <View style={{flexDirection: 'row', gap: 5}}>
+                                <RelText campo='Nome' data={data.nome}/>
+                                <RelText campo='Nascimento' data={data.nascimento}/>
+                                <RelText campo='Idade' data={data.idade}/>
+                            </View>
+                            <View>
+                                {data.imageUri
+                                ? <Image source={{ uri: imageUri}} style={{width: 150, height: 200}}/>
+                                : <FontAwesome6 name="image-portrait" size={60} color="black" />
+                                }
+                            </View>
                         </View>
                         <RelText campo='Nº do SUS' data={data.sus}/>
                         <View style={{flexDirection: 'row', gap: 5}}>

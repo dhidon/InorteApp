@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { auth } from '../services/firebaseConnection'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
-import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, collection, doc, getDoc } from 'firebase/firestore';
+import { db } from '../services/firebaseConnection';
 
 export const AuthContext = createContext({})
 
@@ -12,7 +13,7 @@ function AuthProvider({ children }){
     const [user, setUser] = useState(null)
 
     useEffect(()=>{
-        const unsub = onAuthStateChanged(auth, (user)=>{
+        const unsub = onAuthStateChanged(auth, async (user)=>{
             if(user){
                 setAuthUser({
                     email: user.email,
@@ -20,11 +21,29 @@ function AuthProvider({ children }){
                     profilePic: user.photoURL,
                     telefone: user.phoneNumber
                 })
-                setUser({
-                    email: user.email,
-                    uid: user.uid,
-                    telefone: user.phoneNumber
-                })
+                
+                try {
+                    const docRef = doc(db, 'users', user.uid)
+                    const docSnap = await getDoc(docRef)
+
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data()
+                        setUser({
+                            email: userData.email,
+                            uid: userData.userId,
+                            nome: userData.nome
+                        })
+                    } else {
+                        setUser({
+                            email: user.email,
+                            uid: user.userId,
+                            nome: user.name
+                        })
+                    }
+                } catch(error) {
+                    console.log(error)
+                }
+
             } else {
                 setAuthUser(null)       
                 setUser(null)        
@@ -52,24 +71,27 @@ function AuthProvider({ children }){
         setLoading(true) 
         try {
             const response = await createUserWithEmailAndPassword(auth, email, password)
-            const uid = response.user.uid
+            
+            let userId = response.user.uid
 
-            await setDoc(doc(db, 'usuarios', uid), {
-                uid: uid,
+            await setDoc(doc(db, 'users', userId), {
                 nome: nome,
+                userId,
+                email: email,
                 createdAt: new Date()
             })
 
             const data = {
-                uid: uid,
                 nome: nome,
-                email: response.user.email
+                userId,
+                email: email
             }
 
             setUser(data)
             setLoading(false)
-
+            alert('Usuário cadastrado')
         } catch(error) {
+            alert(error)
             console.log(error)
             setLoading(false) 
         }

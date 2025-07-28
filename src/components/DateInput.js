@@ -6,6 +6,7 @@ import { styles } from '../styles/Styles'
 export default function DateInput(){
     const {paciente, setPaciente, formatarData} = useContext(AnamneseContext)
 
+
     return(
         <>
             <View style={styles.inputArea}>

@@ -10,12 +10,12 @@ export default function Anamnese() {
 
     function gotoAdolescentes(){
         setPaciente({...paciente, grupo: 'adolescente'})
-        navigation.navigate('Anamnese de Adolescentes')
+        navigation.navigate('Registro')
     }
 
     function gotoCriancas(){
         setPaciente({...paciente, grupo: 'criança'})
-        navigation.navigate('Anamnese de Crianças')
+        navigation.navigate('Registro')
     }
 
     return (
@@ -25,9 +25,9 @@ export default function Anamnese() {
 
                 <Text style={[styles.normal, {color: "#000"}]}>Qual o público alvo da anamnese?</Text>
 
-                <View style={{flexDirection: 'row', gap: 20}}>
+                <View style={{flexDirection: 'row', gap: 30}}>
                     <TouchableOpacity 
-                    style={[styles.buttonArea, {height: 240, width: 240, borderRadius: 8}]} 
+                    style={[styles.buttonArea, {height: 200, width: 200, borderRadius: 8}]} 
                     onPress={gotoCriancas}
                     activeOpacity={0.6}
                     >
@@ -35,7 +35,7 @@ export default function Anamnese() {
                     </TouchableOpacity>
                     
                     <TouchableOpacity 
-                    style={[styles.buttonArea, {height: 240, width: 240, borderRadius: 8}]} 
+                    style={[styles.buttonArea, {height: 200, width: 200, borderRadius: 8}]} 
                     onPress={gotoAdolescentes}
                     activeOpacity={0.6}
                     >
