@@ -129,11 +129,11 @@ export default function Relatorio(){
 
                         {data.escola?.frequenta === 'sim' 
                         ?<>
-                            <RelText campo='O paciente frequenta a escola' data={data.escola.nome}/>
+                            <RelText campo='O paciente frequenta a escola' data={data.escola?.nome}/>
                             <View style={{flexDirection: 'row', gap: 5}}>
-                                <RelText campo='Faz AEE' data={data.escola.aee}/>
-                                <RelText campo='Série' data={data.escola.serie}/>
-                                <RelText campo='Turno' data={data.escola.turno}/>
+                                <RelText campo='Faz AEE' data={data.escola?.aee}/>
+                                <RelText campo='Série' data={data.escola?.serie}/>
+                                <RelText campo='Turno' data={data.escola?.turno}/>
                             </View>
                         </>
                         :<Text style={{fontWeight: 'bold'}}>O paciente não frequenta a escola</Text>}

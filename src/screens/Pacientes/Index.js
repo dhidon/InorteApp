@@ -48,7 +48,7 @@ export default function Pacientes(){
     const HeaderSearch = useCallback(() => (
         <View style={{ flexDirection: 'row', gap: 2, right: 20}}>
             <Input
-                legenda='Digite para procurar'
+                legenda='Procure por nome ou número do SUS'
                 valor={search}
                 callback={newText => {
                     setSearch(newText);
